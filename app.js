@@ -247,7 +247,24 @@ app.post(
           stats[weekType][`week${weekNum}`] = {};
           stats[weekType][`week${weekNum}`]["team-stats"] = teamStats.reduce(
             (s, stat) => {
-              s[stat.teamId] = stat;
+              s[stat.teamId] = {
+                defFumRec: stat.defFumRec,
+                defIntsRec: stat.defIntsRec,
+                defPtsPerGame: stat.defPtsPerGame,
+                defSacks: stat.defSacks,
+                off3rdDownConvPct: stat.off3rdDownConvPct,
+                off4thDownConvPct: stat.off4thDownConvPct,
+                offFumLost: stat.offFumLost,
+                offIntsLost: stat.offIntsLost,
+                offPassTDs: stat.offPassTDs,
+                offPassYds: stat.offPassYds,
+                offRedZonePct: stat.offRedZonePct,
+                offRushTDs: stat.offRushTDs,
+                offRushYds: stat.offRushYds,
+                offSacks: stat.offSacks,
+                offTotalYds: stat.offTotalYds,
+                tODiff: stat.tODiff,
+              };
               return s;
             },
             {}
