@@ -343,6 +343,9 @@ app.post(
 app.post(
   "/media/:discord/:platform/:leagueId/team/:teamId/roster",
   (req, res) => {
+    const {
+      params: { discord, teamId },
+    } = req;
     let body = "";
     req.on("data", (chunk) => {
       body += chunk.toString();
