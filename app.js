@@ -175,13 +175,12 @@ app.post("/media/:discord/:platform/:leagueId/leagueteams", (req, res) => {
           cityName: t.cityName,
         })
     );
-    const store = {};
-    store[discord] = { guild_id: discord, teams: teams };
     firestore
       .setDoc(
-        firestore.doc(db, "media", "media"),
+        firestore.doc(db, "media", discord),
         {
-          store,
+          guild_id: discord,
+          teams: teams,
         },
         { merge: true }
       )
@@ -233,13 +232,11 @@ app.post(
             awayScore: game.awayScore,
             homeScore: game.homeScore,
           }));
-          const store = {};
-          store[discord] = { schedules: schedules };
           firestore
             .setDoc(
-              firestore.doc(db, "media", "media"),
+              firestore.doc(db, "media", discord),
               {
-                store,
+                schedules: schedules,
               },
               { merge: true }
             )
@@ -279,13 +276,11 @@ app.post(
             },
             {}
           );
-          const store = {};
-          store[discord] = { stats: stats };
           firestore
             .setDoc(
-              firestore.doc(db, "media", "media"),
+              firestore.doc(db, "media", discord),
               {
-                store,
+                stats: stats,
               },
               { merge: true }
             )
@@ -304,23 +299,23 @@ app.post(
           stats[weekType][`week${weekNum}`] = {};
           stats[weekType][`week${weekNum}`]["player-stats"] =
             defensiveStats.reduce((s, stat) => {
-              s[stat.rosterId] = stringify({
-                defForcedFum: stat.defForcedFum,
-                defInts: stat.defInts,
-                defSacks: stat.defSacks,
-                defTDs: stat.defTDs,
-                defTotalTackles: stat.defTotalTackles,
+              s[stat.rosterId] = {
+                stats: stringify({
+                  defForcedFum: stat.defForcedFum,
+                  defInts: stat.defInts,
+                  defSacks: stat.defSacks,
+                  defTDs: stat.defTDs,
+                  defTotalTackles: stat.defTotalTackles,
+                }),
                 teamId: stat.teamId,
-              });
+              };
               return s;
             }, {});
-          const store = {};
-          store[discord] = { stats: stats };
           firestore
             .setDoc(
-              firestore.doc(db, "media", "media"),
+              firestore.doc(db, "media", discord),
               {
-                store,
+                stats: stats,
               },
               { merge: true }
             )
@@ -345,26 +340,22 @@ app.post(
                 recCatches: stat.recCatches,
                 recTDs: stat.recTDs,
                 recYds: stat.recYds,
-                teamId: stat.teamId,
               };
               const passStats = {
                 passCompPct: stat.passCompPct,
                 passInts: stat.passInts,
                 passTDs: stat.passTDs,
                 passSacks: stat.passSacks,
-                teamId: stat.teamId,
               };
               const rushStats = {
                 rushFum: stat.rushFum,
                 rushTDs: stat.rushTDs,
                 rushYds: stat.rushYds,
                 rushYdsAfterContact: stat.rushYdsAfterContact,
-                teamId: stat.teamId,
               };
               const kickerStats = {
                 fGMade: stat.fGMade,
                 fGAtt: stat.fGAtt,
-                teamId: stat.teamId,
               };
               const allStats = {
                 ...recStats,
@@ -375,16 +366,17 @@ app.post(
               Object.keys(allStats).forEach(
                 (key) => allStats[key] === undefined && delete allStats[key]
               );
-              s[stat.rosterId] = stringify(allStats);
+              s[stat.rosterId] = {
+                stats: stringify(allStats),
+                teamId: stat.teamId,
+              };
               return s;
             }, {});
-          const store = {};
-          store[discord] = { stats: stats };
           firestore
             .setDoc(
-              firestore.doc(db, "media", "media"),
+              firestore.doc(db, "media", discord),
               {
-                store,
+                stats: stats,
               },
               { merge: true }
             )
@@ -436,13 +428,11 @@ app.post(
         };
         return s;
       }, {});
-      const store = {};
-      store[discord] = { teams: teams };
       firestore
         .setDoc(
-          firestore.doc(db, "media", "media"),
+          firestore.doc(db, "media", discord),
           {
-            store,
+            teams: teams,
           },
           { merge: true }
         )
