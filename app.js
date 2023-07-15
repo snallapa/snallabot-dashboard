@@ -203,6 +203,14 @@ app.post("/media/:discord/:platform/:leagueId/standings", (req, res) => {
   });
 });
 
+function stringify(obj) {
+  Object.keys(obj)
+    .map(function (k) {
+      return `${k}:${obj[k]}`;
+    })
+    .join(",");
+}
+
 app.post(
   "/media/:discord/:platform/:leagueId/week/:weekType/:weekNum/:dataType",
   (req, res) => {
@@ -249,7 +257,7 @@ app.post(
           stats[weekType][`week${weekNum}`] = {};
           stats[weekType][`week${weekNum}`]["team-stats"] = teamStats.reduce(
             (s, stat) => {
-              s[stat.teamId] = {
+              s[stat.teamId] = stringify({
                 defFumRec: stat.defFumRec,
                 defIntsRec: stat.defIntsRec,
                 defPtsPerGame: stat.defPtsPerGame,
@@ -266,7 +274,7 @@ app.post(
                 offSacks: stat.offSacks,
                 offTotalYds: stat.offTotalYds,
                 tODiff: stat.tODiff,
-              };
+              });
               return s;
             },
             {}
@@ -296,14 +304,14 @@ app.post(
           stats[weekType][`week${weekNum}`] = {};
           stats[weekType][`week${weekNum}`]["player-stats"] =
             defensiveStats.reduce((s, stat) => {
-              s[stat.rosterId] = {
+              s[stat.rosterId] = stringify({
                 defForcedFum: stat.defForcedFum,
                 defInts: stat.defInts,
                 defSacks: stat.defSacks,
                 defTDs: stat.defTDs,
                 defTotalTackles: stat.defTotalTackles,
                 teamId: stat.teamId,
-              };
+              });
               return s;
             }, {});
           const store = {};
@@ -367,7 +375,7 @@ app.post(
               Object.keys(allStats).forEach(
                 (key) => allStats[key] === undefined && delete allStats[key]
               );
-              s[stat.rosterId] = allStats;
+              s[stat.rosterId] = stringify(allStats);
               return s;
             }, {});
           const store = {};
@@ -422,8 +430,7 @@ app.post(
       teams[teamId] = {};
       teams[teamId]["roster"] = rosterInfoList.reduce((s, player) => {
         s[player.rosterId] = {
-          firstName: player.firstName,
-          lastName: player.lastName,
+          name: `${player.firstName} ${player.lastName}`,
           college: player.college,
           position: player.position,
         };
