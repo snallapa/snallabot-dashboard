@@ -355,7 +355,12 @@ app.post(
       let teams = {};
       teams[teamId] = {};
       teams[teamId]["roster"] = rosterInfoList.reduce((s, player) => {
-        s[player.rosterId] = player;
+        s[player.rosterId] = {
+          firstName: player.firstName,
+          lastName: player.lastName,
+          college: player.college,
+          position: player.position,
+        };
         return s;
       }, {});
       firestore
