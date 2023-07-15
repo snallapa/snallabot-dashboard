@@ -204,7 +204,7 @@ app.post("/media/:discord/:platform/:leagueId/standings", (req, res) => {
 });
 
 function stringify(obj) {
-  Object.keys(obj)
+  return Object.keys(obj)
     .map(function (k) {
       return `${k}:${obj[k]}`;
     })
