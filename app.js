@@ -175,12 +175,13 @@ app.post("/media/:discord/:platform/:leagueId/leagueteams", (req, res) => {
           cityName: t.cityName,
         })
     );
+    const store = {};
+    store[discord] = { guild_id: discord, teams: teams };
     firestore
       .setDoc(
-        firestore.doc(db, "media", discord),
+        firestore.doc(db, "media", "media"),
         {
-          guild_id: discord,
-          teams: teams,
+          store,
         },
         { merge: true }
       )
@@ -224,12 +225,13 @@ app.post(
             awayScore: game.awayScore,
             homeScore: game.homeScore,
           }));
+          const store = {};
+          store[discord] = { schedules: schedules };
           firestore
             .setDoc(
-              firestore.doc(db, "media", discord),
+              firestore.doc(db, "media", "media"),
               {
-                guild_id: discord,
-                schedules: schedules,
+                store,
               },
               { merge: true }
             )
@@ -269,11 +271,13 @@ app.post(
             },
             {}
           );
+          const store = {};
+          store[discord] = { stats: stats };
           firestore
             .setDoc(
-              firestore.doc(db, "media", discord),
+              firestore.doc(db, "media", "media"),
               {
-                stats: stats,
+                store,
               },
               { merge: true }
             )
@@ -302,11 +306,13 @@ app.post(
               };
               return s;
             }, {});
+          const store = {};
+          store[discord] = { stats: stats };
           firestore
             .setDoc(
-              firestore.doc(db, "media", discord),
+              firestore.doc(db, "media", "media"),
               {
-                stats: stats,
+                store,
               },
               { merge: true }
             )
@@ -364,11 +370,13 @@ app.post(
               s[stat.rosterId] = allStats;
               return s;
             }, {});
+          const store = {};
+          store[discord] = { stats: stats };
           firestore
             .setDoc(
-              firestore.doc(db, "media", discord),
+              firestore.doc(db, "media", "media"),
               {
-                stats: stats,
+                store,
               },
               { merge: true }
             )
@@ -421,11 +429,13 @@ app.post(
         };
         return s;
       }, {});
+      const store = {};
+      store[discord] = { teams: teams };
       firestore
         .setDoc(
-          firestore.doc(db, "media", discord),
+          firestore.doc(db, "media", "media"),
           {
-            teams: teams,
+            store,
           },
           { merge: true }
         )
