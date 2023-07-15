@@ -275,7 +275,14 @@ app.post(
           stats[weekType][`week${weekNum}`] = {};
           stats[weekType][`week${weekNum}`]["player-stats"] =
             defensiveStats.reduce((s, stat) => {
-              s[stat.rosterId] = stat;
+              s[stat.rosterId] = {
+                defForcedFum: stat.defForcedFum,
+                defInts: stat.defInts,
+                defSacks: stat.defSacks,
+                defTDs: stat.defTDs,
+                defTotalTackles: stat.defTotalTackles,
+                teamId: stat.teamId,
+              };
               return s;
             }, {});
           firestore
@@ -303,7 +310,41 @@ app.post(
           stats[weekType][`week${weekNum}`] = {};
           stats[weekType][`week${weekNum}`]["player-stats"] =
             playerStats.reduce((s, stat) => {
-              s[stat.rosterId] = stat;
+              const recStats = {
+                recCatches: stat.recCatches,
+                recTDs: stat.recTDs,
+                recYds: stat.recYds,
+                teamId: stat.teamId,
+              };
+              const passStats = {
+                passCompPct: stat.passCompPct,
+                passInts: stat.passInts,
+                passTDs: stat.passTDs,
+                passSacks: stat.passSacks,
+                teamId: stat.teamId,
+              };
+              const rushStats = {
+                rushFum: stat.rushFum,
+                rushTDs: stat.rushTDs,
+                rushYds: stat.rushYds,
+                rushYdsAfterContact: stat.rushYdsAfterContact,
+                teamId: stat.teamId,
+              };
+              const kickerStats = {
+                fGMade: stat.fGMade,
+                fGAtt: stat.fGAtt,
+                teamId: stat.teamId,
+              };
+              const allStats = {
+                ...recStats,
+                ...passStats,
+                ...rushStats,
+                ...kickerStats,
+              };
+              Object.keys(allStats).forEach(
+                (key) => allStats[key] === undefined && delete allStats[key]
+              );
+              s[stat.rosterId] = allStats;
               return s;
             }, {});
           firestore
