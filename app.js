@@ -99,6 +99,7 @@ app.post(
             homeTeamId: game.homeTeamId,
             awayScore: game.awayScore,
             homeScore: game.homeScore,
+	    scheduleId: game.scheduleId
           }));
           firestore
             .setDoc(
@@ -227,6 +228,7 @@ app.post(
             homeTeamId: game.homeTeamId,
             awayScore: game.awayScore,
             homeScore: game.homeScore,
+	    scheduleId: game.scheduleId
           }));
           firestore
             .setDoc(
