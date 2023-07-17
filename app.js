@@ -49,7 +49,7 @@ app.post("/:discord/:platform/:leagueId/leagueteams", (req, res) => {
           username: t.userName,
           division: t.divName,
           cityName: t.cityName,
-        })
+        }),
     );
     firestore
       .setDoc(
@@ -58,7 +58,7 @@ app.post("/:discord/:platform/:leagueId/leagueteams", (req, res) => {
           guild_id: discord,
           teams: teams,
         },
-        { merge: true }
+        { merge: true },
       )
       .then((_) => {
         console.log(`teams written with id`);
@@ -99,7 +99,7 @@ app.post(
             homeTeamId: game.homeTeamId,
             awayScore: game.awayScore,
             homeScore: game.homeScore,
-	    scheduleId: game.scheduleId
+            scheduleId: game.scheduleId,
           }));
           firestore
             .setDoc(
@@ -108,7 +108,7 @@ app.post(
                 guild_id: discord,
                 schedules: schedules,
               },
-              { merge: true }
+              { merge: true },
             )
             .then((_) => {
               console.log(`schedule written with id`);
@@ -130,7 +130,7 @@ app.post(
         }
       }
     });
-  }
+  },
 );
 
 // ROSTERS
@@ -174,7 +174,7 @@ app.post("/media/:discord/:platform/:leagueId/leagueteams", (req, res) => {
           username: t.userName,
           division: t.divName,
           cityName: t.cityName,
-        })
+        }),
     );
     firestore
       .setDoc(
@@ -183,7 +183,7 @@ app.post("/media/:discord/:platform/:leagueId/leagueteams", (req, res) => {
           guild_id: discord,
           teams: teams,
         },
-        { merge: true }
+        { merge: true },
       )
       .then((_) => {
         console.log(`teams written with id`);
@@ -204,7 +204,7 @@ app.post("/media/:discord/:platform/:leagueId/standings", (req, res) => {
 });
 
 function stringify(obj) {
-    return JSON.stringify(obj);
+  return JSON.stringify(obj);
 }
 
 app.post(
@@ -228,7 +228,7 @@ app.post(
             homeTeamId: game.homeTeamId,
             awayScore: game.awayScore,
             homeScore: game.homeScore,
-	    scheduleId: game.scheduleId
+            scheduleId: game.scheduleId,
           }));
           firestore
             .setDoc(
@@ -236,7 +236,7 @@ app.post(
               {
                 schedules: schedules,
               },
-              { merge: true }
+              { merge: true },
             )
             .then((_) => {
               console.log(`schedule written with id`);
@@ -272,7 +272,7 @@ app.post(
               });
               return s;
             },
-            {}
+            {},
           );
           firestore
             .setDoc(
@@ -280,7 +280,7 @@ app.post(
               {
                 stats: stats,
               },
-              { merge: true }
+              { merge: true },
             )
             .then((_) => {
               console.log(`stats written with id`);
@@ -315,7 +315,7 @@ app.post(
               {
                 stats: stats,
               },
-              { merge: true }
+              { merge: true },
             )
             .then((_) => {
               console.log(`stats written with id`);
@@ -326,7 +326,7 @@ app.post(
         }
         default: {
           const property = `player${capitalizeFirstLetter(
-            dataType
+            dataType,
           )}StatInfoList`;
           const playerStats = JSON.parse(body)[property];
           const stats = {};
@@ -362,7 +362,7 @@ app.post(
                 ...kickerStats,
               };
               Object.keys(allStats).forEach(
-                (key) => allStats[key] === undefined && delete allStats[key]
+                (key) => allStats[key] === undefined && delete allStats[key],
               );
               s[stat.rosterId] = {
                 stats: stringify(allStats),
@@ -376,7 +376,7 @@ app.post(
               {
                 stats: stats,
               },
-              { merge: true }
+              { merge: true },
             )
             .then((_) => {
               console.log(`stats written with id`);
@@ -387,7 +387,7 @@ app.post(
         }
       }
     });
-  }
+  },
 );
 
 // ROSTERS
@@ -401,7 +401,7 @@ app.post(
     req.on("end", () => {
       res.sendStatus(200);
     });
-  }
+  },
 );
 
 app.post(
@@ -432,7 +432,7 @@ app.post(
           {
             teams: teams,
           },
-          { merge: true }
+          { merge: true },
         )
         .then((_) => {
           console.log(`roster written with id`);
@@ -440,9 +440,9 @@ app.post(
         })
         .catch(console.error);
     });
-  }
+  },
 );
 
 app.listen(app.get("port"), () =>
-  console.log("Madden Data is running on port", app.get("port"))
+  console.log("Madden Data is running on port", app.get("port")),
 );
