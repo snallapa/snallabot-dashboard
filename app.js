@@ -203,11 +203,7 @@ app.post("/media/:discord/:platform/:leagueId/standings", (req, res) => {
 });
 
 function stringify(obj) {
-  return Object.keys(obj)
-    .map(function (k) {
-      return `${k}:${obj[k]}`;
-    })
-    .join(",");
+    return JSON.stringify(obj);
 }
 
 app.post(
