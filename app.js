@@ -329,6 +329,7 @@ app.post(
             dataType,
           )}StatInfoList`;
           const playerStats = JSON.parse(body)[property];
+          console.log(playerStats);
           const stats = {};
           stats[weekType] = {};
           stats[weekType][`week${weekNum}`] = {};
