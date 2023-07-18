@@ -368,9 +368,9 @@ app.post(
                 (key) => allStats[key] === undefined && delete allStats[key],
               );
               s[stat.rosterId] = {
-                stats: stringify(allStats),
                 teamId: stat.teamId,
               };
+              s[stat.rosterId][`stats${dataType}`] = stringify(allStats);
               return s;
             }, {});
           firestore
