@@ -340,10 +340,12 @@ app.post(
                 recYds: stat.recYds,
               };
               const passStats = {
-                passCompPct: stat.passCompPct,
+                passComp: stat.passComp,
+                passAtt: stat.passAtt,
                 passInts: stat.passInts,
                 passTDs: stat.passTDs,
                 passSacks: stat.passSacks,
+                passYds: stat.passYds,
               };
               const rushStats = {
                 rushFum: stat.rushFum,
