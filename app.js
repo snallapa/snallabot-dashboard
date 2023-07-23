@@ -221,8 +221,7 @@ app.post(
       switch (dataType) {
         case "schedules": {
           const { gameScheduleInfoList: schedulesRaw } = JSON.parse(body);
-          const schedules = {};
-          schedules = schedulesRaw.map((game) => ({
+          const schedules = schedulesRaw.map((game) => ({
             awayTeamId: game.awayTeamId,
             homeTeamId: game.homeTeamId,
             awayScore: game.awayScore,
