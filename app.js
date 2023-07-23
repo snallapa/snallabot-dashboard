@@ -222,8 +222,8 @@ app.post(
         case "schedules": {
           const { gameScheduleInfoList: schedulesRaw } = JSON.parse(body);
           const schedules = {};
-          schedules[weekType] = {};
-          schedules[weekType][`week${weekNum}`] = schedulesRaw.map((game) => ({
+          schedules = {};
+          schedules = schedulesRaw.map((game) => ({
             awayTeamId: game.awayTeamId,
             homeTeamId: game.homeTeamId,
             awayScore: game.awayScore,
@@ -232,7 +232,7 @@ app.post(
           }));
           firestore
             .setDoc(
-              firestore.doc(db, "media", discord),
+              firestore.doc(db, "media", discord, weekType, `week${weekNum}`),
               {
                 schedules: schedules,
               },
@@ -248,35 +248,30 @@ app.post(
         case "teamstats": {
           const { teamStatInfoList: teamStats } = JSON.parse(body);
           const stats = {};
-          stats[weekType] = {};
-          stats[weekType][`week${weekNum}`] = {};
-          stats[weekType][`week${weekNum}`]["team-stats"] = teamStats.reduce(
-            (s, stat) => {
-              s[stat.teamId] = stringify({
-                defFumRec: stat.defFumRec,
-                defIntsRec: stat.defIntsRec,
-                defPtsPerGame: stat.defPtsPerGame,
-                defSacks: stat.defSacks,
-                off3rdDownConvPct: stat.off3rdDownConvPct,
-                off4thDownConvPct: stat.off4thDownConvPct,
-                offFumLost: stat.offFumLost,
-                offIntsLost: stat.offIntsLost,
-                offPassTDs: stat.offPassTDs,
-                offPassYds: stat.offPassYds,
-                offRedZonePct: stat.offRedZonePct,
-                offRushTDs: stat.offRushTDs,
-                offRushYds: stat.offRushYds,
-                offSacks: stat.offSacks,
-                offTotalYds: stat.offTotalYds,
-                tODiff: stat.tODiff,
-              });
-              return s;
-            },
-            {},
-          );
+          stats["team-stats"] = teamStats.reduce((s, stat) => {
+            s[stat.teamId] = stringify({
+              defFumRec: stat.defFumRec,
+              defIntsRec: stat.defIntsRec,
+              defPtsPerGame: stat.defPtsPerGame,
+              defSacks: stat.defSacks,
+              off3rdDownConvPct: stat.off3rdDownConvPct,
+              off4thDownConvPct: stat.off4thDownConvPct,
+              offFumLost: stat.offFumLost,
+              offIntsLost: stat.offIntsLost,
+              offPassTDs: stat.offPassTDs,
+              offPassYds: stat.offPassYds,
+              offRedZonePct: stat.offRedZonePct,
+              offRushTDs: stat.offRushTDs,
+              offRushYds: stat.offRushYds,
+              offSacks: stat.offSacks,
+              offTotalYds: stat.offTotalYds,
+              tODiff: stat.tODiff,
+            });
+            return s;
+          }, {});
           firestore
             .setDoc(
-              firestore.doc(db, "media", discord),
+              firestore.doc(db, "media", discord, weekType, `week${weekNum}`),
               {
                 stats: stats,
               },
@@ -293,25 +288,22 @@ app.post(
           const { playerDefensiveStatInfoList: defensiveStats } =
             JSON.parse(body);
           const stats = {};
-          stats[weekType] = {};
-          stats[weekType][`week${weekNum}`] = {};
-          stats[weekType][`week${weekNum}`]["player-stats"] =
-            defensiveStats.reduce((s, stat) => {
-              s[stat.rosterId] = {
-                stats: stringify({
-                  defForcedFum: stat.defForcedFum,
-                  defInts: stat.defInts,
-                  defSacks: stat.defSacks,
-                  defTDs: stat.defTDs,
-                  defTotalTackles: stat.defTotalTackles,
-                }),
-                teamId: stat.teamId,
-              };
-              return s;
-            }, {});
+          stats["player-stats"] = defensiveStats.reduce((s, stat) => {
+            s[stat.rosterId] = {
+              stats: stringify({
+                defForcedFum: stat.defForcedFum,
+                defInts: stat.defInts,
+                defSacks: stat.defSacks,
+                defTDs: stat.defTDs,
+                defTotalTackles: stat.defTotalTackles,
+              }),
+              teamId: stat.teamId,
+            };
+            return s;
+          }, {});
           firestore
             .setDoc(
-              firestore.doc(db, "media", discord),
+              firestore.doc(db, "media", discord, weekType, `week${weekNum}`),
               {
                 stats: stats,
               },
@@ -330,51 +322,48 @@ app.post(
           )}StatInfoList`;
           const playerStats = JSON.parse(body)[property];
           const stats = {};
-          stats[weekType] = {};
-          stats[weekType][`week${weekNum}`] = {};
-          stats[weekType][`week${weekNum}`]["player-stats"] =
-            playerStats.reduce((s, stat) => {
-              const recStats = {
-                recCatches: stat.recCatches,
-                recTDs: stat.recTDs,
-                recYds: stat.recYds,
-              };
-              const passStats = {
-                passComp: stat.passComp,
-                passAtt: stat.passAtt,
-                passInts: stat.passInts,
-                passTDs: stat.passTDs,
-                passSacks: stat.passSacks,
-                passYds: stat.passYds,
-              };
-              const rushStats = {
-                rushFum: stat.rushFum,
-                rushTDs: stat.rushTDs,
-                rushYds: stat.rushYds,
-                rushYdsAfterContact: stat.rushYdsAfterContact,
-              };
-              const kickerStats = {
-                fGMade: stat.fGMade,
-                fGAtt: stat.fGAtt,
-              };
-              const allStats = {
-                ...recStats,
-                ...passStats,
-                ...rushStats,
-                ...kickerStats,
-              };
-              Object.keys(allStats).forEach(
-                (key) => allStats[key] === undefined && delete allStats[key],
-              );
-              s[stat.rosterId] = {
-                teamId: stat.teamId,
-              };
-              s[stat.rosterId][`stats${dataType}`] = stringify(allStats);
-              return s;
-            }, {});
+          stats["player-stats"] = playerStats.reduce((s, stat) => {
+            const recStats = {
+              recCatches: stat.recCatches,
+              recTDs: stat.recTDs,
+              recYds: stat.recYds,
+            };
+            const passStats = {
+              passComp: stat.passComp,
+              passAtt: stat.passAtt,
+              passInts: stat.passInts,
+              passTDs: stat.passTDs,
+              passSacks: stat.passSacks,
+              passYds: stat.passYds,
+            };
+            const rushStats = {
+              rushFum: stat.rushFum,
+              rushTDs: stat.rushTDs,
+              rushYds: stat.rushYds,
+              rushYdsAfterContact: stat.rushYdsAfterContact,
+            };
+            const kickerStats = {
+              fGMade: stat.fGMade,
+              fGAtt: stat.fGAtt,
+            };
+            const allStats = {
+              ...recStats,
+              ...passStats,
+              ...rushStats,
+              ...kickerStats,
+            };
+            Object.keys(allStats).forEach(
+              (key) => allStats[key] === undefined && delete allStats[key],
+            );
+            s[stat.rosterId] = {
+              teamId: stat.teamId,
+            };
+            s[stat.rosterId][`stats${dataType}`] = stringify(allStats);
+            return s;
+          }, {});
           firestore
             .setDoc(
-              firestore.doc(db, "media", discord),
+              firestore.doc(db, "media", discord, weekType, `week${weekNum}`),
               {
                 stats: stats,
               },
