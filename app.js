@@ -271,7 +271,7 @@ app.post(
             .setDoc(
               firestore.doc(db, "media", discord, weekType, `week${weekNum}`),
               {
-                stats: stats,
+                ...stats,
               },
               { merge: true },
             )
@@ -303,7 +303,7 @@ app.post(
             .setDoc(
               firestore.doc(db, "media", discord, weekType, `week${weekNum}`),
               {
-                stats: stats,
+                ...stats,
               },
               { merge: true },
             )
@@ -363,7 +363,7 @@ app.post(
             .setDoc(
               firestore.doc(db, "media", discord, weekType, `week${weekNum}`),
               {
-                stats: stats,
+                ...stats,
               },
               { merge: true },
             )
