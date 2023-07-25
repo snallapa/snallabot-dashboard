@@ -221,7 +221,9 @@ app.post(
       switch (dataType) {
         case "schedules": {
           const { gameScheduleInfoList: schedulesRaw } = JSON.parse(body);
-          const schedules = schedulesRaw.map((game) => ({
+          const schedules = {};
+          schedules[weekType] = {};
+          schedules[weekType][`week${weekNum}`] = schedulesRaw.map((game) => ({
             awayTeamId: game.awayTeamId,
             homeTeamId: game.homeTeamId,
             awayScore: game.awayScore,
@@ -230,8 +232,9 @@ app.post(
           }));
           firestore
             .setDoc(
-              firestore.doc(db, "media", discord, weekType, `week${weekNum}`),
+              firestore.doc(db, "media", discord),
               {
+                guild_id: discord,
                 schedules: schedules,
               },
               { merge: true },
