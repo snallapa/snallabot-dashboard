@@ -142,23 +142,11 @@ app.post(
 
 // ROSTERS
 app.post("/:username/:platform/:leagueId/freeagents/roster", (req, res) => {
-  let body = "";
-  req.on("data", (chunk) => {
-    body += chunk.toString();
-  });
-  req.on("end", () => {
-    res.sendStatus(200);
-  });
+  res.sendStatus(200);
 });
 
 app.post("/:username/:platform/:leagueId/team/:teamId/roster", (req, res) => {
-  let body = "";
-  req.on("data", (chunk) => {
-    body += chunk.toString();
-  });
-  req.on("end", () => {
-    res.sendStatus(200);
-  });
+  res.sendStatus(200);
 });
 
 //media
