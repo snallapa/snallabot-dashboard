@@ -167,6 +167,7 @@ app.post("/media/:discord/:platform/:leagueId/leagueteams", (req, res) => {
     body += chunk.toString();
   });
   req.on("end", () => {
+    console.log(body);
     const { leagueTeamInfoList: teamsData } = JSON.parse(body);
     let teams = {};
     const {
