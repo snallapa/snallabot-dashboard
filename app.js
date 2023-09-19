@@ -121,6 +121,7 @@ app.post(
               console.log(e);
               res.sendStatus(500);
             });
+          break;
         }
         case "teamstats": {
           res.sendStatus(200);
