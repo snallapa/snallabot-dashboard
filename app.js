@@ -64,7 +64,10 @@ app.post("/:discord/:platform/:leagueId/leagueteams", (req, res) => {
         console.log(`teams written with id`);
         res.sendStatus(200);
       })
-      .catch(console.error);
+      .catch((e) => {
+        console.log(e);
+        res.sendStatus(500);
+      });
   });
 });
 
@@ -114,7 +117,10 @@ app.post(
               console.log(`schedule written with id`);
               res.sendStatus(200);
             })
-            .catch(console.error);
+            .catch((e) => {
+              console.log(e);
+              res.sendStatus(500);
+            });
         }
         case "teamstats": {
           res.sendStatus(200);
