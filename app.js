@@ -37,6 +37,10 @@ app.post("/:discord/:platform/:leagueId/leagueteams", (req, res) => {
   });
   req.on("end", () => {
     const { leagueTeamInfoList: teamsData } = JSON.parse(body);
+    if (!teamsData) {
+      res.sendStatus(500);
+      return;
+    }
     let teams = {};
     const {
       params: { discord },
@@ -95,6 +99,10 @@ app.post(
       switch (dataType) {
         case "schedules": {
           const { gameScheduleInfoList: schedulesRaw } = JSON.parse(body);
+          if (!schedulesRaw) {
+            res.sendStatus(500);
+            return;
+          }
           const schedules = {};
           schedules[weekType] = {};
           schedules[weekType][`week${weekNum}`] = schedulesRaw.map((game) => ({
@@ -157,6 +165,11 @@ app.post("/media/:discord/:platform/:leagueId/leagueteams", (req, res) => {
   });
   req.on("end", () => {
     const { leagueTeamInfoList: teamsData } = JSON.parse(body);
+    if (!teamsData) {
+      res.sendStatus(500);
+      return;
+    }
+
     let teams = {};
     const {
       params: { discord },
@@ -219,6 +232,11 @@ app.post(
       switch (dataType) {
         case "schedules": {
           const { gameScheduleInfoList: schedulesRaw } = JSON.parse(body);
+          if (!schedulesRaw) {
+            res.sendStatus(500);
+            return;
+          }
+
           const schedules = {};
           schedules[weekType] = {};
           schedules[weekType][`week${weekNum}`] = schedulesRaw.map((game) => ({
@@ -241,11 +259,19 @@ app.post(
               console.log(`schedule written with id`);
               res.sendStatus(200);
             })
-            .catch(console.error);
+            .catch((e) => {
+              console.log(e);
+              res.sendStatus(500);
+            });
           break;
         }
         case "teamstats": {
           const { teamStatInfoList: teamStats } = JSON.parse(body);
+          if (!teamStats) {
+            res.sendStatus(500);
+            return;
+          }
+
           const stats = {};
           stats["team-stats"] = teamStats.reduce((s, stat) => {
             s[stat.teamId] = stringify({
@@ -280,12 +306,21 @@ app.post(
               console.log(`stats written with id`);
               res.sendStatus(200);
             })
-            .catch(console.error);
+            .catch((e) => {
+              console.log(e);
+              res.sendStatus(500);
+            });
+
           break;
         }
         case "defense": {
           const { playerDefensiveStatInfoList: defensiveStats } =
             JSON.parse(body);
+          if (!defensiveStats) {
+            res.sendStatus(500);
+            return;
+          }
+
           const stats = {};
           stats["player-stats"] = defensiveStats.reduce((s, stat) => {
             s[stat.rosterId] = {
@@ -312,7 +347,11 @@ app.post(
               console.log(`stats written with id`);
               res.sendStatus(200);
             })
-            .catch(console.error);
+            .catch((e) => {
+              console.log(e);
+              res.sendStatus(500);
+            });
+
           break;
         }
         default: {
@@ -320,6 +359,11 @@ app.post(
             dataType,
           )}StatInfoList`;
           const playerStats = JSON.parse(body)[property];
+          if (!playerStats) {
+            res.sendStatus(500);
+            return;
+          }
+
           const stats = {};
           stats["player-stats"] = playerStats.reduce((s, stat) => {
             const recStats = {
@@ -372,7 +416,11 @@ app.post(
               console.log(`stats written with id`);
               res.sendStatus(200);
             })
-            .catch(console.error);
+            .catch((e) => {
+              console.log(e);
+              res.sendStatus(500);
+            });
+
           break;
         }
       }
@@ -384,13 +432,7 @@ app.post(
 app.post(
   "/media/:username/:platform/:leagueId/freeagents/roster",
   (req, res) => {
-    let body = "";
-    req.on("data", (chunk) => {
-      body += chunk.toString();
-    });
-    req.on("end", () => {
-      res.sendStatus(200);
-    });
+    res.sendStatus(200);
   },
 );
 
@@ -406,6 +448,11 @@ app.post(
     });
     req.on("end", () => {
       const { rosterInfoList } = JSON.parse(body);
+      if (!rosterInfoList) {
+        res.sendStatus(500);
+        return;
+      }
+
       let teams = {};
       teams[teamId] = {};
       teams[teamId]["roster"] = rosterInfoList.reduce((s, player) => {
@@ -428,7 +475,10 @@ app.post(
           console.log(`roster written with id`);
           res.sendStatus(200);
         })
-        .catch(console.error);
+        .catch((e) => {
+          console.log(e);
+          res.sendStatus(500);
+        });
     });
   },
 );
