@@ -168,7 +168,6 @@ app.post("/media/:discord/:platform/:leagueId/leagueteams", (req, res) => {
     body += chunk.toString();
   });
   req.on("end", () => {
-    console.log(body);
     const { leagueTeamInfoList: teamsData } = JSON.parse(body);
     let teams = {};
     const {
@@ -197,7 +196,10 @@ app.post("/media/:discord/:platform/:leagueId/leagueteams", (req, res) => {
         console.log(`teams written with id`);
         res.sendStatus(200);
       })
-      .catch(console.error);
+      .catch((e) => {
+        console.log(e);
+        res.sendStatus(500);
+      });
   });
 });
 
