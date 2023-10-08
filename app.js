@@ -477,6 +477,7 @@ app.post("/:discord/linkea", async (req, res, next) => {
     const code = new URLSearchParams(
       locationUrl.replace("http://127.0.0.1/success", ""),
     ).get("code");
+    console.log(code);
     const res1 = await fetch(`https://accounts.ea.com/connect/token`, {
       method: "POST",
       headers: {
@@ -489,6 +490,7 @@ app.post("/:discord/linkea", async (req, res, next) => {
       body: `authentication_source=317239&code=${code}&grant_type=authorization_code&token_format=JWS&release_type=prod&client_secret=U02zL2khwlgFdODLWCyLPmccOc5EiPBBYcEwCqKDTWBrZj2Fwcx4b4Zd9rsA6lHLkIU4qlVvNh84olij&redrect_uri=http://127.0.0.1/success&client_id=MaddenCompanionApp19`,
     });
     const res1Json = await res1.json();
+    console.log(res1Json);
     const {
       access_token: accessToken,
       refresh_token: refreshToken,
