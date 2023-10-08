@@ -5,6 +5,8 @@ const express = require("express");
 
 const app = express();
 
+app.use(express.json({ limit: "1mb", type: "*/*" }));
+
 const firebaseConfig = {
   apiKey: "AIzaSyDf9ZiTBWf-sWY007WsKktMPewcrs07CWw",
   authDomain: "championslounge-f0f36.firebaseapp.com",
@@ -31,58 +33,46 @@ app.get("*", (req, res) => {
 });
 
 app.post("/:discord/:platform/:leagueId/leagueteams", (req, res) => {
-  let body = "";
-  req.on("data", (chunk) => {
-    body += chunk.toString();
-  });
-  req.on("end", () => {
-    const { leagueTeamInfoList: teamsData } = JSON.parse(body);
-    if (!teamsData) {
+  const { leagueTeamInfoList: teamsData } = req.body;
+  if (!teamsData) {
+    res.sendStatus(500);
+    return;
+  }
+  let teams = {};
+  const {
+    params: { discord },
+  } = req;
+  teamsData.forEach(
+    (t) =>
+      (teams[t.teamId] = {
+        teamName: t.displayName,
+        abbr: t.abbrName,
+        username: t.userName,
+        division: t.divName,
+        cityName: t.cityName,
+      }),
+  );
+  firestore
+    .setDoc(
+      firestore.doc(db, "leagues", discord),
+      {
+        guild_id: discord,
+        teams: teams,
+      },
+      { merge: true },
+    )
+    .then((_) => {
+      console.log(`teams written with id`);
+      res.sendStatus(200);
+    })
+    .catch((e) => {
+      console.log(e);
       res.sendStatus(500);
-      return;
-    }
-    let teams = {};
-    const {
-      params: { discord },
-    } = req;
-    teamsData.forEach(
-      (t) =>
-        (teams[t.teamId] = {
-          teamName: t.displayName,
-          abbr: t.abbrName,
-          username: t.userName,
-          division: t.divName,
-          cityName: t.cityName,
-        }),
-    );
-    firestore
-      .setDoc(
-        firestore.doc(db, "leagues", discord),
-        {
-          guild_id: discord,
-          teams: teams,
-        },
-        { merge: true },
-      )
-      .then((_) => {
-        console.log(`teams written with id`);
-        res.sendStatus(200);
-      })
-      .catch((e) => {
-        console.log(e);
-        res.sendStatus(500);
-      });
-  });
+    });
 });
 
 app.post("/:discord/:platform/:leagueId/standings", (req, res) => {
-  let body = "";
-  req.on("data", (chunk) => {
-    body += chunk.toString();
-  });
-  req.on("end", () => {
-    res.sendStatus(200);
-  });
+  res.sendStatus(200);
 });
 
 app.post(
@@ -91,60 +81,54 @@ app.post(
     const {
       params: { discord, weekType, weekNum, dataType },
     } = req;
-    let body = "";
-    req.on("data", (chunk) => {
-      body += chunk.toString();
-    });
-    req.on("end", () => {
-      switch (dataType) {
-        case "schedules": {
-          const { gameScheduleInfoList: schedulesRaw } = JSON.parse(body);
-          if (!schedulesRaw) {
+    switch (dataType) {
+      case "schedules": {
+        const { gameScheduleInfoList: schedulesRaw } = JSON.parse(body);
+        if (!schedulesRaw) {
+          res.sendStatus(500);
+          return;
+        }
+        const schedules = {};
+        schedules[weekType] = {};
+        schedules[weekType][`week${weekNum}`] = schedulesRaw.map((game) => ({
+          awayTeamId: game.awayTeamId,
+          homeTeamId: game.homeTeamId,
+          awayScore: game.awayScore,
+          homeScore: game.homeScore,
+          scheduleId: game.scheduleId,
+        }));
+        firestore
+          .setDoc(
+            firestore.doc(db, "leagues", discord),
+            {
+              guild_id: discord,
+              schedules: schedules,
+            },
+            { merge: true },
+          )
+          .then((_) => {
+            console.log(`schedule written with id`);
+            res.sendStatus(200);
+          })
+          .catch((e) => {
+            console.log(e);
             res.sendStatus(500);
-            return;
-          }
-          const schedules = {};
-          schedules[weekType] = {};
-          schedules[weekType][`week${weekNum}`] = schedulesRaw.map((game) => ({
-            awayTeamId: game.awayTeamId,
-            homeTeamId: game.homeTeamId,
-            awayScore: game.awayScore,
-            homeScore: game.homeScore,
-            scheduleId: game.scheduleId,
-          }));
-          firestore
-            .setDoc(
-              firestore.doc(db, "leagues", discord),
-              {
-                guild_id: discord,
-                schedules: schedules,
-              },
-              { merge: true },
-            )
-            .then((_) => {
-              console.log(`schedule written with id`);
-              res.sendStatus(200);
-            })
-            .catch((e) => {
-              console.log(e);
-              res.sendStatus(500);
-            });
-          break;
-        }
-        case "teamstats": {
-          res.sendStatus(200);
-          break;
-        }
-        case "defense": {
-          res.sendStatus(200);
-          break;
-        }
-        default: {
-          res.sendStatus(200);
-          break;
-        }
+          });
+        break;
       }
-    });
+      case "teamstats": {
+        res.sendStatus(200);
+        break;
+      }
+      case "defense": {
+        res.sendStatus(200);
+        break;
+      }
+      default: {
+        res.sendStatus(200);
+        break;
+      }
+    }
   },
 );
 
