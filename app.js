@@ -183,13 +183,7 @@ app.post("/media/:discord/:platform/:leagueId/leagueteams", (req, res) => {
 });
 
 app.post("/media/:discord/:platform/:leagueId/standings", (req, res) => {
-  let body = "";
-  req.on("data", (chunk) => {
-    body += chunk.toString();
-  });
-  req.on("end", () => {
-    res.sendStatus(200);
-  });
+  res.sendStatus(200);
 });
 
 function stringify(obj) {
@@ -202,207 +196,198 @@ app.post(
     const {
       params: { discord, weekType, weekNum, dataType },
     } = req;
-    let body = "";
-    req.on("data", (chunk) => {
-      body += chunk.toString();
-    });
-    req.on("end", () => {
-      switch (dataType) {
-        case "schedules": {
-          const { gameScheduleInfoList: schedulesRaw } = JSON.parse(body);
-          if (!schedulesRaw) {
-            res.sendStatus(500);
-            return;
-          }
-
-          const schedules = {};
-          schedules[weekType] = {};
-          schedules[weekType][`week${weekNum}`] = schedulesRaw.map((game) => ({
-            awayTeamId: game.awayTeamId,
-            homeTeamId: game.homeTeamId,
-            awayScore: game.awayScore,
-            homeScore: game.homeScore,
-            scheduleId: game.scheduleId,
-          }));
-          firestore
-            .setDoc(
-              firestore.doc(db, "media", discord),
-              {
-                guild_id: discord,
-                schedules: schedules,
-              },
-              { merge: true },
-            )
-            .then((_) => {
-              console.log(`schedule written with id`);
-              res.sendStatus(200);
-            })
-            .catch((e) => {
-              console.log(e);
-              res.sendStatus(500);
-            });
-          break;
+    switch (dataType) {
+      case "schedules": {
+        const { gameScheduleInfoList: schedulesRaw } = req.body;
+        if (!schedulesRaw) {
+          res.sendStatus(500);
+          return;
         }
-        case "teamstats": {
-          const { teamStatInfoList: teamStats } = JSON.parse(body);
-          if (!teamStats) {
+
+        const schedules = {};
+        schedules[weekType] = {};
+        schedules[weekType][`week${weekNum}`] = schedulesRaw.map((game) => ({
+          awayTeamId: game.awayTeamId,
+          homeTeamId: game.homeTeamId,
+          awayScore: game.awayScore,
+          homeScore: game.homeScore,
+          scheduleId: game.scheduleId,
+        }));
+        firestore
+          .setDoc(
+            firestore.doc(db, "media", discord),
+            {
+              guild_id: discord,
+              schedules: schedules,
+            },
+            { merge: true },
+          )
+          .then((_) => {
+            console.log(`schedule written with id`);
+            res.sendStatus(200);
+          })
+          .catch((e) => {
+            console.log(e);
             res.sendStatus(500);
-            return;
-          }
-
-          const stats = {};
-          stats["team-stats"] = teamStats.reduce((s, stat) => {
-            s[stat.teamId] = stringify({
-              defFumRec: stat.defFumRec,
-              defIntsRec: stat.defIntsRec,
-              defPtsPerGame: stat.defPtsPerGame,
-              defSacks: stat.defSacks,
-              off3rdDownConvPct: stat.off3rdDownConvPct,
-              off4thDownConvPct: stat.off4thDownConvPct,
-              offFumLost: stat.offFumLost,
-              offIntsLost: stat.offIntsLost,
-              offPassTDs: stat.offPassTDs,
-              offPassYds: stat.offPassYds,
-              offRedZonePct: stat.offRedZonePct,
-              offRushTDs: stat.offRushTDs,
-              offRushYds: stat.offRushYds,
-              offSacks: stat.offSacks,
-              offTotalYds: stat.offTotalYds,
-              tODiff: stat.tODiff,
-            });
-            return s;
-          }, {});
-          firestore
-            .setDoc(
-              firestore.doc(db, "media", discord, weekType, `week${weekNum}`),
-              {
-                ...stats,
-              },
-              { merge: true },
-            )
-            .then((_) => {
-              console.log(`stats written with id`);
-              res.sendStatus(200);
-            })
-            .catch((e) => {
-              console.log(e);
-              res.sendStatus(500);
-            });
-
-          break;
-        }
-        case "defense": {
-          const { playerDefensiveStatInfoList: defensiveStats } =
-            JSON.parse(body);
-          if (!defensiveStats) {
-            res.sendStatus(500);
-            return;
-          }
-
-          const stats = {};
-          stats["player-stats"] = defensiveStats.reduce((s, stat) => {
-            s[stat.rosterId] = {
-              stats: stringify({
-                defForcedFum: stat.defForcedFum,
-                defInts: stat.defInts,
-                defSacks: stat.defSacks,
-                defTDs: stat.defTDs,
-                defTotalTackles: stat.defTotalTackles,
-              }),
-              teamId: stat.teamId,
-            };
-            return s;
-          }, {});
-          firestore
-            .setDoc(
-              firestore.doc(db, "media", discord, weekType, `week${weekNum}`),
-              {
-                ...stats,
-              },
-              { merge: true },
-            )
-            .then((_) => {
-              console.log(`stats written with id`);
-              res.sendStatus(200);
-            })
-            .catch((e) => {
-              console.log(e);
-              res.sendStatus(500);
-            });
-
-          break;
-        }
-        default: {
-          const property = `player${capitalizeFirstLetter(
-            dataType,
-          )}StatInfoList`;
-          const playerStats = JSON.parse(body)[property];
-          if (!playerStats) {
-            res.sendStatus(500);
-            return;
-          }
-
-          const stats = {};
-          stats["player-stats"] = playerStats.reduce((s, stat) => {
-            const recStats = {
-              recCatches: stat.recCatches,
-              recTDs: stat.recTDs,
-              recYds: stat.recYds,
-            };
-            const passStats = {
-              passComp: stat.passComp,
-              passAtt: stat.passAtt,
-              passInts: stat.passInts,
-              passTDs: stat.passTDs,
-              passSacks: stat.passSacks,
-              passYds: stat.passYds,
-            };
-            const rushStats = {
-              rushFum: stat.rushFum,
-              rushTDs: stat.rushTDs,
-              rushYds: stat.rushYds,
-              rushYdsAfterContact: stat.rushYdsAfterContact,
-            };
-            const kickerStats = {
-              fGMade: stat.fGMade,
-              fGAtt: stat.fGAtt,
-            };
-            const allStats = {
-              ...recStats,
-              ...passStats,
-              ...rushStats,
-              ...kickerStats,
-            };
-            Object.keys(allStats).forEach(
-              (key) => allStats[key] === undefined && delete allStats[key],
-            );
-            s[stat.rosterId] = {
-              teamId: stat.teamId,
-            };
-            s[stat.rosterId][`stats${dataType}`] = stringify(allStats);
-            return s;
-          }, {});
-          firestore
-            .setDoc(
-              firestore.doc(db, "media", discord, weekType, `week${weekNum}`),
-              {
-                ...stats,
-              },
-              { merge: true },
-            )
-            .then((_) => {
-              console.log(`stats written with id`);
-              res.sendStatus(200);
-            })
-            .catch((e) => {
-              console.log(e);
-              res.sendStatus(500);
-            });
-
-          break;
-        }
+          });
+        break;
       }
-    });
+      case "teamstats": {
+        const { teamStatInfoList: teamStats } = req.body;
+        if (!teamStats) {
+          res.sendStatus(500);
+          return;
+        }
+
+        const stats = {};
+        stats["team-stats"] = teamStats.reduce((s, stat) => {
+          s[stat.teamId] = stringify({
+            defFumRec: stat.defFumRec,
+            defIntsRec: stat.defIntsRec,
+            defPtsPerGame: stat.defPtsPerGame,
+            defSacks: stat.defSacks,
+            off3rdDownConvPct: stat.off3rdDownConvPct,
+            off4thDownConvPct: stat.off4thDownConvPct,
+            offFumLost: stat.offFumLost,
+            offIntsLost: stat.offIntsLost,
+            offPassTDs: stat.offPassTDs,
+            offPassYds: stat.offPassYds,
+            offRedZonePct: stat.offRedZonePct,
+            offRushTDs: stat.offRushTDs,
+            offRushYds: stat.offRushYds,
+            offSacks: stat.offSacks,
+            offTotalYds: stat.offTotalYds,
+            tODiff: stat.tODiff,
+          });
+          return s;
+        }, {});
+        firestore
+          .setDoc(
+            firestore.doc(db, "media", discord, weekType, `week${weekNum}`),
+            {
+              ...stats,
+            },
+            { merge: true },
+          )
+          .then((_) => {
+            console.log(`stats written with id`);
+            res.sendStatus(200);
+          })
+          .catch((e) => {
+            console.log(e);
+            res.sendStatus(500);
+          });
+
+        break;
+      }
+      case "defense": {
+        const { playerDefensiveStatInfoList: defensiveStats } = req.body;
+        if (!defensiveStats) {
+          res.sendStatus(500);
+          return;
+        }
+
+        const stats = {};
+        stats["player-stats"] = defensiveStats.reduce((s, stat) => {
+          s[stat.rosterId] = {
+            stats: stringify({
+              defForcedFum: stat.defForcedFum,
+              defInts: stat.defInts,
+              defSacks: stat.defSacks,
+              defTDs: stat.defTDs,
+              defTotalTackles: stat.defTotalTackles,
+            }),
+            teamId: stat.teamId,
+          };
+          return s;
+        }, {});
+        firestore
+          .setDoc(
+            firestore.doc(db, "media", discord, weekType, `week${weekNum}`),
+            {
+              ...stats,
+            },
+            { merge: true },
+          )
+          .then((_) => {
+            console.log(`stats written with id`);
+            res.sendStatus(200);
+          })
+          .catch((e) => {
+            console.log(e);
+            res.sendStatus(500);
+          });
+
+        break;
+      }
+      default: {
+        const property = `player${capitalizeFirstLetter(dataType)}StatInfoList`;
+        const playerStats = req.body[property];
+        if (!playerStats) {
+          res.sendStatus(500);
+          return;
+        }
+
+        const stats = {};
+        stats["player-stats"] = playerStats.reduce((s, stat) => {
+          const recStats = {
+            recCatches: stat.recCatches,
+            recTDs: stat.recTDs,
+            recYds: stat.recYds,
+          };
+          const passStats = {
+            passComp: stat.passComp,
+            passAtt: stat.passAtt,
+            passInts: stat.passInts,
+            passTDs: stat.passTDs,
+            passSacks: stat.passSacks,
+            passYds: stat.passYds,
+          };
+          const rushStats = {
+            rushFum: stat.rushFum,
+            rushTDs: stat.rushTDs,
+            rushYds: stat.rushYds,
+            rushYdsAfterContact: stat.rushYdsAfterContact,
+          };
+          const kickerStats = {
+            fGMade: stat.fGMade,
+            fGAtt: stat.fGAtt,
+          };
+          const allStats = {
+            ...recStats,
+            ...passStats,
+            ...rushStats,
+            ...kickerStats,
+          };
+          Object.keys(allStats).forEach(
+            (key) => allStats[key] === undefined && delete allStats[key],
+          );
+          s[stat.rosterId] = {
+            teamId: stat.teamId,
+          };
+          s[stat.rosterId][`stats${dataType}`] = stringify(allStats);
+          return s;
+        }, {});
+        firestore
+          .setDoc(
+            firestore.doc(db, "media", discord, weekType, `week${weekNum}`),
+            {
+              ...stats,
+            },
+            { merge: true },
+          )
+          .then((_) => {
+            console.log(`stats written with id`);
+            res.sendStatus(200);
+          })
+          .catch((e) => {
+            console.log(e);
+            res.sendStatus(500);
+          });
+
+        break;
+      }
+    }
   },
 );
 
@@ -420,44 +405,38 @@ app.post(
     const {
       params: { discord, teamId },
     } = req;
-    let body = "";
-    req.on("data", (chunk) => {
-      body += chunk.toString();
-    });
-    req.on("end", () => {
-      const { rosterInfoList } = JSON.parse(body);
-      if (!rosterInfoList) {
-        res.sendStatus(500);
-        return;
-      }
+    const { rosterInfoList } = req.body;
+    if (!rosterInfoList) {
+      res.sendStatus(500);
+      return;
+    }
 
-      let teams = {};
-      teams[teamId] = {};
-      teams[teamId]["roster"] = rosterInfoList.reduce((s, player) => {
-        s[player.rosterId] = {
-          name: `${player.firstName} ${player.lastName}`,
-          college: player.college,
-          position: player.position,
-        };
-        return s;
-      }, {});
-      firestore
-        .setDoc(
-          firestore.doc(db, "media", discord),
-          {
-            teams: teams,
-          },
-          { merge: true },
-        )
-        .then((_) => {
-          console.log(`roster written with id`);
-          res.sendStatus(200);
-        })
-        .catch((e) => {
-          console.log(e);
-          res.sendStatus(500);
-        });
-    });
+    let teams = {};
+    teams[teamId] = {};
+    teams[teamId]["roster"] = rosterInfoList.reduce((s, player) => {
+      s[player.rosterId] = {
+        name: `${player.firstName} ${player.lastName}`,
+        college: player.college,
+        position: player.position,
+      };
+      return s;
+    }, {});
+    firestore
+      .setDoc(
+        firestore.doc(db, "media", discord),
+        {
+          teams: teams,
+        },
+        { merge: true },
+      )
+      .then((_) => {
+        console.log(`roster written with id`);
+        res.sendStatus(200);
+      })
+      .catch((e) => {
+        console.log(e);
+        res.sendStatus(500);
+      });
   },
 );
 
