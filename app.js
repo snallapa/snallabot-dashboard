@@ -83,7 +83,7 @@ app.post(
     } = req;
     switch (dataType) {
       case "schedules": {
-        const { gameScheduleInfoList: schedulesRaw } = JSON.parse(body);
+        const { gameScheduleInfoList: schedulesRaw } = req.body;
         if (!schedulesRaw) {
           res.sendStatus(500);
           return;
@@ -143,49 +143,43 @@ app.post("/:username/:platform/:leagueId/team/:teamId/roster", (req, res) => {
 
 //media
 app.post("/media/:discord/:platform/:leagueId/leagueteams", (req, res) => {
-  let body = "";
-  req.on("data", (chunk) => {
-    body += chunk.toString();
-  });
-  req.on("end", () => {
-    const { leagueTeamInfoList: teamsData } = JSON.parse(body);
-    if (!teamsData) {
-      res.sendStatus(500);
-      return;
-    }
+  const { leagueTeamInfoList: teamsData } = req.body;
+  if (!teamsData) {
+    res.sendStatus(500);
+    return;
+  }
 
-    let teams = {};
-    const {
-      params: { discord },
-    } = req;
-    teamsData.forEach(
-      (t) =>
-        (teams[t.teamId] = {
-          teamName: t.displayName,
-          abbr: t.abbrName,
-          username: t.userName,
-          division: t.divName,
-          cityName: t.cityName,
-        }),
-    );
-    firestore
-      .setDoc(
-        firestore.doc(db, "media", discord),
-        {
-          guild_id: discord,
-          teams: teams,
-        },
-        { merge: true },
-      )
-      .then((_) => {
-        console.log(`teams written with id`);
-        res.sendStatus(200);
-      })
-      .catch((e) => {
-        console.log(e);
-        res.sendStatus(500);
-      });
-  });
+  let teams = {};
+  const {
+    params: { discord },
+  } = req;
+  teamsData.forEach(
+    (t) =>
+      (teams[t.teamId] = {
+        teamName: t.displayName,
+        abbr: t.abbrName,
+        username: t.userName,
+        division: t.divName,
+        cityName: t.cityName,
+      }),
+  );
+  firestore
+    .setDoc(
+      firestore.doc(db, "media", discord),
+      {
+        guild_id: discord,
+        teams: teams,
+      },
+      { merge: true },
+    )
+    .then((_) => {
+      console.log(`teams written with id`);
+      res.sendStatus(200);
+    })
+    .catch((e) => {
+      console.log(e);
+      res.sendStatus(500);
+    });
 });
 
 app.post("/media/:discord/:platform/:leagueId/standings", (req, res) => {
