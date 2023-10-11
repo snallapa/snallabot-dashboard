@@ -2,6 +2,7 @@ const firebaseapp = require("firebase/app");
 const firestore = require("firebase/firestore");
 const crypto = require("crypto");
 const buffer = require("buffer");
+const { Agent } = require("undici");
 
 const express = require("express");
 
@@ -643,6 +644,12 @@ async function makeBlazeRequest(guild_id, blazeRequest) {
     const res1 = await fetch(
       `https://wal2.tools.gos.bio-iad.ea.com/wal/authentication/login`,
       {
+        dispatcher: new Agent({
+          connect: {
+            rejectUnauthorized: false,
+            secureOptions: crypto.constants.SSL_OP_LEGACY_SERVER_CONNECT,
+          },
+        }),
         method: "POST",
         headers: {
           "Accept-Charset": "UTF-8",
