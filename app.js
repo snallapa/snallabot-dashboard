@@ -748,7 +748,7 @@ app.post("/:discord/linkea", async (req, res, next) => {
       expires_in: expiresIn,
     } = res1Json;
     const expiry = new Date(new Date().getTime() + expiresIn * 1000);
-    const blazeId = BLAZE_SERVICE(YEAR)[consoleAbbr];
+    const blazeService = BLAZE_SERVICE(YEAR)[consoleAbbr];
     const blazeProductName = BLAZE_PRODUCT_NAME(YEAR)[consoleAbbr];
 
     await firestore.setDoc(
@@ -758,7 +758,7 @@ app.post("/:discord/linkea", async (req, res, next) => {
           accessToken,
           refreshToken,
           expiry,
-          blazeId,
+          blazeService,
           blazeProductName,
         },
       },
