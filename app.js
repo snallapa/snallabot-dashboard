@@ -644,10 +644,10 @@ async function makeBlazeRequest(guild_id, blazeRequest) {
   const requestId = tokenInfo.blazeRequestId || 1;
   const authData = calculateMessageAuthData(tokenInfo.blazeId, requestId);
   blazeRequest.messageAuthData = authData;
-  const messageExpiration = Math.floor(new Date().getTime() / 1000);
-  blazeRequest.messageExpirationTime = messageExpiration;
-  blazeRequest.deviceId = "MCA4b35d75Vm-MCA";
-  blazeRequest.ipAddress = "127.0.0.1";
+  // const messageExpiration = Math.floor(new Date().getTime() / 1000);
+  // blazeRequest.messageExpirationTime = messageExpiration;
+  // blazeRequest.deviceId = "MCA4b35d75Vm-MCA";
+  // blazeRequest.ipAddress = "127.0.0.1";
   const body = JSON.stringify({
     apiVersion: 2,
     clientDevice: 3,
@@ -767,9 +767,12 @@ app.post("/:discord/linkea", async (req, res, next) => {
 
     await getBlazeSession(discord);
     const leagueResponse = await makeBlazeRequest(discord, {
+      messsageExpirationTime: Math.floor(new Date().getTime / 1000),
+      deviceId: "MCA4b35d75Vm-MCA",
       commandName: "Mobile_GetMyLeagues",
       componentId: 2060,
       commandId: 801,
+      ipAddress: "127.0.0.1",
       requestPayload: {},
       componentName: "careermode",
     });
