@@ -556,7 +556,7 @@ async function getBlazeSession(guild_id) {
         headers: {
           "Accept-Charset": "UTF-8",
           Accept: "application/json",
-          "X-BLAZE-ID": tokenInfo.blazeId,
+          "X-BLAZE-ID": tokenInfo.blazeService,
           "X-BLAZE-VOID-RESP": "XML",
           "X-Application-Key": "MADDEN-MCA",
           "Content-Type": "application/json",
@@ -668,7 +668,7 @@ async function makeBlazeRequest(guild_id, blazeRequest) {
       headers: {
         "Accept-Charset": "UTF-8",
         Accept: "application/json",
-        "X-BLAZE-ID": tokenInfo.blazeId,
+        "X-BLAZE-ID": tokenInfo.blazeService,
         "X-BLAZE-VOID-RESP": "XML",
         "X-Application-Key": "MADDEN-MCA",
         "Content-Type": "application/json",
