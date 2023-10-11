@@ -538,7 +538,10 @@ async function getBlazeSession(guild_id) {
   const league = docSnap.data();
   const tokenInfo = league.madden_server;
   const now = new Date();
-  if (tokenInfo.sessionKey && now > tokenInfo.blazeExpiry) {
+  if (
+    !tokenInfo.sessionKey ||
+    (tokenInfo.blazeExpiry && now > tokenInfo.blazeExpiry)
+  ) {
     const res1 = await fetch(
       `https://wal2.tools.gos.bio-iad.ea.com/wal/authentication/login`,
       {
@@ -628,6 +631,9 @@ async function makeBlazeRequest(guild_id, blazeRequest) {
 
   const league = docSnap.data();
   const tokenInfo = league.madden_server;
+  if (!tokenInfo.sessionKey) {
+    throw new Error("no session key");
+  }
   const requestId = tokenInfo.blazeRequestId || 1;
   const authData = calculateMessageAuthData(tokenInfo.blazeId, requestId);
   blazeRequest.messageAuthData = authData;
