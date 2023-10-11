@@ -686,7 +686,7 @@ async function makeBlazeRequest(guild_id, blazeRequest) {
     },
     { merge: true },
   );
-
+  console.log(await res1.text());
   return await res1.json();
 }
 
