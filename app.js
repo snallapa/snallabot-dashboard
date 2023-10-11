@@ -633,28 +633,33 @@ async function makeBlazeRequest(guild_id, blazeRequest) {
   blazeRequest.messageExpirationTime = messageExpiration;
   blazeRequest.deviceId = "MCA4b35d75Vm-MCA";
   blazeRequest.ipAddress = "127.0.0.1";
-
-  const res1 = await fetch(
-    `https://wal2.tools.gos.bio-iad.ea.com/wal/authentication/login`,
-    {
-      method: "POST",
-      headers: {
-        "Accept-Charset": "UTF-8",
-        Accept: "application/json",
-        "X-BLAZE-ID": tokenInfo.blazeId,
-        "X-BLAZE-VOID-RESP": "XML",
-        "X-Application-Key": "MADDEN-MCA",
-        "Content-Type": "application/json",
-        "User-Agent":
-          "Dalvik/2.1.0 (Linux; U; Android 13; sdk_gphone_x86_64 Build/TE1A.220922.031)",
+  const body = JSON.stringify({
+    apiVersion: 2,
+    clientDevice: 3,
+    requestInfo: JSON.stringify(blazeRequest),
+  });
+  console.log(body);
+  try {
+    const res1 = await fetch(
+      `https://wal2.tools.gos.bio-iad.ea.com/wal/authentication/login`,
+      {
+        method: "POST",
+        headers: {
+          "Accept-Charset": "UTF-8",
+          Accept: "application/json",
+          "X-BLAZE-ID": tokenInfo.blazeId,
+          "X-BLAZE-VOID-RESP": "XML",
+          "X-Application-Key": "MADDEN-MCA",
+          "Content-Type": "application/json",
+          "User-Agent":
+            "Dalvik/2.1.0 (Linux; U; Android 13; sdk_gphone_x86_64 Build/TE1A.220922.031)",
+        },
+        body: body,
       },
-      body: JSON.stringify({
-        apiVersion: 2,
-        clientDevice: 3,
-        requestInfo: JSON.stringify(blazeRequest),
-      }),
-    },
-  );
+    );
+  } catch (e) {
+    console.log(e);
+  }
   return await res1.json();
 }
 
