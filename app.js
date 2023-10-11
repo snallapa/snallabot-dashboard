@@ -766,8 +766,9 @@ app.post("/:discord/linkea", async (req, res, next) => {
     );
 
     await getBlazeSession(discord);
+    const messageExpiration = Math.floor(new Date().getTime() / 1000);
     const leagueResponse = await makeBlazeRequest(discord, {
-      messsageExpirationTime: Math.floor(new Date().getTime / 1000),
+      messsageExpirationTime: messageExpiration,
       deviceId: "MCA4b35d75Vm-MCA",
       commandName: "Mobile_GetMyLeagues",
       componentId: 2060,
