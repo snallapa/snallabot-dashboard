@@ -779,7 +779,7 @@ app.post("/:discord/linkea", async (req, res, next) => {
       componentId: 2060,
       commandId: 801,
       ipAddress: "127.0.0.1",
-      requestPayload: {},
+      requestPayload: "{}",
       componentName: "careermode",
     });
     console.log(leagueResponse);
