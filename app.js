@@ -663,6 +663,7 @@ app.post("/:discord/linkea", async (req, res, next) => {
     params: { discord },
   } = req;
   const { persona, token, gameConsole } = req.body;
+  const consoleAbbr = ENTITLEMENT_TO_SYSTEM(TWO_DIGIT_YEAR)[gameConsole];
   console.log(req.body);
   try {
     const locationUrl = await fetch(
@@ -731,7 +732,7 @@ app.post("/:discord/linkea", async (req, res, next) => {
       },
       { merge: true },
     );
-    const consoleAbbr = ENTITLEMENT_TO_SYSTEM(TWO_DIGIT_YEAR)[gameConsole];
+
     await getBlazeSession(discord);
     const leagueResponse = await makeBlazeRequest(discord, {
       commandName: "Mobile_GetMyLeagues",
