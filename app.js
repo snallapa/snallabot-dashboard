@@ -571,8 +571,8 @@ async function getBlazeSession(guild_id) {
     );
     const res1Json = await res1.json();
     const {
-      sessionKey,
       userLoginInfo: {
+        sessionKey,
         personaDetails: { personaId: blazeId },
       },
     } = res1Json;
