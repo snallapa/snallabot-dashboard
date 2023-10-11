@@ -572,8 +572,9 @@ async function getBlazeSession(guild_id) {
     );
     tokenInfo.blazeSessionExpiry = blazeExpiry;
     tokenInfo.blazeId = blazeId;
+    console.log(tokenInfo);
     await firestore.setDoc(
-      firestore.doc(db, "leagues", discord),
+      firestore.doc(db, "leagues", guild_id),
       {
         madden_server: tokenInfo,
       },
@@ -627,7 +628,7 @@ async function makeBlazeRequest(guild_id, blazeRequest) {
 
   const league = docSnap.data();
   const tokenInfo = league.madden_server;
-  const requestId = tokenInfo.blazeRequestId || 2;
+  const requestId = tokenInfo.blazeRequestId || 1;
   const authData = calculateMessageAuthData(tokenInfo.blazeId, requestId);
   blazeRequest.messageAuthData = authData;
   const messageExpiration = Math.floor(new Date().getTime() / 1000);
@@ -641,8 +642,9 @@ async function makeBlazeRequest(guild_id, blazeRequest) {
   });
   console.log(body);
   const res1 = await fetch(
-    `https://wal2.tools.gos.bio-iad.ea.com/wal/authentication/login`,
+    `https://wal2.tools.gos.bio-iad.ea.com/wal/mca/Process/${tokenInfo.sessionKey}`,
     {
+      // EA is on legacy SSL SMH LMAO ALSO
       dispatcher: new Agent({
         connect: {
           rejectUnauthorized: false,
@@ -662,6 +664,14 @@ async function makeBlazeRequest(guild_id, blazeRequest) {
       },
       body: body,
     },
+  );
+  tokenInfo.blazeRequestId = requestId + 1;
+  await firestore.setDoc(
+    firestore.doc(db, "leagues", guild_id),
+    {
+      madden_server: tokenInfo,
+    },
+    { merge: true },
   );
 
   return await res1.json();
