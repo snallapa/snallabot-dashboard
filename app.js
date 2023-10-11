@@ -545,6 +545,13 @@ async function getBlazeSession(guild_id) {
     const res1 = await fetch(
       `https://wal2.tools.gos.bio-iad.ea.com/wal/authentication/login`,
       {
+        // EA is on legacy SSL SMH LMAO ALSO
+        dispatcher: new Agent({
+          connect: {
+            rejectUnauthorized: false,
+            secureOptions: crypto.constants.SSL_OP_LEGACY_SERVER_CONNECT,
+          },
+        }),
         method: "POST",
         headers: {
           "Accept-Charset": "UTF-8",
