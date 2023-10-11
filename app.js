@@ -686,8 +686,13 @@ async function makeBlazeRequest(guild_id, blazeRequest) {
     },
     { merge: true },
   );
-  console.log(await res1.text());
-  return await res1.json();
+  const txtResponse = await res1.text();
+  try {
+    return JSON.parse(txtResponse);
+  } catch (e) {
+    console.log(txtResponse);
+    throw new Error("failed blaze request");
+  }
 }
 
 app.post("/:discord/linkea", async (req, res, next) => {
