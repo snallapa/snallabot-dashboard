@@ -12,6 +12,7 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "express": "^4.18.2",
-    "firebase": "9.7.0"
+      "firebase": "9.7.0",
+      "undici": "5.25.4"
   }
 }
