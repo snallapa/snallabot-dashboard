@@ -491,6 +491,7 @@ async function refreshToken(guild_id) {
   const league = docSnap.data();
   const tokenInfo = league.madden_server;
   const now = new Date();
+  console.log(tokenInfo);
   if (tokenInfo.accessToken && now > tokenInfo.expiry) {
     //refresh token
     const res1 = await fetch(`https://accounts.ea.com/connect/token`, {
