@@ -505,6 +505,7 @@ async function refreshToken(guild_id) {
       body: `grant_type=refresh_token&client_id=MaddenCompanionApp19&client_secret=U02zL2khwlgFdODLWCyLPmccOc5EiPBBYcEwCqKDTWBrZj2Fwcx4b4Zd9rsA6lHLkIU4qlVvNh84olij&release_type=prod&refresh_token=${tokenInfo.refreshToken}}&authentication_source=317239&token_format=JWS`,
     });
     const res1Json = await res1.json();
+    console.log(res1Json);
     const {
       access_token: accessToken,
       refresh_token: refreshToken,
