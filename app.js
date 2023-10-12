@@ -770,7 +770,7 @@ app.post("/:discord/linkea", async (req, res, next) => {
       },
       { merge: true },
     );
-    res.setStatus(200);
+    res.status(200);
   } catch (e) {
     next(e);
   }
