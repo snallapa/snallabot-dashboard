@@ -769,34 +769,41 @@ app.post("/:discord/linkea", async (req, res, next) => {
       },
       { merge: true },
     );
-
-    await getBlazeSession(discord);
-    const messageExpiration = Math.floor(new Date().getTime() / 1000);
-    const leagueResponse = await makeBlazeRequest(discord, {
-      messsageExpirationTime: messageExpiration,
-      deviceId: "MCA4b35d75Vm-MCA",
-      commandName: "Mobile_GetMyLeagues",
-      componentId: 2060,
-      commandId: 801,
-      ipAddress: "127.0.0.1",
-      requestPayload: "{}",
-      componentName: "careermode",
-    });
-    console.log(leagueResponse);
-    const {
-      responseInfo: {
-        value: { leagues: maddenLeagues },
-      },
-    } = leagueResponse;
-    const slimmedLeagues = maddenLeagues.map((m) => ({
-      leagueId: m.leagueId,
-      leagueName: m.leagueName,
-      userTeamName: m.userTeamName,
-    }));
-    res.status(200).json(slimmedLeagues);
+    res.setStatus(200);
   } catch (e) {
     next(e);
   }
+});
+
+app.post("/:discord/getleagues", async (req, res, next) => {
+  const {
+    params: { discord },
+  } = req;
+  await refreshToken(discord);
+  await getBlazeSession(discord);
+  const messageExpiration = Math.floor(new Date().getTime() / 1000);
+  const leagueResponse = await makeBlazeRequest(discord, {
+    messsageExpirationTime: messageExpiration,
+    deviceId: "MCA4b35d75Vm-MCA",
+    commandName: "Mobile_GetMyLeagues",
+    componentId: 2060,
+    commandId: 801,
+    ipAddress: "127.0.0.1",
+    requestPayload: "{}",
+    componentName: "careermode",
+  });
+  console.log(leagueResponse);
+  const {
+    responseInfo: {
+      value: { leagues: maddenLeagues },
+    },
+  } = leagueResponse;
+  const slimmedLeagues = maddenLeagues.map((m) => ({
+    leagueId: m.leagueId,
+    leagueName: m.leagueName,
+    userTeamName: m.userTeamName,
+  }));
+  res.status(200).json(slimmedLeagues);
 });
 
 app.listen(app.get("port"), () =>
