@@ -492,7 +492,7 @@ async function refreshToken(guild_id) {
   const tokenInfo = league.madden_server;
   const now = new Date();
   console.log(tokenInfo);
-  if (tokenInfo.accessToken && now > tokenInfo.expiry) {
+  if (tokenInfo.accessToken && now > tokenInfo.expiry.toDate()) {
     //refresh token
     const res1 = await fetch(`https://accounts.ea.com/connect/token`, {
       method: "POST",
@@ -542,7 +542,7 @@ async function getBlazeSession(guild_id) {
   const now = new Date();
   if (
     !tokenInfo.sessionKey ||
-    (tokenInfo.blazeExpiry && now > tokenInfo.blazeExpiry)
+    (tokenInfo.blazeExpiry && now > tokenInfo.blazeExpiry.toDate())
   ) {
     const res1 = await fetch(
       `https://wal2.tools.gos.bio-iad.ea.com/wal/authentication/login`,
