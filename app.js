@@ -650,10 +650,11 @@ async function makeBlazeRequest(guild_id, blazeRequest) {
   const requestId = tokenInfo.blazeRequestId || 1;
   const authData = calculateMessageAuthData(tokenInfo.blazeId, requestId);
   blazeRequest.messageAuthData = authData;
-  // const messageExpiration = Math.floor(new Date().getTime() / 1000);
-  // blazeRequest.messageExpirationTime = messageExpiration;
-  // blazeRequest.deviceId = "MCA4b35d75Vm-MCA";
-  // blazeRequest.ipAddress = "127.0.0.1";
+  const messageExpiration = Math.floor(new Date().getTime() / 1000);
+  blazeRequest.messageExpirationTime = messageExpiration;
+  blazeRequest.deviceId = "MCA4b35d75Vm-MCA";
+  blazeRequest.ipAddress = "127.0.0.1";
+  blazeRequest.requestBody = JSON.stringify(blazeRequest.requestBody);
   const body = JSON.stringify({
     apiVersion: 2,
     clientDevice: 3,
@@ -783,15 +784,12 @@ app.post("/:discord/getleagues", async (req, res, next) => {
   try {
     await refreshToken(discord);
     await getBlazeSession(discord);
-    const messageExpiration = Math.floor(new Date().getTime() / 1000);
+
     const leagueResponse = await makeBlazeRequest(discord, {
-      messsageExpirationTime: messageExpiration,
-      deviceId: "MCA4b35d75Vm-MCA",
       commandName: "Mobile_GetMyLeagues",
       componentId: 2060,
       commandId: 801,
-      ipAddress: "127.0.0.1",
-      requestPayload: "{}",
+      requestPayload: {},
       componentName: "careermode",
     });
     console.log(leagueResponse);
@@ -809,6 +807,42 @@ app.post("/:discord/getleagues", async (req, res, next) => {
   } catch (e) {
     next(e);
   }
+});
+
+app.post("/:discord/selectLeague", async (req, res, next) => {
+  const {
+    params: { discord },
+  } = req;
+  const { selectedLeague } = req.body;
+  try {
+    await firestore.setDoc(
+      firestore.doc(db, "leagues", discord),
+      {
+        madden_server: {
+          leagueId: selectedLeague.leagueId,
+        },
+      },
+      { merge: true },
+    );
+  } catch (e) {
+    next(e);
+  }
+});
+
+app.post("/:discord/getLeagueInfo", async (req, res, next) => {
+  const {
+    params: { discord },
+  } = req;
+  const docSnap = await firestore.getDoc(
+    firestore.doc(db, "leagues", guild_id),
+  );
+  if (!docSnap.exists()) {
+    throw new Error(`No league found for ${guild_id}, export in MCA first`);
+  }
+
+  const league = docSnap.data();
+  await refreshToken(discord);
+  await getBlazeSession(discord);
 });
 
 app.listen(app.get("port"), () =>
