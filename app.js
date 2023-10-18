@@ -655,6 +655,7 @@ async function makeBlazeRequest(guild_id, blazeRequest) {
   blazeRequest.deviceId = "MCA4b35d75Vm-MCA";
   blazeRequest.ipAddress = "127.0.0.1";
   blazeRequest.requestBody = JSON.stringify(blazeRequest.requestBody);
+  console.log(blazeRequest);
   const body = JSON.stringify({
     apiVersion: 2,
     clientDevice: 3,
