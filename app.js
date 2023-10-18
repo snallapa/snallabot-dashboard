@@ -521,6 +521,8 @@ async function refreshToken(guild_id) {
           accessToken,
           refreshToken,
           expiry,
+          sessionKey: firestore.deleteField(),
+          blazeSessionExpiry: firestore.deleteField(),
         },
       },
       { merge: true },
