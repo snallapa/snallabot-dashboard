@@ -825,6 +825,7 @@ app.post("/:discord/selectLeague", async (req, res, next) => {
       },
       { merge: true },
     );
+    res.status(200);
   } catch (e) {
     next(e);
   }
