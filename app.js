@@ -491,9 +491,10 @@ async function refreshToken(guild_id) {
   const league = docSnap.data();
   const tokenInfo = league.madden_server;
   const now = new Date();
-  console.log(tokenInfo);
+
   if (tokenInfo.accessToken && now > tokenInfo.expiry.toDate()) {
     //refresh token
+    console.log("refreshing EA tokens");
     const res1 = await fetch(`https://accounts.ea.com/connect/token`, {
       method: "POST",
       headers: {
@@ -506,7 +507,7 @@ async function refreshToken(guild_id) {
       body: `grant_type=refresh_token&client_id=MaddenCompanionApp19&client_secret=U02zL2khwlgFdODLWCyLPmccOc5EiPBBYcEwCqKDTWBrZj2Fwcx4b4Zd9rsA6lHLkIU4qlVvNh84olij&release_type=prod&refresh_token=${tokenInfo.refreshToken}&authentication_source=317239&token_format=JWS`,
     });
     const res1Json = await res1.json();
-    console.log(res1Json);
+
     const {
       access_token: accessToken,
       refresh_token: refreshToken,
@@ -544,6 +545,7 @@ async function getBlazeSession(guild_id) {
     !tokenInfo.sessionKey ||
     (tokenInfo.blazeExpiry && now > tokenInfo.blazeExpiry.toDate())
   ) {
+    console.log("refreshing blaze session");
     const res1 = await fetch(
       `https://wal2.tools.gos.bio-iad.ea.com/wal/authentication/login`,
       {
@@ -584,7 +586,6 @@ async function getBlazeSession(guild_id) {
     );
     tokenInfo.blazeSessionExpiry = blazeExpiry;
     tokenInfo.blazeId = blazeId;
-    console.log(tokenInfo);
     await firestore.setDoc(
       firestore.doc(db, "leagues", guild_id),
       {
@@ -655,7 +656,6 @@ async function makeBlazeRequest(guild_id, blazeRequest) {
     clientDevice: 3,
     requestInfo: JSON.stringify(blazeRequest),
   });
-  console.log(body);
   const res1 = await fetch(
     `https://wal2.tools.gos.bio-iad.ea.com/wal/mca/Process/${tokenInfo.sessionKey}`,
     {
@@ -703,7 +703,6 @@ app.post("/:discord/linkea", async (req, res, next) => {
   } = req;
   const { persona, token, gameConsole } = req.body;
   const consoleAbbr = ENTITLEMENT_TO_SYSTEM(TWO_DIGIT_YEAR)[gameConsole];
-  console.log(req.body);
   try {
     const locationUrl = await fetch(
       `https://accounts.ea.com/connect/auth?hide_create=true&release_type=prod&response_type=code&redirect_uri=http://127.0.0.1/success&client_id=MaddenCompanionApp19&machineProfileKey=MCA4b35d75Vm-MCA&authentication_source=317239&access_token=${token}&persona_id=${persona.personaId}&persona_namespace=${persona.namespaceName}`,
@@ -731,11 +730,9 @@ app.post("/:discord/linkea", async (req, res, next) => {
       })
       .catch(console.warn);
 
-    console.log(locationUrl);
     const code = new URLSearchParams(
       locationUrl.replace("http://127.0.0.1/success", ""),
     ).get("code");
-    console.log(code);
     const res1 = await fetch(`https://accounts.ea.com/connect/token`, {
       method: "POST",
       headers: {
@@ -748,7 +745,6 @@ app.post("/:discord/linkea", async (req, res, next) => {
       body: `authentication_source=317239&code=${code}&grant_type=authorization_code&token_format=JWS&release_type=prod&client_secret=U02zL2khwlgFdODLWCyLPmccOc5EiPBBYcEwCqKDTWBrZj2Fwcx4b4Zd9rsA6lHLkIU4qlVvNh84olij&redirect_uri=http://127.0.0.1/success&client_id=MaddenCompanionApp19`,
     });
     const res1Json = await res1.json();
-    console.log(res1Json);
     const {
       access_token: accessToken,
       refresh_token: refreshToken,
