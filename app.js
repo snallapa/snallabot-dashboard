@@ -835,16 +835,36 @@ app.post("/:discord/getLeagueInfo", async (req, res, next) => {
   const {
     params: { discord },
   } = req;
-  const docSnap = await firestore.getDoc(
-    firestore.doc(db, "leagues", guild_id),
-  );
-  if (!docSnap.exists()) {
-    throw new Error(`No league found for ${guild_id}, export in MCA first`);
-  }
+  const docSnap = await firestore.getDoc(firestore.doc(db, "leagues", discord));
+  try {
+    if (!docSnap.exists()) {
+      throw new Error(`No league found for ${discord}, export in MCA first`);
+    }
 
-  const league = docSnap.data();
-  await refreshToken(discord);
-  await getBlazeSession(discord);
+    const league = docSnap.data();
+    await refreshToken(discord);
+    await getBlazeSession(discord);
+    const leagueResponse = await makeBlazeRequest(discord, {
+      commandName: "Mobile_Career_GetLeagueHub",
+      componentId: 2060,
+      commandId: 811,
+      requestPayload: { leagueId: league.madden_server.leagueId },
+      componentName: "careermode",
+    });
+    console.log(leagueResponse);
+    const {
+      responseInfo: {
+        value: {
+          gameScheduleHubInfo,
+          teamIdInfoList,
+          careerHubInfo: { seasonInfo },
+        },
+      },
+    } = leagueResponse;
+    res.status(200).json({ gameScheduleHubInfo, teamIdInfoList, seasonInfo });
+  } catch (e) {
+    next(e);
+  }
 });
 
 app.listen(app.get("port"), () =>
