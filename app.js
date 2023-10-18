@@ -543,7 +543,8 @@ async function getBlazeSession(guild_id) {
   const now = new Date();
   if (
     !tokenInfo.sessionKey ||
-    (tokenInfo.blazeExpiry && now > tokenInfo.blazeExpiry.toDate())
+    (tokenInfo.blazeSessionExpiry &&
+      now > tokenInfo.blazeSessionExpiry.toDate())
   ) {
     console.log("refreshing blaze session");
     const res1 = await fetch(
