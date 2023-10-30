@@ -532,7 +532,7 @@ async function refreshToken(guild_id) {
   }
 }
 
-const BLAZE_SESSION_EXPIRY = 1140;
+const BLAZE_SESSION_EXPIRY = 540;
 
 async function getBlazeSession(guild_id) {
   const docSnap = await firestore.getDoc(
@@ -598,6 +598,67 @@ async function getBlazeSession(guild_id) {
       },
       { merge: true },
     );
+  } else if (tokenInfo.sessionKey) {
+    const leagueResponse = await makeBlazeRequest(guild_id, {
+      commandName: "Mobile_GetMyLeagues",
+      componentId: 2060,
+      commandId: 801,
+      requestPayload: {},
+      componentName: "careermode",
+    });
+    if (
+      leagueResponse.error?.errorname &&
+      leagueResponse.error.errorname === "ERR_AUTHENTICATION_REQUIRED"
+    ) {
+      console.log("refreshing blaze session due to auth error");
+      const res1 = await fetch(
+        `https://wal2.tools.gos.bio-iad.ea.com/wal/authentication/login`,
+        {
+          // EA is on legacy SSL SMH LMAO ALSO
+          dispatcher: new Agent({
+            connect: {
+              rejectUnauthorized: false,
+              secureOptions: crypto.constants.SSL_OP_LEGACY_SERVER_CONNECT,
+            },
+          }),
+          method: "POST",
+          headers: {
+            "Accept-Charset": "UTF-8",
+            Accept: "application/json",
+            "X-BLAZE-ID": tokenInfo.blazeService,
+            "X-BLAZE-VOID-RESP": "XML",
+            "X-Application-Key": "MADDEN-MCA",
+            "Content-Type": "application/json",
+            "User-Agent":
+              "Dalvik/2.1.0 (Linux; U; Android 13; sdk_gphone_x86_64 Build/TE1A.220922.031)",
+          },
+          body: JSON.stringify({
+            accessToken: tokenInfo.accessToken,
+            productName: tokenInfo.blazeProductName,
+          }),
+        },
+      );
+      const res1Json = await res1.json();
+      const {
+        userLoginInfo: {
+          sessionKey,
+          personaDetails: { personaId: blazeId },
+        },
+      } = res1Json;
+      tokenInfo.sessionKey = sessionKey;
+      const blazeExpiry = new Date(
+        new Date().getTime() + BLAZE_SESSION_EXPIRY * 1000,
+      );
+      tokenInfo.blazeSessionExpiry = blazeExpiry;
+      tokenInfo.blazeId = blazeId;
+      await firestore.setDoc(
+        firestore.doc(db, "leagues", guild_id),
+        {
+          madden_server: tokenInfo,
+        },
+        { merge: true },
+      );
+    }
   }
 }
 
@@ -747,7 +808,7 @@ async function getExportData(exportUrls, week, stage, currentLeague, guild_id) {
         body: JSON.stringify({ leagueId: tokenInfo.leagueId }),
       },
     );
-    data.teams = await res1.json();
+    data.leagueTeams = await res1.json();
     const res2 = await fetch(
       `https://wal2.tools.gos.bio-iad.ea.com/wal/mca/CareerMode_GetStandingsExport/${tokenInfo.sessionKey}`,
       {
@@ -819,6 +880,7 @@ async function getExportData(exportUrls, week, stage, currentLeague, guild_id) {
   }
   if (rosters) {
     const teams = currentLeague.teamIdInfoList;
+    data.teams = {};
     for (const teamIndex in teams) {
       const team = teams[teamIndex];
       const teamId = team.teamId;
@@ -851,7 +913,7 @@ async function getExportData(exportUrls, week, stage, currentLeague, guild_id) {
           }),
         },
       );
-      data[teamId] = await res1.json();
+      data.teams[teamId] = await res1.json();
     }
     const res1 = await fetch(
       `https://wal2.tools.gos.bio-iad.ea.com/wal/mca/CareerMode_GetTeamRostersExport/${tokenInfo.sessionKey}`,
@@ -882,7 +944,7 @@ async function getExportData(exportUrls, week, stage, currentLeague, guild_id) {
         }),
       },
     );
-    data.freeAgents = await res1.json();
+    data.teams.freeagents = await res1.json();
   }
   return data;
 }
@@ -1069,10 +1131,73 @@ app.post("/:discord/unlink", async (req, res, next) => {
       },
       { merge: true },
     );
+    res.status(200).json({});
   } catch (e) {
     next(e);
   }
 });
+
+async function exportData(
+  exportUrl,
+  exportData,
+  console,
+  league,
+  weekType,
+  weekNumber,
+) {
+  const { leagueInfo, weeklyStats, rosters } = exportUrl;
+  const url = exportUrl.url + exportUrl.url.endsWith("/") ? "" : "/";
+  const exports = [];
+  if (leagueInfo) {
+    exports.append(
+      fetch(`${url}/${console}/${league}/leagueteams`, {
+        method: "POST",
+        body: JSON.stringify(exportData.leagueTeams),
+      }),
+    );
+    exports.append(
+      fetch(`${url}/${console}/${league}/standings`, {
+        method: "POST",
+        body: JSON.stringify(exportData.standings),
+      }),
+    );
+  }
+  if (weeklyStats) {
+    const weekly = {
+      passing: exportData.passingStats,
+      schedules: exportData.weeklySchedule,
+      teamstats: exportData.teamStats,
+      defense: exportData.defensiveStats,
+      punting: exportData.puntingStats,
+      receiving: exportData.receivingStats,
+      kicking: exportData.kickingStats,
+      rushing: exportData.rushingStats,
+    };
+    for (const weeklyExport in weekly) {
+      exports.append(
+        fetch(
+          `${url}/${console}/${league}/week/${weekType}/${weekNumber}/${weeklyExport}`,
+          {
+            method: "POST",
+            body: JSON.stringify(weekly[weeklyExport]),
+          },
+        ),
+      );
+    }
+  }
+  if (rosters) {
+    for (const teamId in exportData.teams) {
+      exports.append(
+        fetch(`${url}/${console}/${league}/team/${teamId}/roster`, {
+          method: "POST",
+          body: JSON.stringify(exportData.teams[teamId]),
+        }),
+      );
+    }
+  }
+  const responses = await Promise.all(exports);
+  return responses.every((r) => r.ok);
+}
 
 app.post("/:discord/export", async (req, res, next) => {
   const {
@@ -1086,12 +1211,15 @@ app.post("/:discord/export", async (req, res, next) => {
     const league = docSnap.data();
     const exportUrls = league.commands?.exports || [];
     exportUrls.append({
-      url: `https://snallabto.herokuapp.com/${discord}`,
+      url: `https://snallabot.herokuapp.com/${discord}`,
       leagueInfo: true,
       weeklyStats: true,
       rosters: false,
     });
-    const { week } = req.body;
+    const maddenLeagueId = league.madden_servier.leagueId;
+    const maddenConsole =
+      BLAZE_SERVICE_TO_PATH(YEAR)[league.madden_server.blazeService];
+    const { week, weekType } = req.body;
     await refreshToken(discord);
     await getBlazeSession(discord);
     const leagueResponse = await makeBlazeRequest(discord, {
@@ -1105,6 +1233,73 @@ app.post("/:discord/export", async (req, res, next) => {
     const {
       responseInfo: { value: maddenLeague },
     } = leagueResponse;
+    if (week != "ALL_WEEKS") {
+      const stage = weekType === "PRESEASON" ? 0 : 1;
+      const weekIndex = week - 1;
+      const exportData = getExportData(
+        exportUrls,
+        weekIndex,
+        stage,
+        maddenLeague,
+        discord,
+      );
+      for (const exportUrl of exportUrls) {
+        await exportData(
+          exportUrl,
+          exportData,
+          maddenConsole,
+          maddenLeagueId,
+          stage === 0 ? "pre" : "reg",
+          week,
+        );
+      }
+    } else {
+      // preseason
+      for (const weekIndex = 0; weekIndex < 4; weekIndex++) {
+        const exportData = getExportData(
+          exportUrls,
+          weekIndex,
+          0,
+          maddenLeague,
+          discord,
+        );
+        for (const exportUrl of exportUrls) {
+          await exportData(
+            exportUrl,
+            exportData,
+            maddenConsole,
+            maddenLeagueId,
+            "pre",
+            weekIndex + 1,
+          );
+        }
+      }
+      //regular season
+      for (const weekIndex = 0; weekIndex < 23; weekIndex++) {
+        //pro bowl
+        if (weekIndex === 21) {
+          continue;
+        }
+        const exportData = getExportData(
+          exportUrls,
+          weekIndex,
+          1,
+          maddenLeague,
+          discord,
+        );
+        for (const exportUrl of exportUrls) {
+          await exportData(
+            exportUrl,
+            exportData,
+            maddenConsole,
+            maddenLeagueId,
+            "reg",
+            weekIndex + 1,
+          );
+        }
+      }
+    }
+    res.status(200).json({});
   } catch (e) {
     next(e);
   }
