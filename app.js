@@ -119,15 +119,8 @@ app.post(
           });
         break;
       }
-      case "teamstats": {
-        res.sendStatus(200);
-        break;
-      }
-      case "defense": {
-        res.sendStatus(200);
-        break;
-      }
       default: {
+        console.log(req.body);
         res.sendStatus(200);
         break;
       }
@@ -472,6 +465,16 @@ const BLAZE_SERVICE = (a) => ({
   xbsx: `madden-${a}-xbsx-gen5`,
   stadia: `madden-${a}-stadia-gen5`,
 });
+
+const BLAZE_SERVICE_TO_PATH = (a) => ({
+  [`madden-${a}-xone-gen4`]: "xone",
+  [`madden-${a}-ps4-gen4`]: "ps4",
+  [`madden-${a}-pc-gen5`]: "pc",
+  [`madden-${a}-ps5-gen5`]: "ps5",
+  [`madden-${a}-xbsx-gen5`]: "xbsx",
+  [`madden-${a}-stadia-gen5`]: "stadia",
+});
+
 const BLAZE_PRODUCT_NAME = (a) => ({
   xone: `madden-${a}-xone-mca`,
   ps4: `madden-${a}-ps4-mca`,
@@ -702,6 +705,189 @@ async function makeBlazeRequest(guild_id, blazeRequest) {
   }
 }
 
+async function getExportData(exportUrls, week, stage, currentLeague, guild_id) {
+  const docSnap = await firestore.getDoc(
+    firestore.doc(db, "leagues", guild_id),
+  );
+  if (!docSnap.exists()) {
+    throw new Error(`No league found for ${guild_id}, export in MCA first`);
+  }
+
+  const league = docSnap.data();
+  const tokenInfo = league.madden_server;
+  if (!tokenInfo.sessionKey) {
+    throw new Error("no session key");
+  }
+
+  const leagueInfo = exportUrls.some((u) => u.leagueInfo);
+  const rosters = exportUrls.some((u) => u.rosters);
+  const weeklyStats = exportUrls.some((u) => u.weeklyStats);
+  const data = {};
+  if (leagueInfo) {
+    const res1 = await fetch(
+      `https://wal2.tools.gos.bio-iad.ea.com/wal/mca/CareerMode_GetLeagueTeamsExport/${tokenInfo.sessionKey}`,
+      {
+        // EA is on legacy SSL SMH LMAO ALSO
+        dispatcher: new Agent({
+          connect: {
+            rejectUnauthorized: false,
+            secureOptions: crypto.constants.SSL_OP_LEGACY_SERVER_CONNECT,
+          },
+        }),
+        method: "POST",
+        headers: {
+          "Accept-Charset": "UTF-8",
+          Accept: "application/json",
+          "X-BLAZE-ID": tokenInfo.blazeService,
+          "X-BLAZE-VOID-RESP": "XML",
+          "X-Application-Key": "MADDEN-MCA",
+          "Content-Type": "application/json",
+          "User-Agent":
+            "Dalvik/2.1.0 (Linux; U; Android 13; sdk_gphone_x86_64 Build/TE1A.220922.031)",
+        },
+        body: JSON.stringify({ leagueId: tokenInfo.leagueId }),
+      },
+    );
+    data.teams = await res1.json();
+    const res2 = await fetch(
+      `https://wal2.tools.gos.bio-iad.ea.com/wal/mca/CareerMode_GetStandingsExport/${tokenInfo.sessionKey}`,
+      {
+        // EA is on legacy SSL SMH LMAO ALSO
+        dispatcher: new Agent({
+          connect: {
+            rejectUnauthorized: false,
+            secureOptions: crypto.constants.SSL_OP_LEGACY_SERVER_CONNECT,
+          },
+        }),
+        method: "POST",
+        headers: {
+          "Accept-Charset": "UTF-8",
+          Accept: "application/json",
+          "X-BLAZE-ID": tokenInfo.blazeService,
+          "X-BLAZE-VOID-RESP": "XML",
+          "X-Application-Key": "MADDEN-MCA",
+          "Content-Type": "application/json",
+          "User-Agent":
+            "Dalvik/2.1.0 (Linux; U; Android 13; sdk_gphone_x86_64 Build/TE1A.220922.031)",
+        },
+        body: JSON.stringify({ leagueId: tokenInfo.leagueId }),
+      },
+    );
+    data.standings = await res2.json();
+  }
+  if (weeklyStats) {
+    const stats = {
+      weeklySchedule: "CareerMode_GetWeeklySchedulesExport",
+      rushingStats: "CareerMode_GetWeeklyRushingStatsExport",
+      teamStats: "CareerMode_GetWeeklyTeamStatsExport",
+      puntingStats: "CareerMode_GetWeeklyPuntingStatsExport",
+      receivingStats: "CareerMode_GetWeeklyReceivingStatsExport",
+      defensiveStats: "CareerMode_GetWeeklyDefensiveStatsExport",
+      kickingStats: "CareerMode_GetWeeklyKickingStatsExport",
+      passingStats: "CareerMode_GetWeeklyPassingStatsExport",
+    };
+    for (const statType in stats) {
+      const res1 = await fetch(
+        `https://wal2.tools.gos.bio-iad.ea.com/wal/mca/${stats[statType]}/${tokenInfo.sessionKey}`,
+        {
+          // EA is on legacy SSL SMH LMAO ALSO
+          dispatcher: new Agent({
+            connect: {
+              rejectUnauthorized: false,
+              secureOptions: crypto.constants.SSL_OP_LEGACY_SERVER_CONNECT,
+            },
+          }),
+          method: "POST",
+          headers: {
+            "Accept-Charset": "UTF-8",
+            Accept: "application/json",
+            "X-BLAZE-ID": tokenInfo.blazeService,
+            "X-BLAZE-VOID-RESP": "XML",
+            "X-Application-Key": "MADDEN-MCA",
+            "Content-Type": "application/json",
+            "User-Agent":
+              "Dalvik/2.1.0 (Linux; U; Android 13; sdk_gphone_x86_64 Build/TE1A.220922.031)",
+          },
+          body: JSON.stringify({
+            leagueId: tokenInfo.leagueId,
+            stageIndex: stage,
+            weekIndex: week,
+          }),
+        },
+      );
+      data[statType] = await res1.json();
+    }
+  }
+  if (rosters) {
+    const teams = currentLeague.teamIdInfoList;
+    for (const teamIndex in teams) {
+      const team = teams[teamIndex];
+      const teamId = team.teamId;
+      const res1 = await fetch(
+        `https://wal2.tools.gos.bio-iad.ea.com/wal/mca/CareerMode_GetTeamRostersExport/${tokenInfo.sessionKey}`,
+        {
+          // EA is on legacy SSL SMH LMAO ALSO
+          dispatcher: new Agent({
+            connect: {
+              rejectUnauthorized: false,
+              secureOptions: crypto.constants.SSL_OP_LEGACY_SERVER_CONNECT,
+            },
+          }),
+          method: "POST",
+          headers: {
+            "Accept-Charset": "UTF-8",
+            Accept: "application/json",
+            "X-BLAZE-ID": tokenInfo.blazeService,
+            "X-BLAZE-VOID-RESP": "XML",
+            "X-Application-Key": "MADDEN-MCA",
+            "Content-Type": "application/json",
+            "User-Agent":
+              "Dalvik/2.1.0 (Linux; U; Android 13; sdk_gphone_x86_64 Build/TE1A.220922.031)",
+          },
+          body: JSON.stringify({
+            leagueId: tokenInfo.leagueId,
+            listIndex: teamIndex,
+            returnFreeAgent: false,
+            teamId: teamId,
+          }),
+        },
+      );
+      data[teamId] = await res1.json();
+    }
+    const res1 = await fetch(
+      `https://wal2.tools.gos.bio-iad.ea.com/wal/mca/CareerMode_GetTeamRostersExport/${tokenInfo.sessionKey}`,
+      {
+        // EA is on legacy SSL SMH LMAO ALSO
+        dispatcher: new Agent({
+          connect: {
+            rejectUnauthorized: false,
+            secureOptions: crypto.constants.SSL_OP_LEGACY_SERVER_CONNECT,
+          },
+        }),
+        method: "POST",
+        headers: {
+          "Accept-Charset": "UTF-8",
+          Accept: "application/json",
+          "X-BLAZE-ID": tokenInfo.blazeService,
+          "X-BLAZE-VOID-RESP": "XML",
+          "X-Application-Key": "MADDEN-MCA",
+          "Content-Type": "application/json",
+          "User-Agent":
+            "Dalvik/2.1.0 (Linux; U; Android 13; sdk_gphone_x86_64 Build/TE1A.220922.031)",
+        },
+        body: JSON.stringify({
+          leagueId: tokenInfo.leagueId,
+          listIndex: -1,
+          returnFreeAgents: true,
+          teamId: 0,
+        }),
+      },
+    );
+    data.freeAgents = await res1.json();
+  }
+  return data;
+}
+
 app.post("/:discord/linkea", async (req, res, next) => {
   const {
     params: { discord },
@@ -862,6 +1048,64 @@ app.post("/:discord/getLeagueInfo", async (req, res, next) => {
       },
     } = leagueResponse;
     res.status(200).json({ gameScheduleHubInfo, teamIdInfoList, seasonInfo });
+  } catch (e) {
+    next(e);
+  }
+});
+
+app.post("/:discord/unlink", async (req, res, next) => {
+  const {
+    params: { discord },
+  } = req;
+  const docSnap = await firestore.getDoc(firestore.doc(db, "leagues", discord));
+  try {
+    if (!docSnap.exists()) {
+      throw new Error(`No league found for ${discord}, export in MCA first`);
+    }
+    const league = docSnap.data();
+    await firestore.setDoc(
+      firestore.doc(db, "leagues", discord),
+      {
+        madden_server: firestore.deleteField(),
+      },
+      { merge: true },
+    );
+  } catch (e) {
+    next(e);
+  }
+});
+
+app.post("/:discord/export", async (req, res, next) => {
+  const {
+    params: { discord },
+  } = req;
+  const docSnap = await firestore.getDoc(firestore.doc(db, "leagues", discord));
+  try {
+    if (!docSnap.exists()) {
+      throw new Error(`No league found for ${discord}, export in MCA first`);
+    }
+    const league = docSnap.data();
+    const exportUrls = league.commands?.exports || [];
+    exportUrls.append({
+      url: `https://snallabto.herokuapp.com/${discord}`,
+      leagueInfo: true,
+      weeklyStats: true,
+      rosters: false,
+    });
+    const { week } = req.body;
+    await refreshToken(discord);
+    await getBlazeSession(discord);
+    const leagueResponse = await makeBlazeRequest(discord, {
+      commandName: "Mobile_Career_GetLeagueHub",
+      componentId: 2060,
+      commandId: 811,
+      requestPayload: { leagueId: league.madden_server.leagueId },
+      componentName: "careermode",
+    });
+    console.log(leagueResponse);
+    const {
+      responseInfo: { value: maddenLeague },
+    } = leagueResponse;
   } catch (e) {
     next(e);
   }
