@@ -1066,6 +1066,14 @@ app.post("/:discord/selectLeague", async (req, res, next) => {
     await firestore.setDoc(
       firestore.doc(db, "leagues", discord),
       {
+        "commands.exports": [
+          {
+            url: `https://snallabot.herokuapp.com/${discord}`,
+            leagueInfo: true,
+            weeklyStats: true,
+            rosters: false,
+          },
+        ],
         madden_server: {
           leagueId: selectedLeague.leagueId,
         },
@@ -1209,13 +1217,7 @@ app.post("/:discord/export", async (req, res, next) => {
       throw new Error(`No league found for ${discord}, export in MCA first`);
     }
     const league = docSnap.data();
-    const exportUrls = league.commands?.exports || [];
-    exportUrls.append({
-      url: `https://snallabot.herokuapp.com/${discord}`,
-      leagueInfo: true,
-      weeklyStats: true,
-      rosters: false,
-    });
+    const exportUrls = league.commands.exports;
     const maddenLeagueId = league.madden_servier.leagueId;
     const maddenConsole =
       BLAZE_SERVICE_TO_PATH(YEAR)[league.madden_server.blazeService];
