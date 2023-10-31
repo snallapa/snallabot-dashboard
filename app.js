@@ -1315,6 +1315,32 @@ app.post("/:discord/export", async (req, res, next) => {
   }
 });
 
+app.post("/:discord/updateExports", async (req, res, next) => {
+  const {
+    params: { discord },
+  } = req;
+  const docSnap = await firestore.getDoc(firestore.doc(db, "leagues", discord));
+  const newExports = req.body.exports;
+  try {
+    if (!docSnap.exists()) {
+      throw new Error(`No league found for ${discord}, export in MCA first`);
+    }
+    const league = docSnap.data();
+    await firestore.setDoc(
+      firestore.doc(db, "leagues", discord),
+      {
+        commands: {
+          exports: newExports,
+        },
+      },
+      { merge: true },
+    );
+    res.status(200).json(newExports);
+  } catch (e) {
+    next(e);
+  }
+});
+
 app.listen(app.get("port"), () =>
   console.log("Madden Data is running on port", app.get("port")),
 );
