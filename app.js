@@ -1066,14 +1066,16 @@ app.post("/:discord/selectLeague", async (req, res, next) => {
     await firestore.setDoc(
       firestore.doc(db, "leagues", discord),
       {
-        "commands.exports": [
-          {
-            url: `https://snallabot.herokuapp.com/${discord}`,
-            leagueInfo: true,
-            weeklyStats: true,
-            rosters: false,
-          },
-        ],
+        commands: {
+          exports: [
+            {
+              url: `https://snallabot.herokuapp.com/${discord}`,
+              leagueInfo: true,
+              weeklyStats: true,
+              rosters: false,
+            },
+          ],
+        },
         madden_server: {
           leagueId: selectedLeague.leagueId,
         },
