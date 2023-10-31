@@ -1073,6 +1073,7 @@ app.post("/:discord/selectLeague", async (req, res, next) => {
               leagueInfo: true,
               weeklyStats: true,
               rosters: false,
+              autoUpdate: true,
             },
           ],
         },
@@ -1118,7 +1119,12 @@ app.post("/:discord/getLeagueInfo", async (req, res, next) => {
         },
       },
     } = leagueResponse;
-    res.status(200).json({ gameScheduleHubInfo, teamIdInfoList, seasonInfo });
+    res.status(200).json({
+      gameScheduleHubInfo,
+      teamIdInfoList,
+      seasonInfo,
+      exports: league.commands.exports,
+    });
   } catch (e) {
     next(e);
   }
