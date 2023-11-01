@@ -1162,7 +1162,6 @@ async function exportData(
   const url = exportUrl.url.endsWith("/")
     ? exportUrl.slice(0, -1)
     : exportUrl.url;
-  console.log(url);
   if (leagueInfo) {
     const exports = [];
     exports.push(
