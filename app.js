@@ -1178,6 +1178,7 @@ async function exportData(
     );
   }
   if (weeklyStats) {
+    console.log(data);
     const weekly = {
       passing: data.passingStats,
       schedules: data.weeklySchedule,
