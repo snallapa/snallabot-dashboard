@@ -1162,6 +1162,7 @@ async function exportData(
   const url = exportUrl.url.endsWith("/")
     ? exportUrl.slice(0, -1)
     : exportUrl.url;
+  let completeSuccess = true;
   if (leagueInfo) {
     const exports = [];
     exports.push(
@@ -1178,9 +1179,10 @@ async function exportData(
     );
     const responses = await Promise.all(exports);
     const isSuccess = responses.every((r) => r.ok);
-    console.log(
-      `exported league info to ${url}, and it was successful? ${isSuccess}`,
-    );
+    completeSuccess = completeSuccess && isSuccess;
+    // console.log(
+    //   `exported league info to ${url}, and it was successful? ${isSuccess}`,
+    // );
     if (!isSuccess) {
       console.log(`did not export all things for ${url}`);
       responses.filter((r) => !r.ok).foreach((r) => console.warn(r));
@@ -1211,9 +1213,10 @@ async function exportData(
     }
     const responses = await Promise.all(exports);
     const isSuccess = responses.every((r) => r.ok);
-    console.log(
-      `exported weekly stats to ${url}, and it was successful? ${isSuccess}`,
-    );
+    completeSuccess = completeSuccess && isSuccess;
+    // console.log(
+    //   `exported weekly stats to ${url}, and it was successful? ${isSuccess}`,
+    // );
     if (!isSuccess) {
       console.log(`did not export all things for ${url}`);
       responses.filter((r) => !r.ok).foreach((r) => console.warn(r));
@@ -1223,12 +1226,12 @@ async function exportData(
     const exports = [];
     for (const teamId in data.teams) {
       if (teamId === "freeagents") {
-        // exports.push(
-        //   fetch(`${url}/${maddenConsole}/${league}/${teamId}/roster`, {
-        //     method: "POST",
-        //     body: JSON.stringify(data.teams[teamId]),
-        //   }),
-        // );
+        exports.push(
+          fetch(`${url}/${maddenConsole}/${league}/${teamId}/roster`, {
+            method: "POST",
+            body: JSON.stringify(data.teams[teamId]),
+          }),
+        );
       } else {
         exports.push(
           fetch(`${url}/${maddenConsole}/${league}/team/${teamId}/roster`, {
@@ -1240,13 +1243,19 @@ async function exportData(
     }
     const responses = await Promise.all(exports);
     const isSuccess = responses.every((r) => r.ok);
-    console.log(
-      `exported rosters to ${url}, and it was successful? ${isSuccess}`,
-    );
+    completeSuccess = completeSuccess && isSuccess;
+    // console.log(
+    //   `exported rosters to ${url}, and it was successful? ${isSuccess}`,
+    // );
     if (!isSuccess) {
       console.log(`did not export all things for ${url}`);
       responses.filter((r) => !r.ok).foreach((r) => console.warn(r));
     }
+  }
+  if (completeSuccess) {
+    console.debug(`successfully exported to ${url}`);
+  } else {
+    console.error(`failed to export to ${url}`);
   }
   return true;
 }
