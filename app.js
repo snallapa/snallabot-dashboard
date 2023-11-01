@@ -1164,13 +1164,13 @@ async function exportData(
     : exportUrl.url;
   const exports = [];
   if (leagueInfo) {
-    exports.append(
+    exports.push(
       fetch(`${url}/${console}/${league}/leagueteams`, {
         method: "POST",
         body: JSON.stringify(data.leagueTeams),
       }),
     );
-    exports.append(
+    exports.push(
       fetch(`${url}/${console}/${league}/standings`, {
         method: "POST",
         body: JSON.stringify(data.standings),
@@ -1189,7 +1189,7 @@ async function exportData(
       rushing: data.rushingStats,
     };
     for (const weeklyExport in weekly) {
-      exports.append(
+      exports.push(
         fetch(
           `${url}/${console}/${league}/week/${weekType}/${weekNumber}/${weeklyExport}`,
           {
@@ -1202,7 +1202,7 @@ async function exportData(
   }
   if (rosters) {
     for (const teamId in data.teams) {
-      exports.append(
+      exports.push(
         fetch(`${url}/${console}/${league}/team/${teamId}/roster`, {
           method: "POST",
           body: JSON.stringify(data.teams[teamId]),
