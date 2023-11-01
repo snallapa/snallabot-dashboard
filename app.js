@@ -1189,7 +1189,7 @@ async function exportData(
       rushing: data.rushingStats,
     };
     for (const weeklyExport in weekly) {
-      console.log(weeklyExport);
+      console.log(weekly[weeklyExport]);
       exports.push(
         fetch(
           `${url}/${maddenConsole}/${league}/week/${weekType}/${weekNumber}/${weeklyExport}`,
@@ -1267,7 +1267,6 @@ app.post("/:discord/export", async (req, res, next) => {
         maddenLeague,
         discord,
       );
-      console.log(data);
       for (const exportUrl of exportUrls) {
         await exportData(
           exportUrl,
