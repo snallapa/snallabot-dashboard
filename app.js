@@ -84,6 +84,7 @@ app.post(
     const {
       params: { discord, weekType, weekNum, dataType },
     } = req;
+    console.log(Object.keys(req.body));
     switch (dataType) {
       case "schedules": {
         const { gameScheduleInfoList: schedulesRaw } = req.body;
@@ -1189,7 +1190,6 @@ async function exportData(
       rushing: data.rushingStats,
     };
     for (const weeklyExport in weekly) {
-      console.log(weekly[weeklyExport]);
       exports.push(
         fetch(
           `${url}/${maddenConsole}/${league}/week/${weekType}/${weekNumber}/${weeklyExport}`,
@@ -1220,7 +1220,6 @@ async function exportData(
       }
     }
   }
-  console.log(exports.length);
   const responses = await Promise.all(exports);
   const isSuccess = responses.every((r) => r.ok);
   if (!isSuccess) {
