@@ -1272,7 +1272,7 @@ app.post("/:discord/export", async (req, res, next) => {
       }
     } else if (week === 100) {
       // preseason
-      for (const weekIndex = 0; weekIndex < 4; weekIndex++) {
+      for (let weekIndex = 0; weekIndex < 4; weekIndex++) {
         const data = await getExportData(
           exportUrls,
           weekIndex,
@@ -1292,7 +1292,7 @@ app.post("/:discord/export", async (req, res, next) => {
         }
       }
       //regular season
-      for (const weekIndex = 0; weekIndex < 23; weekIndex++) {
+      for (let weekIndex = 0; weekIndex < 23; weekIndex++) {
         //pro bowl
         if (weekIndex === 21) {
           continue;
