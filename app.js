@@ -775,9 +775,6 @@ async function getExportData(exportUrls, week, stage, currentLeague, guild_id) {
 
   const league = docSnap.data();
   const tokenInfo = league.madden_server;
-  if (!tokenInfo.sessionKey) {
-    throw new Error("no session key");
-  }
 
   const leagueInfo = exportUrls.some((u) => u.leagueInfo);
   const rosters = exportUrls.some((u) => u.rosters);
@@ -1155,39 +1152,41 @@ app.post("/:discord/unlink", async (req, res, next) => {
 
 async function exportData(
   exportUrl,
-  exportData,
+  data,
   console,
   league,
   weekType,
   weekNumber,
 ) {
   const { leagueInfo, weeklyStats, rosters } = exportUrl;
-  const url = exportUrl.url + exportUrl.url.endsWith("/") ? "" : "/";
+  const url = exportUrl.url.endsWith("/")
+    ? exportUrl.slice(0, -1)
+    : exportUrl.url;
   const exports = [];
   if (leagueInfo) {
     exports.append(
       fetch(`${url}/${console}/${league}/leagueteams`, {
         method: "POST",
-        body: JSON.stringify(exportData.leagueTeams),
+        body: JSON.stringify(data.leagueTeams),
       }),
     );
     exports.append(
       fetch(`${url}/${console}/${league}/standings`, {
         method: "POST",
-        body: JSON.stringify(exportData.standings),
+        body: JSON.stringify(data.standings),
       }),
     );
   }
   if (weeklyStats) {
     const weekly = {
-      passing: exportData.passingStats,
-      schedules: exportData.weeklySchedule,
-      teamstats: exportData.teamStats,
-      defense: exportData.defensiveStats,
-      punting: exportData.puntingStats,
-      receiving: exportData.receivingStats,
-      kicking: exportData.kickingStats,
-      rushing: exportData.rushingStats,
+      passing: data.passingStats,
+      schedules: data.weeklySchedule,
+      teamstats: data.teamStats,
+      defense: data.defensiveStats,
+      punting: data.puntingStats,
+      receiving: data.receivingStats,
+      kicking: data.kickingStats,
+      rushing: data.rushingStats,
     };
     for (const weeklyExport in weekly) {
       exports.append(
@@ -1202,11 +1201,11 @@ async function exportData(
     }
   }
   if (rosters) {
-    for (const teamId in exportData.teams) {
+    for (const teamId in data.teams) {
       exports.append(
         fetch(`${url}/${console}/${league}/team/${teamId}/roster`, {
           method: "POST",
-          body: JSON.stringify(exportData.teams[teamId]),
+          body: JSON.stringify(data.teams[teamId]),
         }),
       );
     }
@@ -1229,7 +1228,7 @@ app.post("/:discord/export", async (req, res, next) => {
     const maddenLeagueId = league.madden_servier.leagueId;
     const maddenConsole =
       BLAZE_SERVICE_TO_PATH(YEAR)[league.madden_server.blazeService];
-    const { week, weekType } = req.body;
+    const { week, stage } = req.body;
     await refreshToken(discord);
     await getBlazeSession(discord);
     const leagueResponse = await makeBlazeRequest(discord, {
@@ -1239,14 +1238,13 @@ app.post("/:discord/export", async (req, res, next) => {
       requestPayload: { leagueId: league.madden_server.leagueId },
       componentName: "careermode",
     });
-    console.log(leagueResponse);
+
     const {
       responseInfo: { value: maddenLeague },
     } = leagueResponse;
-    if (week != "ALL_WEEKS") {
-      const stage = weekType === "PRESEASON" ? 0 : 1;
+    if (week <= 23) {
       const weekIndex = week - 1;
-      const exportData = getExportData(
+      const data = await getExportData(
         exportUrls,
         weekIndex,
         stage,
@@ -1256,17 +1254,17 @@ app.post("/:discord/export", async (req, res, next) => {
       for (const exportUrl of exportUrls) {
         await exportData(
           exportUrl,
-          exportData,
+          data,
           maddenConsole,
           maddenLeagueId,
           stage === 0 ? "pre" : "reg",
           week,
         );
       }
-    } else {
+    } else if (week === 100) {
       // preseason
       for (const weekIndex = 0; weekIndex < 4; weekIndex++) {
-        const exportData = getExportData(
+        const data = await getExportData(
           exportUrls,
           weekIndex,
           0,
@@ -1276,7 +1274,7 @@ app.post("/:discord/export", async (req, res, next) => {
         for (const exportUrl of exportUrls) {
           await exportData(
             exportUrl,
-            exportData,
+            data,
             maddenConsole,
             maddenLeagueId,
             "pre",
@@ -1290,7 +1288,7 @@ app.post("/:discord/export", async (req, res, next) => {
         if (weekIndex === 21) {
           continue;
         }
-        const exportData = getExportData(
+        const data = await getExportData(
           exportUrls,
           weekIndex,
           1,
@@ -1300,7 +1298,7 @@ app.post("/:discord/export", async (req, res, next) => {
         for (const exportUrl of exportUrls) {
           await exportData(
             exportUrl,
-            exportData,
+            data,
             maddenConsole,
             maddenLeagueId,
             "reg",
