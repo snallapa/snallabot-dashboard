@@ -390,8 +390,7 @@ app.post(
 app.post(
   "/media/:username/:platform/:leagueId/freeagents/roster",
   (req, res) => {
-    console.log("rosters " + req.body);
-
+    console.log(req.body);
     res.sendStatus(200);
   },
 );
@@ -1204,12 +1203,21 @@ async function exportData(
   }
   if (rosters) {
     for (const teamId in data.teams) {
-      exports.push(
-        fetch(`${url}/${console}/${league}/team/${teamId}/roster`, {
-          method: "POST",
-          body: JSON.stringify(data.teams[teamId]),
-        }),
-      );
+      if (teamId === "freeagents") {
+        exports.push(
+          fetch(`${url}/${console}/${league}/${teamId}/roster`, {
+            method: "POST",
+            body: JSON.stringify(data.teams[teamId]),
+          }),
+        );
+      } else {
+        exports.push(
+          fetch(`${url}/${console}/${league}/team/${teamId}/roster`, {
+            method: "POST",
+            body: JSON.stringify(data.teams[teamId]),
+          }),
+        );
+      }
     }
   }
   const responses = await Promise.all(exports);
