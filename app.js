@@ -36,6 +36,7 @@ app.get("*", (req, res) => {
 });
 
 app.post("/:discord/:platform/:leagueId/leagueteams", (req, res) => {
+  console.log(JSON.stringify(req.body).length);
   const { leagueTeamInfoList: teamsData } = req.body;
   if (!teamsData) {
     res.sendStatus(500);
@@ -75,6 +76,7 @@ app.post("/:discord/:platform/:leagueId/leagueteams", (req, res) => {
 });
 
 app.post("/:discord/:platform/:leagueId/standings", (req, res) => {
+  console.log(JSON.stringify(req.body).length);
   res.sendStatus(200);
 });
 
@@ -84,7 +86,7 @@ app.post(
     const {
       params: { discord, weekType, weekNum, dataType },
     } = req;
-    console.log(Object.keys(req.body));
+    console.log(JSON.stringify(req.body).length);
     switch (dataType) {
       case "schedules": {
         const { gameScheduleInfoList: schedulesRaw } = req.body;
