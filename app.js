@@ -943,7 +943,6 @@ async function getExportData(exportUrls, week, stage, currentLeague, guild_id) {
       },
     );
     data.teams.freeagents = await res1.json();
-    console.log(data.teams.freeagents);
   }
   return data;
 }
