@@ -1178,7 +1178,6 @@ async function exportData(
     );
   }
   if (weeklyStats) {
-    console.log(data);
     const weekly = {
       passing: data.passingStats,
       schedules: data.weeklySchedule,
@@ -1266,6 +1265,7 @@ app.post("/:discord/export", async (req, res, next) => {
         maddenLeague,
         discord,
       );
+      console.log(data);
       for (const exportUrl of exportUrls) {
         await exportData(
           exportUrl,
