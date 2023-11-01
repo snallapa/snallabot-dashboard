@@ -36,7 +36,6 @@ app.get("*", (req, res) => {
 });
 
 app.post("/:discord/:platform/:leagueId/leagueteams", (req, res) => {
-  console.log(JSON.stringify(req.body).length);
   const { leagueTeamInfoList: teamsData } = req.body;
   if (!teamsData) {
     res.sendStatus(500);
@@ -76,7 +75,6 @@ app.post("/:discord/:platform/:leagueId/leagueteams", (req, res) => {
 });
 
 app.post("/:discord/:platform/:leagueId/standings", (req, res) => {
-  console.log(JSON.stringify(req.body).length);
   res.sendStatus(200);
 });
 
@@ -86,7 +84,6 @@ app.post(
     const {
       params: { discord, weekType, weekNum, dataType },
     } = req;
-    console.log(JSON.stringify(req.body).length);
     switch (dataType) {
       case "schedules": {
         const { gameScheduleInfoList: schedulesRaw } = req.body;
@@ -1225,6 +1222,7 @@ async function exportData(
   }
   const responses = await Promise.all(exports);
   const isSuccess = responses.every((r) => r.ok);
+  console.log(`exported to ${url}, and it was successful? ${isSuccess}`);
   if (!isSuccess) {
     console.log(`did not export all things for ${url}`);
     responses.filter((r) => !r.ok).foreach((r) => console.warn(r));
