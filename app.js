@@ -1271,16 +1271,20 @@ app.post("/:discord/export", async (req, res, next) => {
         );
       }
     } else if (week === 100) {
+      const onlyStats = exportUrls.map((e) => ({ ...e, rosters: false }));
+      const onlyRosters = exportUrls
+        .filter((e) => e.rosters)
+        .map((e) => ({ ...e, leagueInfo: false, weeklyStats: false }));
       // preseason
       for (let weekIndex = 0; weekIndex < 4; weekIndex++) {
         const data = await getExportData(
-          exportUrls,
+          onlyStats,
           weekIndex,
           0,
           maddenLeague,
           discord,
         );
-        for (const exportUrl of exportUrls) {
+        for (const exportUrl of onlyStats) {
           await exportData(
             exportUrl,
             data,
@@ -1298,13 +1302,13 @@ app.post("/:discord/export", async (req, res, next) => {
           continue;
         }
         const data = await getExportData(
-          exportUrls,
+          onlyStats,
           weekIndex,
           1,
           maddenLeague,
           discord,
         );
-        for (const exportUrl of exportUrls) {
+        for (const exportUrl of onlyStats) {
           await exportData(
             exportUrl,
             data,
@@ -1314,6 +1318,23 @@ app.post("/:discord/export", async (req, res, next) => {
             weekIndex + 1,
           );
         }
+      }
+      const data = await getExportData(
+        onlyRosters,
+        0,
+        1,
+        maddenLeague,
+        discord,
+      );
+      for (const exportUrl of onlyRosters) {
+        await exportData(
+          exportUrl,
+          data,
+          maddenConsole,
+          maddenLeagueId,
+          "reg",
+          1,
+        );
       }
     }
     res.status(200).json({});
