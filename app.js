@@ -1238,15 +1238,15 @@ async function exportData(
           }),
         );
       }
-      const responses = await Promise.all(exports);
-      const isSuccess = responses.every((r) => r.ok);
-      console.log(
-        `exported rosters to ${url}, and it was successful? ${isSuccess}`,
-      );
-      if (!isSuccess) {
-        console.log(`did not export all things for ${url}`);
-        responses.filter((r) => !r.ok).foreach((r) => console.warn(r));
-      }
+    }
+    const responses = await Promise.all(exports);
+    const isSuccess = responses.every((r) => r.ok);
+    console.log(
+      `exported rosters to ${url}, and it was successful? ${isSuccess}`,
+    );
+    if (!isSuccess) {
+      console.log(`did not export all things for ${url}`);
+      responses.filter((r) => !r.ok).foreach((r) => console.warn(r));
     }
   }
   return true;
