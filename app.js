@@ -1163,8 +1163,8 @@ async function exportData(
     ? exportUrl.slice(0, -1)
     : exportUrl.url;
   console.log(url);
-  const exports = [];
   if (leagueInfo) {
+    const exports = [];
     exports.push(
       fetch(`${url}/${maddenConsole}/${league}/leagueteams`, {
         method: "POST",
@@ -1177,8 +1177,18 @@ async function exportData(
         body: JSON.stringify(data.standings),
       }),
     );
+    const responses = await Promise.all(exports);
+    const isSuccess = responses.every((r) => r.ok);
+    console.log(
+      `exported league info to ${url}, and it was successful? ${isSuccess}`,
+    );
+    if (!isSuccess) {
+      console.log(`did not export all things for ${url}`);
+      responses.filter((r) => !r.ok).foreach((r) => console.warn(r));
+    }
   }
   if (weeklyStats) {
+    const exports = [];
     const weekly = {
       passing: data.passingStats,
       schedules: data.weeklySchedule,
@@ -1200,8 +1210,18 @@ async function exportData(
         ),
       );
     }
+    const responses = await Promise.all(exports);
+    const isSuccess = responses.every((r) => r.ok);
+    console.log(
+      `exported weekly stats to ${url}, and it was successful? ${isSuccess}`,
+    );
+    if (!isSuccess) {
+      console.log(`did not export all things for ${url}`);
+      responses.filter((r) => !r.ok).foreach((r) => console.warn(r));
+    }
   }
   if (rosters) {
+    const exports = [];
     for (const teamId in data.teams) {
       if (teamId === "freeagents") {
         // exports.push(
@@ -1218,16 +1238,18 @@ async function exportData(
           }),
         );
       }
+      const responses = await Promise.all(exports);
+      const isSuccess = responses.every((r) => r.ok);
+      console.log(
+        `exported rosters to ${url}, and it was successful? ${isSuccess}`,
+      );
+      if (!isSuccess) {
+        console.log(`did not export all things for ${url}`);
+        responses.filter((r) => !r.ok).foreach((r) => console.warn(r));
+      }
     }
   }
-  const responses = await Promise.all(exports);
-  const isSuccess = responses.every((r) => r.ok);
-  console.log(`exported to ${url}, and it was successful? ${isSuccess}`);
-  if (!isSuccess) {
-    console.log(`did not export all things for ${url}`);
-    responses.filter((r) => !r.ok).foreach((r) => console.warn(r));
-  }
-  return responses.every((r) => r.ok);
+  return true;
 }
 
 app.post("/:discord/export", async (req, res, next) => {
