@@ -8,7 +8,7 @@ const express = require("express");
 
 const app = express();
 
-app.use(express.json({ limit: "1mb", type: "*/*" }));
+app.use(express.json({ limit: "10mb", type: "*/*" }));
 
 const firebaseConfig = {
   apiKey: "AIzaSyDf9ZiTBWf-sWY007WsKktMPewcrs07CWw",
