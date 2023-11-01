@@ -1225,7 +1225,7 @@ app.post("/:discord/export", async (req, res, next) => {
     }
     const league = docSnap.data();
     const exportUrls = league.commands.exports;
-    const maddenLeagueId = league.madden_servier.leagueId;
+    const maddenLeagueId = league.madden_server.leagueId;
     const maddenConsole =
       BLAZE_SERVICE_TO_PATH(YEAR)[league.madden_server.blazeService];
     const { week, stage } = req.body;
