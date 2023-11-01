@@ -390,7 +390,8 @@ app.post(
 app.post(
   "/media/:username/:platform/:leagueId/freeagents/roster",
   (req, res) => {
-    console.log(req.body);
+    console.log("rosters " + req.body);
+
     res.sendStatus(200);
   },
 );
