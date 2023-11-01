@@ -1153,7 +1153,7 @@ app.post("/:discord/unlink", async (req, res, next) => {
 async function exportData(
   exportUrl,
   data,
-  console,
+  maddenConsole,
   league,
   weekType,
   weekNumber,
@@ -1165,13 +1165,13 @@ async function exportData(
   const exports = [];
   if (leagueInfo) {
     exports.push(
-      fetch(`${url}/${console}/${league}/leagueteams`, {
+      fetch(`${url}/${maddenConsole}/${league}/leagueteams`, {
         method: "POST",
         body: JSON.stringify(data.leagueTeams),
       }),
     );
     exports.push(
-      fetch(`${url}/${console}/${league}/standings`, {
+      fetch(`${url}/${maddenConsole}/${league}/standings`, {
         method: "POST",
         body: JSON.stringify(data.standings),
       }),
@@ -1189,9 +1189,10 @@ async function exportData(
       rushing: data.rushingStats,
     };
     for (const weeklyExport in weekly) {
+      console.log(weeklyExport);
       exports.push(
         fetch(
-          `${url}/${console}/${league}/week/${weekType}/${weekNumber}/${weeklyExport}`,
+          `${url}/${maddenConsole}/${league}/week/${weekType}/${weekNumber}/${weeklyExport}`,
           {
             method: "POST",
             body: JSON.stringify(weekly[weeklyExport]),
@@ -1204,14 +1205,14 @@ async function exportData(
     for (const teamId in data.teams) {
       if (teamId === "freeagents") {
         exports.push(
-          fetch(`${url}/${console}/${league}/${teamId}/roster`, {
+          fetch(`${url}/${maddenConsole}/${league}/${teamId}/roster`, {
             method: "POST",
             body: JSON.stringify(data.teams[teamId]),
           }),
         );
       } else {
         exports.push(
-          fetch(`${url}/${console}/${league}/team/${teamId}/roster`, {
+          fetch(`${url}/${maddenConsole}/${league}/team/${teamId}/roster`, {
             method: "POST",
             body: JSON.stringify(data.teams[teamId]),
           }),
@@ -1219,6 +1220,7 @@ async function exportData(
       }
     }
   }
+  console.log(exports.length);
   const responses = await Promise.all(exports);
   const isSuccess = responses.every((r) => r.ok);
   if (!isSuccess) {
