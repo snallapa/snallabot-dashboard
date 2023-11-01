@@ -906,7 +906,7 @@ async function getExportData(exportUrls, week, stage, currentLeague, guild_id) {
           body: JSON.stringify({
             leagueId: tokenInfo.leagueId,
             listIndex: teamIndex,
-            returnFreeAgent: false,
+            returnFreeAgents: false,
             teamId: teamId,
           }),
         },
@@ -943,6 +943,7 @@ async function getExportData(exportUrls, week, stage, currentLeague, guild_id) {
       },
     );
     data.teams.freeagents = await res1.json();
+    console.log(data.teams.freeagents);
   }
   return data;
 }
