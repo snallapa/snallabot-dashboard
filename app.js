@@ -1373,6 +1373,54 @@ app.post("/:discord/export", async (req, res, next) => {
           1,
         );
       }
+    } else if (week === 101) {
+      const weekIndex = maddenLeague.seasonInfo.seasonWeek;
+      const stage = maddenLeague.seasonInfo.seasonWeekType == 0 ? 0 : 1;
+      const data = await getExportData(
+        exportUrls,
+        weekIndex,
+        stage,
+        maddenLeague,
+        discord,
+      );
+      for (const exportUrl of exportUrls) {
+        await exportData(
+          exportUrl,
+          data,
+          maddenConsole,
+          maddenLeagueId,
+          stage === 0 ? "pre" : "reg",
+          week,
+        );
+      }
+    } else if (week === 102) {
+      const currentWeek = maddenLeague.seasonInfo.seasonWeek;
+      const stage = maddenLeague.seasonInfo.seasonWeekType == 0 ? 0 : 1;
+      const maxWeekIndex = stage === 0 ? 3 : 22;
+      const weeksToExport = [
+        currentWeek - 1,
+        currentWeek,
+        currentWeek + 1,
+      ].filter((c) => c >= 0 && c <= maxWeekIndex);
+      for (const weekIndex of weeksToExport) {
+        const data = await getExportData(
+          exportUrls,
+          weekIndex,
+          stage,
+          maddenLeague,
+          discord,
+        );
+        for (const exportUrl of exportUrls) {
+          await exportData(
+            exportUrl,
+            data,
+            maddenConsole,
+            maddenLeagueId,
+            stage === 0 ? "pre" : "reg",
+            week,
+          );
+        }
+      }
     }
     res.status(200).json({});
   } catch (e) {
