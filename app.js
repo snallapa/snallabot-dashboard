@@ -1163,6 +1163,7 @@ async function exportData(
   const url = exportUrl.url.endsWith("/")
     ? exportUrl.slice(0, -1)
     : exportUrl.url;
+  console.log(url);
   const exports = [];
   if (leagueInfo) {
     exports.push(
@@ -1204,12 +1205,12 @@ async function exportData(
   if (rosters) {
     for (const teamId in data.teams) {
       if (teamId === "freeagents") {
-        exports.push(
-          fetch(`${url}/${maddenConsole}/${league}/${teamId}/roster`, {
-            method: "POST",
-            body: JSON.stringify(data.teams[teamId]),
-          }),
-        );
+        // exports.push(
+        //   fetch(`${url}/${maddenConsole}/${league}/${teamId}/roster`, {
+        //     method: "POST",
+        //     body: JSON.stringify(data.teams[teamId]),
+        //   }),
+        // );
       } else {
         exports.push(
           fetch(`${url}/${maddenConsole}/${league}/team/${teamId}/roster`, {
