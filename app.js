@@ -1042,6 +1042,7 @@ app.post("/:discord/getleagues", async (req, res, next) => {
         value: { leagues: maddenLeagues },
       },
     } = leagueResponse;
+    console.log(leagueResponse);
     const slimmedLeagues = maddenLeagues.map((m) => ({
       leagueId: m.leagueId,
       leagueName: m.leagueName,
