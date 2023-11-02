@@ -87,7 +87,6 @@ app.post(
     switch (dataType) {
       case "schedules": {
         const { gameScheduleInfoList: schedulesRaw } = req.body;
-        console.log(schedulesRaw);
         if (!schedulesRaw) {
           res.sendStatus(500);
           return;
@@ -1199,7 +1198,6 @@ async function exportData(
       kicking: data.kickingStats,
       rushing: data.rushingStats,
     };
-    console.log(data.weeklySchedule);
     for (const weeklyExport in weekly) {
       exports.push(
         fetch(
