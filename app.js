@@ -1395,7 +1395,10 @@ app.post("/:discord/export", async (req, res, next) => {
       }
     } else if (week === 102) {
       const autoUrls = exportUrls.filter((e) => e.autoUpdate);
-      const currentWeek = maddenLeague.careerHubInfo.seasonInfo.seasonWeek;
+      const currentWeek =
+        maddenLeague.careerHubInfo.seasonInfo.seasonWeekType === 8
+          ? 22
+          : maddenLeague.careerHubInfo.seasonInfo.seasonWeek;
       const stage =
         maddenLeague.careerHubInfo.seasonInfo.seasonWeekType == 0 ? 0 : 1;
       const maxWeekIndex = stage === 0 ? 3 : 22;
