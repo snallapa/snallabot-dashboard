@@ -579,6 +579,7 @@ async function getBlazeSession(guild_id) {
       },
     );
     const res1Json = await res1.json();
+    console.log(res1Json);
     const {
       userLoginInfo: {
         sessionKey,
