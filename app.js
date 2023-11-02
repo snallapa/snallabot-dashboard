@@ -1399,9 +1399,13 @@ app.post("/:discord/export", async (req, res, next) => {
       const stage =
         maddenLeague.careerHubInfo.seasonInfo.seasonWeekType == 0 ? 0 : 1;
       const maxWeekIndex = stage === 0 ? 3 : 22;
-      const weeksToExport = [currentWeek - 1, currentWeek, currentWeek + 1]
-        .filter((c) => c >= 0 && c <= maxWeekIndex)
-        .map((c) => (c === 21 ? 22 : c));
+      const previousWeek = currentWeek - 1;
+      const nextWeek = currentWeek + 1;
+      const weeksToExport = [
+        previousWeek === 21 ? 20 : previousWeek,
+        currentWeek,
+        nextWeek === 21 ? 22 : nextWeek,
+      ].filter((c) => c >= 0 && c <= maxWeekIndex);
       for (const weekIndex of weeksToExport) {
         const data = await getExportData(
           autoUrls,
