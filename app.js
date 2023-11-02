@@ -87,6 +87,7 @@ app.post(
     switch (dataType) {
       case "schedules": {
         const { gameScheduleInfoList: schedulesRaw } = req.body;
+        console.log(schedulesRaw);
         if (!schedulesRaw) {
           res.sendStatus(500);
           return;
@@ -1037,7 +1038,6 @@ app.post("/:discord/getleagues", async (req, res, next) => {
       requestPayload: {},
       componentName: "careermode",
     });
-    console.log(leagueResponse);
     const {
       responseInfo: {
         value: { leagues: maddenLeagues },
@@ -1106,7 +1106,6 @@ app.post("/:discord/getLeagueInfo", async (req, res, next) => {
       requestPayload: { leagueId: league.madden_server.leagueId },
       componentName: "careermode",
     });
-    console.log(leagueResponse);
     const {
       responseInfo: {
         value: {
