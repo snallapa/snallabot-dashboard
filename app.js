@@ -1200,6 +1200,7 @@ async function exportData(
       kicking: data.kickingStats,
       rushing: data.rushingStats,
     };
+    console.log(data.weeklySchedule);
     for (const weeklyExport in weekly) {
       exports.push(
         fetch(
