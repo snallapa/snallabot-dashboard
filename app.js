@@ -1392,7 +1392,7 @@ app.post("/:discord/export", async (req, res, next) => {
           maddenConsole,
           maddenLeagueId,
           stage === 0 ? "pre" : "reg",
-          week,
+          weekIndex + 1,
         );
       }
     } else if (week === 102) {
@@ -1421,7 +1421,7 @@ app.post("/:discord/export", async (req, res, next) => {
             maddenConsole,
             maddenLeagueId,
             stage === 0 ? "pre" : "reg",
-            week,
+            weekIndex + 1,
           );
         }
       }
