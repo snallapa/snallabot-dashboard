@@ -1375,8 +1375,9 @@ app.post("/:discord/export", async (req, res, next) => {
       }
     } else if (week === 101) {
       const autoUrls = exportUrls.filter((e) => e.autoUpdate);
-      const weekIndex = maddenLeague.seasonInfo.seasonWeek;
-      const stage = maddenLeague.seasonInfo.seasonWeekType == 0 ? 0 : 1;
+      const weekIndex = maddenLeague.careerHubInfo.seasonInfo.seasonWeek;
+      const stage =
+        maddenLeague.careerHubInfo.seasonInfo.seasonWeekType == 0 ? 0 : 1;
       const data = await getExportData(
         autoUrls,
         weekIndex,
@@ -1396,8 +1397,9 @@ app.post("/:discord/export", async (req, res, next) => {
       }
     } else if (week === 102) {
       const autoUrls = exportUrls.filter((e) => e.autoUpdate);
-      const currentWeek = maddenLeague.seasonInfo.seasonWeek;
-      const stage = maddenLeague.seasonInfo.seasonWeekType == 0 ? 0 : 1;
+      const currentWeek = maddenLeague.careerHubInfo.seasonInfo.seasonWeek;
+      const stage =
+        maddenLeague.careerHubInfo.seasonInfo.seasonWeekType == 0 ? 0 : 1;
       const maxWeekIndex = stage === 0 ? 3 : 22;
       const weeksToExport = [
         currentWeek - 1,
