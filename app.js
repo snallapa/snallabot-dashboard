@@ -1107,6 +1107,9 @@ app.post("/:discord/getLeagueInfo", async (req, res, next) => {
       requestPayload: { leagueId: league.madden_server.leagueId },
       componentName: "careermode",
     });
+    if (!leagueResponse.responseInfo?.value) {
+      console.log(leagueResponse);
+    }
     const {
       responseInfo: {
         value: {
