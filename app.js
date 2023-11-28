@@ -1379,6 +1379,7 @@ app.post("/:discord/export", async (req, res, next) => {
     } else if (week === 101) {
       const autoUrls = exportUrls.filter((e) => e.autoUpdate);
       const weekIndex = maddenLeague.careerHubInfo.seasonInfo.seasonWeek;
+      console.log(weekIndex);
       const stage =
         maddenLeague.careerHubInfo.seasonInfo.seasonWeekType == 0 ? 0 : 1;
       const data = await getExportData(
