@@ -1277,7 +1277,7 @@ app.post("/:discord/export", async (req, res, next) => {
     const maddenLeagueId = league.madden_server.leagueId;
     const maddenConsole =
       BLAZE_SERVICE_TO_PATH(YEAR)[league.madden_server.blazeService];
-    const { week, stage } = req.body;
+    const { week, stage, auto } = req.body;
     await refreshToken(discord);
     await getBlazeSession(discord);
     const leagueResponse = await makeBlazeRequest(discord, {
@@ -1377,7 +1377,9 @@ app.post("/:discord/export", async (req, res, next) => {
         );
       }
     } else if (week === 101) {
-      const autoUrls = exportUrls.filter((e) => e.autoUpdate);
+      const autoUrls = auto
+        ? exportUrls.filter((e) => e.autoUpdate)
+        : exportUrls;
       const weekIndex = maddenLeague.careerHubInfo.seasonInfo.seasonWeek;
       console.log(weekIndex);
       const stage =
@@ -1401,7 +1403,9 @@ app.post("/:discord/export", async (req, res, next) => {
         );
       }
     } else if (week === 102) {
-      const autoUrls = exportUrls.filter((e) => e.autoUpdate);
+      const autoUrls = auto
+        ? exportUrls.filter((e) => e.autoUpdate)
+        : exportUrls;
       const currentWeek =
         maddenLeague.careerHubInfo.seasonInfo.seasonWeekType === 8
           ? 22
