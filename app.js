@@ -515,6 +515,9 @@ async function refreshToken(guild_id) {
       refresh_token: refreshToken,
       expires_in: expiresIn,
     } = res1Json;
+    if (!accessToken) {
+      console.log(res1Json);
+    }
     const expiry = new Date(new Date().getTime() + expiresIn * 1000);
     await firestore.setDoc(
       firestore.doc(db, "leagues", guild_id),
@@ -579,7 +582,6 @@ async function getBlazeSession(guild_id) {
       },
     );
     const res1Json = await res1.json();
-    console.log(res1Json);
     const {
       userLoginInfo: {
         sessionKey,
@@ -719,7 +721,6 @@ async function makeBlazeRequest(guild_id, blazeRequest) {
   blazeRequest.deviceId = "MCA4b35d75Vm-MCA";
   blazeRequest.ipAddress = "127.0.0.1";
   blazeRequest.requestPayload = JSON.stringify(blazeRequest.requestPayload);
-  console.log(blazeRequest);
   const body = JSON.stringify({
     apiVersion: 2,
     clientDevice: 3,
@@ -1043,7 +1044,6 @@ app.post("/:discord/getleagues", async (req, res, next) => {
         value: { leagues: maddenLeagues },
       },
     } = leagueResponse;
-    console.log(leagueResponse);
     const slimmedLeagues = maddenLeagues.map((m) => ({
       leagueId: m.leagueId,
       leagueName: m.leagueName,
@@ -1381,10 +1381,8 @@ app.post("/:discord/export", async (req, res, next) => {
         ? exportUrls.filter((e) => e.autoUpdate)
         : exportUrls;
       const weekIndex = maddenLeague.careerHubInfo.seasonInfo.seasonWeek;
-      console.log(weekIndex);
       const stage =
         maddenLeague.careerHubInfo.seasonInfo.seasonWeekType == 0 ? 0 : 1;
-      console.log(stage);
       const data = await getExportData(
         autoUrls,
         weekIndex,
