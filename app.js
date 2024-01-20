@@ -483,7 +483,7 @@ const BLAZE_PRODUCT_NAME = (a) => ({
   stadia: `madden-${a}-stadia-mca`,
 });
 
-async function refreshToken(guild_id) {
+async function Token(guild_id) {
   const docSnap = await firestore.getDoc(
     firestore.doc(db, "leagues", guild_id),
   );
@@ -582,12 +582,16 @@ async function getBlazeSession(guild_id) {
       },
     );
     const res1Json = await res1.json();
+    if (!res1Json.userLoginInfo?.sessionKey) {
+      console.log(res1Json);
+    }
     const {
       userLoginInfo: {
         sessionKey,
         personaDetails: { personaId: blazeId },
       },
     } = res1Json;
+
     tokenInfo.sessionKey = sessionKey;
     const blazeExpiry = new Date(
       new Date().getTime() + BLAZE_SESSION_EXPIRY * 1000,
@@ -642,6 +646,10 @@ async function getBlazeSession(guild_id) {
         },
       );
       const res1Json = await res1.json();
+      if (!res1Json.userLoginInfo?.sessionKey) {
+        console.log(res1Json);
+      }
+
       const {
         userLoginInfo: {
           sessionKey,
