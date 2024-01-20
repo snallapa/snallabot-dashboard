@@ -483,7 +483,7 @@ const BLAZE_PRODUCT_NAME = (a) => ({
   stadia: `madden-${a}-stadia-mca`,
 });
 
-async function Token(guild_id) {
+async function refreshToken(guild_id) {
   const docSnap = await firestore.getDoc(
     firestore.doc(db, "leagues", guild_id),
   );
