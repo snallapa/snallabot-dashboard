@@ -1052,7 +1052,6 @@ app.post("/:discord/getleagues", async (req, res, next) => {
         value: { leagues: maddenLeagues },
       },
     } = leagueResponse;
-    console.log(maddenLeagues);
     const slimmedLeagues = maddenLeagues.map((m) => ({
       leagueId: m.leagueId,
       leagueName: m.leagueName,
@@ -1197,7 +1196,7 @@ async function exportData(
     // );
     if (!isSuccess) {
       console.log(`did not export all things for ${url}`);
-      responses.filter((r) => !r.ok).foreach((r) => console.warn(r));
+      responses.filter((r) => !r.ok).forEach((r) => console.warn(r));
     }
   }
   if (weeklyStats) {
@@ -1231,7 +1230,7 @@ async function exportData(
     // );
     if (!isSuccess) {
       console.log(`did not export all things for ${url}`);
-      responses.filter((r) => !r.ok).foreach((r) => console.warn(r));
+      responses.filter((r) => !r.ok).forEach((r) => console.warn(r));
     }
   }
   if (rosters) {
@@ -1261,7 +1260,7 @@ async function exportData(
     // );
     if (!isSuccess) {
       console.log(`did not export all things for ${url}`);
-      responses.filter((r) => !r.ok).foreach((r) => console.warn(r));
+      responses.filter((r) => !r.ok).forEach((r) => console.warn(r));
     }
   }
   if (completeSuccess) {
