@@ -1196,7 +1196,7 @@ async function exportData(
     // );
     if (!isSuccess) {
       console.log(`failed to export league info for for ${url}`);
-      responses.filter((r) => !r.ok).forEach((r) => console.warn(r));
+      responses.filter((r) => !r.ok).forEach((r) => console.warn(r.status));
     }
   }
   if (weeklyStats) {
@@ -1230,7 +1230,7 @@ async function exportData(
     // );
     if (!isSuccess) {
       console.log(`failed to export stats ${url}`);
-      responses.filter((r) => !r.ok).forEach((r) => console.warn(r));
+      responses.filter((r) => !r.ok).forEach((r) => console.warn(r.status));
     }
   }
   if (rosters) {
@@ -1260,7 +1260,7 @@ async function exportData(
     // );
     if (!isSuccess) {
       console.log(`failed to export rosters for ${url}`);
-      responses.filter((r) => !r.ok).forEach((r) => console.warn(r));
+      responses.filter((r) => !r.ok).forEach((r) => console.warn(r.status));
     }
   }
   if (completeSuccess) {
