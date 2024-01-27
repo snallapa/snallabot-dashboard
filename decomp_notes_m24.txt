@@ -1,0 +1,1176 @@
+
+
+MADDEN 24 SECTION
+
+
+2023-09-24 01:28:10 POST https://159.153.191.240/connect/token                                                                                                                                                                        
+                         ← 200 OK application/json 316b 33ms
+                                   Request                                                                       Response                                                                       Detail
+Accept-Charset:   UTF-8                                                                                                                                                                                                                
+Content-Type:     application/x-www-form-urlencoded; charset=UTF-8                                                                                                                                                                     
+User-Agent:       Dalvik/2.1.0 (Linux; U; Android 13; sdk_gphone64_x86_64 Build/TE1A.220922.010)                                                                                                                                       
+Host:             accounts.ea.com                                                                                                                                                                                                      
+Connection:       Keep-Alive                                                                                                                                                                                                           
+Accept-Encoding:  gzip                                                                                                                                                                                                                 
+Content-Length:   294                                                                                                                                                                                                                  
+URLEncoded form                                                                                                                                                                                                                  [m:auto]
+authentication_source: 317239
+code:                  QUOwAFs1t3HxMjAH3faiii6Ps2LYzLZ5GL2oVbMo
+grant_type:            authorization_code
+release_type:          prod
+client_secret:         U02zL2khwlgFdODLWCyLPmccOc5EiPBBYcEwCqKDTWBrZj2Fwcx4b4Zd9rsA6lHLkIU4qlVvNh84olij
+redirect_uri:          http://127.0.0.1/success
+client_id:             MaddenCompanionApp19
+
+x-nexus-sequence:               146.70.165.202:3132900250251708255                                                                                                                                                                     
+x-nexus-hostname:               prdaccounts-94                                                                                                                                                                                         
+p3p:                            CP="ALL DSP COR IVD IVA PSD PSA TEL TAI CUS ADM CUR CON SAM OUR IND"                                                                                                                                   
+x-samesite:                     true                                                                                                                                                                                                   
+pragma:                         no-cache                                                                                                                                                                                               
+expires:                        Thu, 01 Jan 1970 00:00:00 GMT                                                                                                                                                                          
+cache-control:                  no-cache,no-store                                                                                                                                                                                      
+content-type:                   application/json;charset=UTF-8                                                                                                                                                                         
+content-length:                 316                                                                                                                                                                                                    
+date:                           Sun, 24 Sep 2023 05:28:10 GMT                                                                                                                                                                          
+server:                         Powered by Electronic Arts                                                                                                                                                                             
+x-envoy-upstream-service-time:  14                                                                                                                                                                                                     
+x-envoy-hostname:               prdnonpcihost-grpc-expansion-5.iad2.infery.com                                                                                                                                                         
+Strict-Transport-Security:      max-age=15552000; includeSubDomains; preload                                                                                                                                                           
+JSON                                                                                                                                                                                                                             [m:auto]
+{
+    "access_token": "QVQwOjMuMDozLjA6MjQwOkJoU2pTTUM2eEo0SWcxMTMxSEdOZTRvSFR5OXpuNlo0VGYyOjc5MTk1OnF1Y2k4",
+    "expires_in": 14399,
+    "id_token": null,
+    "refresh_token": "UlQwOjMuMDozLjA6MjAxNjA6YlV4MThxZmh1anNSNUxpYjZEemMyZjBMeDZiYkhiaU9OOjc5MTk1OnF1Y2k4.rNnm0nceRNAXtQEZsrk8qotfjM",
+    "token_type": "Bearer"
+}
+
+
+
+
+
+-------------------------------------------------------------------------------
+
+
+Flow Details
+2023-09-24 01:28:10 GET https://159.153.191.240/connect/tokeninfo?access_token=QVQwOjMuMDozLjA6MjQwOkJoU2pTTUM2eEo0SWcxMTMxSEdOZTRvSFR5OXpuNlo0VGYyOjc5MTk1OnF1Y2k4                                                                   
+                        ← 200 OK application/json 318b 20ms
+                                   Request                                                                       Response                                                                       Detail
+Accept-Charset:      UTF-8                                                                                                                                                                                                             
+X-Include-Deviceid:  true                                                                                                                                                                                                              
+User-Agent:          Dalvik/2.1.0 (Linux; U; Android 13; sdk_gphone64_x86_64 Build/TE1A.220922.010)                                                                                                                                    
+Host:                accounts.ea.com                                                                                                                                                                                                   
+Connection:          Keep-Alive                                                                                                                                                                                                        
+Accept-Encoding:     gzip                                                                                                                                                                                                              
+Query                                                                                                                                                                                                                            [m:auto]
+access_token: QVQwOjMuMDozLjA6MjQwOkJoU2pTTUM2eEo0SWcxMTMxSEdOZTRvSFR5OXpuNlo0VGYyOjc5MTk1OnF1Y2k4
+
+
+x-nexus-sequence:               146.70.165.202:7484465308470627880                                                                                                                                                                     
+x-nexus-hostname:               prdaccounts-139                                                                                                                                                                                        
+p3p:                            CP="ALL DSP COR IVD IVA PSD PSA TEL TAI CUS ADM CUR CON SAM OUR IND"                                                                                                                                   
+x-samesite:                     true                                                                                                                                                                                                   
+pragma:                         no-cache                                                                                                                                                                                               
+expires:                        Thu, 01 Jan 1970 00:00:00 GMT                                                                                                                                                                          
+cache-control:                  no-cache,no-store                                                                                                                                                                                      
+content-type:                   application/json;charset=UTF-8                                                                                                                                                                         
+content-length:                 318                                                                                                                                                                                                    
+date:                           Sun, 24 Sep 2023 05:28:10 GMT                                                                                                                                                                          
+server:                         Powered by Electronic Arts                                                                                                                                                                             
+x-envoy-upstream-service-time:  2                                                                                                                                                                                                      
+x-envoy-hostname:               prdnonpcihost-grpc-expansion-17.iad2.infery.com                                                                                                                                                        
+Strict-Transport-Security:      max-age=15552000; includeSubDomains; preload                                                                                                                                                           
+JSON                                                                                                                                                                                                                             [m:auto]
+{
+    "client_id": "MaddenCompanionApp19",
+    "device_id": "MCA4b35d75Vm-MCA",
+    "expires_in": 14399,
+    "persona_id": null,
+    "pid_id": "2458179195",
+    "pid_type": "NUCLEUS",
+    "scope": "offline security.challenge signin search.identity basic.identity basic.persona basic.entitlement",
+    "user_id": "2458179195"
+}
+----------------------------------------------------------------------------------------------
+
+
+2023-09-24 01:28:10 GET https://159.153.191.238/proxy/identity/pids/2458179195/entitlements/?status=ACTIVE                                                                                                                            
+                        ← 200 OK application/json 2.4k 31ms
+                                   Request                                                                       Response                                                                       Detail
+Accept-Charset:    UTF-8                                                                                                                                                                                                               
+Authorization:     Bearer QVQwOjMuMDozLjA6MjQwOkJoU2pTTUM2eEo0SWcxMTMxSEdOZTRvSFR5OXpuNlo0VGYyOjc5MTk1OnF1Y2k4                                                                                                                         
+X-Expand-Results:  true                                                                                                                                                                                                                
+User-Agent:        Dalvik/2.1.0 (Linux; U; Android 13; sdk_gphone64_x86_64 Build/TE1A.220922.010)                                                                                                                                      
+Host:              gateway.ea.com                                                                                                                                                                                                      
+Connection:        Keep-Alive                                                                                                                                                                                                          
+Accept-Encoding:   gzip                                                                                                                                                                                                                
+Query                                                                                                                                                                                                                            [m:auto]
+status: ACTIVE
+
+
+2023-09-24 01:28:10 GET https://159.153.191.238/proxy/identity/pids/2458179195/entitlements/?status=ACTIVE                                                                                                                            
+                        ← 200 OK application/json 2.4k 31ms
+                                   Request                                                                       Response                                                                       Detail
+x-nexus-sequence:               146.70.165.202:5659519259919402530                                                                                                                                                                     
+x-nexus-hostname:               prdgateway-128                                                                                                                                                                                         
+x-sequence:                     2087137926                                                                                                                                                                                             
+date:                           Sun, 24 Sep 2023 05:28:10 GMT                                                                                                                                                                          
+server:                         Powered by Electronic Arts                                                                                                                                                                             
+x-hostname:                     prdgateway-128.gateway.prd-gateway.svc.cluster.local                                                                                                                                                   
+x-bundle:                       com.ea.nucleus.entitlement.impl                                                                                                                                                                        
+x-version:                      2.0.0                                                                                                                                                                                                  
+x-envoy-upstream-service-time:  13                                                                                                                                                                                                     
+x-envoy-hostname:               prdhotstandbyhost-2.iad2.infery.com                                                                                                                                                                    
+cache-control:                  no-store                                                                                                                                                                                               
+content-type:                   application/json;charset=utf-8                                                                                                                                                                         
+content-length:                 2478                                                                                                                                                                                                   
+Strict-Transport-Security:      max-age=15552000; includeSubDomains; preload                                                                                                                                                           
+JSON                                                                                                                                                                                                                             [m:auto]
+{
+    "entitlements": {
+        "entitlement": [
+            {
+                "entitlementId": 1017465179195,
+                "entitlementSource": "319991",
+                "entitlementTag": "ONLINE_ACCESS",
+                "entitlementType": "ONLINE_ACCESS",
+                "grantDate": "2023-08-18T2:15Z",
+                "groupName": "MADDEN_24PS5",
+                "isConsumable": false,
+                "lastModifiedDate": "2023-08-18T2:15Z",
+                "originPermissions": 0,
+                "pidUri": "/pids/2458179195",
+                "productCatalog": "",
+                "productId": "",
+                "projectId": "319991",
+                "status": "ACTIVE",
+                "statusReasonCode": "",
+                "terminationDate": "",
+                "useCount": 0,
+                "version": 0
+            },
+            {
+                "entitlementId": 1014818979195,
+                "entitlementSource": "319038",
+                "entitlementTag": "ONLINE_ACCESS",
+                "entitlementType": "ONLINE_ACCESS",
+                "grantDate": "2022-08-19T14:42Z",
+                "groupName": "MADDEN_23PS5",
+                "isConsumable": false,
+                "lastModifiedDate": "2022-08-19T14:42Z",
+                "originPermissions": 0,
+                "pidUri": "/pids/2458179195",
+                "productCatalog": "",
+                "productId": "",
+                "projectId": "319038",
+                "status": "ACTIVE",
+                "statusReasonCode": "",
+                "terminationDate": "",
+                "useCount": 0,
+                "version": 0
+            },
+            {
+                "entitlementId": 1014525379195,
+                "entitlementSource": "319038",
+                "entitlementTag": "BETA_ONLINE_ACCESS",
+                "entitlementType": "ONLINE_ACCESS",
+                "grantDate": "2022-06-18T4:2Z",
+                "groupName": "MADDEN_23PS5",
+                "isConsumable": false,
+                "lastModifiedDate": "2022-06-18T4:2Z",
+                "originPermissions": 0,
+                "pidUri": "/pids/2458179195",
+                "productCatalog": "",
+                "productId": "",
+                "projectId": "319038",
+                "status": "ACTIVE",
+                "statusReasonCode": "",
+                "terminationDate": "",
+                "useCount": 0,
+                "version": 0
+            },
+            {
+                "entitlementId": 1013632479195,
+                "entitlementSource": "319132",
+                "entitlementTag": "ONLINE_ACCESS",
+                "entitlementType": "ONLINE_ACCESS",
+                "grantDate": "2021-08-27T23:38Z",
+                "groupName": "MADDEN_22PS5",
+                "isConsumable": false,
+                "lastModifiedDate": "2021-08-27T23:38Z",
+                "originPermissions": 0,
+                "pidUri": "/pids/2458179195",
+                "productCatalog": "",
+                "productId": "",
+                "projectId": "319132",
+                "status": "ACTIVE",
+                "statusReasonCode": "",
+                "terminationDate": "",
+                "useCount": 0,
+                "version": 0
+            }
+        ]
+    }
+}
+-----------------------------------------------------
+2023-09-24 01:28:10 GET https://159.153.191.238/proxy/identity/pids/2458179195/personas?status=ACTIVE&access_token=QVQwOjMuMDozLjA6MjQwOkJoU2pTTUM2eEo0SWcxMTMxSEdOZTRvSFR5OXpuNlo0VGYyOjc5MTk1OnF1Y2k4                               
+                        ← 200 OK application/json 786b 26ms
+                                   Request                                                                       Response                                                                       Detail
+Accept-Charset:    UTF-8                                                                                                                                                                                                               
+X-Expand-Results:  true                                                                                                                                                                                                                
+User-Agent:        Dalvik/2.1.0 (Linux; U; Android 13; sdk_gphone64_x86_64 Build/TE1A.220922.010)                                                                                                                                      
+Host:              gateway.ea.com                                                                                                                                                                                                      
+Connection:        Keep-Alive                                                                                                                                                                                                          
+Accept-Encoding:   gzip                                                                                                                                                                                                                
+Query                                                                                                                                                                                                                            [m:auto]
+status:       ACTIVE
+access_token: QVQwOjMuMDozLjA6MjQwOkJoU2pTTUM2eEo0SWcxMTMxSEdOZTRvSFR5OXpuNlo0VGYyOjc5MTk1OnF1Y2k4
+
+
+
+2023-09-24 01:28:10 GET https://159.153.191.238/proxy/identity/pids/2458179195/personas?status=ACTIVE&access_token=QVQwOjMuMDozLjA6MjQwOkJoU2pTTUM2eEo0SWcxMTMxSEdOZTRvSFR5OXpuNlo0VGYyOjc5MTk1OnF1Y2k4                               
+                        ← 200 OK application/json 786b 26ms
+                                   Request                                                                       Response                                                                       Detail
+x-nexus-sequence:               146.70.165.202:6396733667529738091                                                                                                                                                                     
+x-nexus-hostname:               prdgateway-14                                                                                                                                                                                          
+x-sequence:                     1700155237                                                                                                                                                                                             
+date:                           Sun, 24 Sep 2023 05:28:10 GMT                                                                                                                                                                          
+server:                         Powered by Electronic Arts                                                                                                                                                                             
+x-hostname:                     prdgateway-14.gateway.prd-gateway.svc.cluster.local                                                                                                                                                    
+x-bundle:                       com.ea.nucleus.eaid                                                                                                                                                                                    
+x-version:                      2.0.0                                                                                                                                                                                                  
+x-envoy-upstream-service-time:  8                                                                                                                                                                                                      
+x-envoy-hostname:               prdnonpciworkernode-4.iad2.infery.com                                                                                                                                                                  
+cache-control:                  no-store                                                                                                                                                                                               
+content-type:                   application/json;charset=utf-8                                                                                                                                                                         
+content-length:                 786                                                                                                                                                                                                    
+Strict-Transport-Security:      max-age=15552000; includeSubDomains; preload                                                                                                                                                           
+JSON                                                                                                                                                                                                                             [m:auto]
+{
+    "personas": {
+        "persona": [
+            {
+                "dateCreated": "2013-04-27T16:28Z",
+                "displayName": "snallapa",
+                "isVisible": true,
+                "lastAuthenticated": "2023-07-14T3:46Z",
+                "name": "snallapa",
+                "namespaceName": "cem_ea_id",
+                "personaId": 872284979,
+                "pidId": 2458179195,
+                "showPersona": "NO_ONE",
+                "status": "ACTIVE",
+                "statusReasonCode": ""
+            },
+            {
+                "dateCreated": "2012-02-13T22:35Z",
+                "displayName": "snallapa",
+                "isVisible": true,
+                "lastAuthenticated": "2023-09-24T5:4Z",
+                "name": "snallapa",
+                "namespaceName": "ps3",
+                "personaId": 417448296,
+                "pidId": 2458179195,
+                "showPersona": "EVERYONE",
+                "status": "ACTIVE",
+                "statusReasonCode": "NONE"
+            }
+        ]
+    }
+}
+
+-------------------------------------------------------------------------------------
+
+
+2023-09-24 01:28:13 POST https://159.153.191.240/connect/token                                                                                                                                                                        
+                         ← 200 OK application/json 4.6k 64ms
+                                   Request                                                                       Response                                                                       Detail
+Accept-Charset:   UTF-8                                                                                                                                                                                                                
+Content-Type:     application/x-www-form-urlencoded; charset=UTF-8                                                                                                                                                                     
+User-Agent:       Dalvik/2.1.0 (Linux; U; Android 13; sdk_gphone64_x86_64 Build/TE1A.220922.010)                                                                                                                                       
+Host:             accounts.ea.com                                                                                                                                                                                                      
+Connection:       Keep-Alive                                                                                                                                                                                                           
+Accept-Encoding:  gzip                                                                                                                                                                                                                 
+Content-Length:   313                                                                                                                                                                                                                  
+URLEncoded form                                                                                                                                                                                                                  [m:auto]
+authentication_source: 317239
+code:                  QUOwAFs1O5ialSu3iNDrv2MgA_6X1cRsmSS7YAZ0AQ
+grant_type:            authorization_code
+token_format:          JWS
+release_type:          prod
+client_secret:         U02zL2khwlgFdODLWCyLPmccOc5EiPBBYcEwCqKDTWBrZj2Fwcx4b4Zd9rsA6lHLkIU4qlVvNh84olij
+redirect_uri:          http://127.0.0.1/success
+client_id:             MaddenCompanionApp19
+
+
+2023-09-24 01:28:13 POST https://159.153.191.240/connect/token                                                                                                                                                                        
+                         ← 200 OK application/json 4.6k 64ms
+                                   Request                                                                       Response                                                                       Detail
+x-nexus-sequence:               146.70.165.202:5340709221510105510                                                                                                                                                                     
+x-nexus-hostname:               prdaccounts-143                                                                                                                                                                                        
+p3p:                            CP="ALL DSP COR IVD IVA PSD PSA TEL TAI CUS ADM CUR CON SAM OUR IND"                                                                                                                                   
+x-samesite:                     true                                                                                                                                                                                                   
+pragma:                         no-cache                                                                                                                                                                                               
+expires:                        Thu, 01 Jan 1970 00:00:00 GMT                                                                                                                                                                          
+cache-control:                  no-cache,no-store                                                                                                                                                                                      
+content-type:                   application/json;charset=UTF-8                                                                                                                                                                         
+content-length:                 4666                                                                                                                                                                                                   
+date:                           Sun, 24 Sep 2023 05:28:13 GMT                                                                                                                                                                          
+server:                         Powered by Electronic Arts                                                                                                                                                                             
+x-envoy-upstream-service-time:  45                                                                                                                                                                                                     
+x-envoy-hostname:               prdhotstandbygphost-8.iad2.infery.com                                                                                                                                                                  
+Strict-Transport-Security:      max-age=15552000; includeSubDomains; preload                                                                                                                                                           
+JSON                                                                                                                                                                                                                             [m:auto]
+{
+    "access_token": "eyJraWQiOiJhMzQ3YTFjZS0yZTNlLTRiNzMtYjBhZC03NmI1YWUxYzdjYzMiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhY2NvdW50cy5lYS5jb20iLCJqdGkiOiJTa0V3T2pNdU1Eb3hMakE2TURnMU4yVTBNek10TXpBNE1DMDBORFZsTFdJek9UVXRNVGhpWVRJeE5HUmtPRE00Iiw
+iYXpwIjoiTWFkZGVuQ29tcGFuaW9uQXBwMTkiLCJpYXQiOjE2OTU1MzMyOTMsImV4cCI6MTY5NTU0NzY5MywidmVyIjoxLCJuZXh1cyI6eyJjbGkiOiJNYWRkZW5Db21wYW5pb25BcHAxOSIsInByZCI6IjM3MDljN2E0LWJhMTYtM2ViMC02NmMyLTRlMmExYTFhZmU1MyIsInNjbyI6Im9mZmxpbmUgc2VjdXJp
+dHkuY2hhbGxlbmdlIHNpZ25pbiBzZWFyY2guaWRlbnRpdHkgYmFzaWMuaWRlbnRpdHkgYmFzaWMucGVyc29uYSBiYXNpYy5lbnRpdGxlbWVudCIsInBpZCI6IjEwMDAwNjcxNzkxOTUiLCJwdHkiOiJQUzMiLCJ1aWQiOiIyNDU4MTc5MTk1IiwicHNpZCI6NDE3NDQ4Mjk2LCJwbHR5cCI6IldFQiIsInBuaWQiO
+iJFQSIsImRwaWQiOiJXRUIiLCJzdHBzIjoiT0ZGIiwidWRnIjpmYWxzZSwiY250eSI6IjEiLCJhdXNyYyI6IjMxNzIzOSIsImlwZ2VvIjp7ImlwIjoiMTQ2LjcwLiouKiIsImN0eSI6IlVTIiwicmVnIjoiTmV3IFlvcmsiLCJjaXQiOiJOZXcgWW9yayIsImlzcCI6Ik0yNDcgRXVyb3BlIFNSTCIsImxhdCI6Ij
+QwLjcxNTciLCJsZ3QiOiItNzQuMCIsInR6IjoiLTQifSwidWlmIjp7InVkZyI6ZmFsc2UsImN0eSI6IlVTIiwibGFuIjoiZW4iLCJzdGEiOiJBQ1RJVkUiLCJhbm8iOmZhbHNlLCJhZ2UiOjU4LCJhZ3AiOiJBRFVMVCJ9LCJwc2lmIjpbeyJpZCI6NDE3NDQ4Mjk2LCJucyI6InBzMyIsImRpcyI6InNuYWxsYXB
+hIiwibmljIjoic25hbGxhcGEifSx7ImlkIjo4NzIyODQ5NzksIm5zIjoiY2VtX2VhX2lkIiwiZGlzIjoic25hbGxhcGEiLCJuaWMiOiJzbmFsbGFwYSJ9XSwiZW5jIjoiMHJ6WGg1dE1GMjFROEUxQmdQdlZLT1hZTzVIZ1dMVk5uNVNUV0NWbWorMEhKeFlxbDY5dHc1U1dpVVFibXlWangyOWhhWnNZMmZXNTU5
+M2lINGVQUUpQVXNZK056V0ZqaVZtUTdpMTJEUlRPbGV4NTVxODQvR0xjY2lZNFpBeUdIcCtlQzZqSkVKd3R4aGExTjBSOUtmOUgxVEN5UDhxVlI1ZVhtR2ZQazVIN09NNE9UVnYzRStGcFBwTnYybkZQc1FWUTAzaUhOSzVDTVV2OExxcU1PQzBBaDhHNTRRbjdrNFJGZ2VjWHNuNWVZVU1oRi9zZjAyK05YVmNQd
+VBZcG5LR1FuZUc3NFJFWjRrODZTTitvbURaVCtocEtmcE1qZkMxbWMrVVBSRXhack1NZ2VsaEdWakYxMmZsQ3pOZFBUbm9vaC95UUJQRFE5SUlQVU5zclFZYTIvS2VZOGkvWWlURWx4TWxJd3dxM1ZOMFNLNTZRSHF0dTNPblR0R3E1ejBEUlhuNVhjL2ZLb2t3VW85dFFQc0RiL1BnS21COSt0TStkdXpJTk9VVk
+56eDVOUHRKSi9iNmhIUDZCaEZ4UTFKRGlxYUs1UUJEcWUzUk5FemNjQ0FtSy94N081Si9SckljbDFLWk5TbGRrMStNL3NrRFJUMHVtL3QrWWl4U1FwNFUxalIxU0wyQnVnUjh4bWhHMU5WYzBxRU5IRFAxSHNHUjZlSUk3WEwyNjFNV2RrblZCNG40eUQveVZMQ09OazBuUWswSnRacXR0YjBKck8yY25tekZyNzF
+xTjg2NmJxZVQ4Rk9CQWhVOD0ifX0.cmzyks04-DuxOKnD5lRwex5qzQuLpI3npnj0e7zwFGJOJ1ZB_ME1RtsnlfVdaOuSTHv2oxJA34UmtpLNRf-21H43n2qu-8icIlSPgrfcXHCJpRMovmJpMUpImCWaOYmtqszHNSH5rVb2a-red3CLSpOAeU1O6w0f5AtyrKgFGk3V3SEJhZE6R_d3oq2VsogyigMDwdTLLGEH
+AeaQvxpO1x2uMjMjRm8cQar_2ZerC4aHKVDiOfbE1Hes8XstZynohNUwL1LQbAWe1KnHz1i7iajIK9GmEKgElyTS0mmPKvavRnU2GthTEWQgii9_PgVgOuY8oMFM-3TO4mt76LowCw",
+    "expires_in": 14399,
+    "id_token": null,
+    "refresh_token": "eyJraWQiOiJlMWMzYTE0OC05NmZjLTQ4MzAtYTExZS0yNmZiNjE4MTNkNWYiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhY2NvdW50cy5lYS5jb20iLCJqdGkiOiJTbEl3T2pNdU1Eb3hMakE2WkRoak1qTXhObUl0WldWaU5DMDBNemMzTFdJeE5qTXRZMk5pTVRrNU9UWTVOR1F6Ii
+wiYXpwIjoiTWFkZGVuQ29tcGFuaW9uQXBwMTkiLCJpYXQiOjE2OTU1MzMyOTMsImV4cCI6MTY5Njc0Mjg5MywidmVyIjoxLCJuZXh1cyI6eyJ1aWQiOiIyNDU4MTc5MTk1IiwiZW5jIjoiZnU4YksydEFEWFdxUW9CSWw2VTlNMjFyaC96SlpVdmIwUGg0NldCWktucklxeTdtNWF5cEh6TGFFcnFubVVXMUcvTGN
+VZnE2NlJzQnZEVk04L0pBaVQxWnUvczYvMisxWE1MRjh0LzVaT3hTVFc1Y1JrcTFtak9mRFpzZU1FRllDTjF5aFovaXlaS3RhanlPRXh3eXRNZ1ZNNUhGSUhBQm9kVWtnTVdMbHEvb0hxRFlOUXJXVml6RnF6T016N2d2a0hKQ21NYk40b2lhTWlwalpRK0FLNlkwQ1Z0aXNUOEhlQWNVTTVYeWVTSjRQNzM0RnJB
+SnVOdWNGY0x6cXJLYzY2Y0g1MzN1a3N3SkdNYVo0UWY0Y2dTb00wRTU5dkpneWhlbU9KYk1CcUwrVWExaG1lbmNFQ2xFT2pXVTR0T3BLRDZwd2k0ZzJENmhRV1BhelR2b2dtbkQrS2RwcWJEL2ljVkh0d3lOSmJlOWNrK1UxOG5oYVpUMlNBRVZJdWN0SUUvWnpQRVUzUVpxRDBkRjZyQTBId2doTzZ0Si9HbmFRa
+G1VaGxjM1kzQ0EyRWZueW1ISjFDeS9hTkI4dUZaMk40SDJlQTcxNzdKMmlyNUo2akJkWXowam8wMEY4a1hlOU5COS9CQkFaaHVFWnR0d1ZuRTBHaXBTRSsyR2IvWjI2dkJBOWY1UXZtUGtBNkxvVmNFd1EzWGVNTi9XVUxHNmNXUlRxVXpObWQ4T0NrQ3hYVEw1SmgwREtKVzJmRTJwWE9Fa3h4VzR5bEIzYWkyNj
+ZRaHZCR0JSaldBYlFKb2c0RUxySmZFa2V3a2h1UVZ5QmZvODh5YjZQRTJtS0NoVTZ1NFIvdk5Yc1NKWHVodjhHc3RONGpuYTllbnBtdGc0czZlZStrNy9vcUJzMDhwNlVQQWF5ejg3T3N5Wk9wcHJrYkoyMmZIWEYvbkdWUmVvL1V6TEl4emowU1JNYTRhcGxta2RybktyOHJ1aFZuZktidnNQMCtVdG9NQTJSQXV
+YRXVvbkltc28xZzVsVmM1dzFIWmNwN2lSOVFUVTFpQXRMN3kraG1McW9BNE1rM0dIM2Z6SjlwWTdnMFB3NHQ4blEzMFdoS25jTGY5bEFHT3M0ZlJNQm5laEV2L0doNTFCUUN1YTRWTDR1bVJVSVE0ZnVZNC9hNTNaV24wdDdKTGdBM0ZaOXQ3bGFlYkZuLzdqaVZJMFJyWkJjTDJhUnMrdnVvS25tQ0pOU0pYWjZ4
+eERYR1dQQTdrdzdmakZ3ZzBZWWY3UURNdWgrTnI4NU5GUjdBTkVHaktSa1RjVUVVUHVlMWdxSUFrWUkvejJMYXBOOU5oZGlma2hSVlNwRy9zNU94bFdSUm9mWHUyQzRjY2d3YnZKK3c9PSJ9fQ.Il-nHZLRBbGfuk6nLxWQBBrlF_gINuc9Dh63KWd7IWJil_9km0haT7OlBxdPigambc2ISj7Hjt5yHA7ol18zox
+VV-HqPMNZP8CAI63aHcLxSKUvVV7FHynxN7U5aoY24z9pbGJ05OFQ-S6M_EwY_tfwzFP2FdZNBLKtYzcmOAN3r89LvpRdc5YKDwSrtxJ5nBaj1auJfs3KQq0uaiLOvV9GSWQTI_TRcXoeeKnPNc_12Wokat8QJhkADm-cvDmZsFBXNSAj2PXbsvC6SS53EUF_h9kBIUeiJDAsHh66J3Nd5YwCsCvjLJTlg5N3YdFI
+2jxqy9caFAvO7J9KsCzGV5w",
+    "token_type": "Bearer"
+}
+
+
+------------------------------------------------------------------------------------
+
+Flow Details
+2023-09-24 01:28:13 POST https://159.153.64.202/wal/authentication/login                                                                                                                                                              
+                         ← 200 OK application/json 1.1k 112ms
+                                   Request                                                                       Response                                                                       Detail
+Accept-Charset:     UTF-8                                                                                                                                                                                                              
+Accept:             application/json                                                                                                                                                                                                   
+X-BLAZE-ID:         madden-2024-ps5-gen5                                                                                                                                                                                               
+X-BLAZE-VOID-RESP:  XML                                                                                                                                                                                                                
+X-Application-Key:  MADDEN-MCA                                                                                                                                                                                                         
+Content-Type:       application/json                                                                                                                                                                                                   
+User-Agent:         Dalvik/2.1.0 (Linux; U; Android 13; sdk_gphone64_x86_64 Build/TE1A.220922.010)                                                                                                                                     
+Host:               wal2.tools.gos.bio-iad.ea.com                                                                                                                                                                                      
+Connection:         Keep-Alive                                                                                                                                                                                                         
+Accept-Encoding:    gzip                                                                                                                                                                                                               
+Content-Length:     2501                                                                                                                                                                                                               
+JSON                                                                                                                                                                                                                             [m:auto]
+{
+    "accessToken": "eyJraWQiOiJhMzQ3YTFjZS0yZTNlLTRiNzMtYjBhZC03NmI1YWUxYzdjYzMiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhY2NvdW50cy5lYS5jb20iLCJqdGkiOiJTa0V3T2pNdU1Eb3hMakE2TURnMU4yVTBNek10TXpBNE1DMDBORFZsTFdJek9UVXRNVGhpWVRJeE5HUmtPRE00Iiwi
+YXpwIjoiTWFkZGVuQ29tcGFuaW9uQXBwMTkiLCJpYXQiOjE2OTU1MzMyOTMsImV4cCI6MTY5NTU0NzY5MywidmVyIjoxLCJuZXh1cyI6eyJjbGkiOiJNYWRkZW5Db21wYW5pb25BcHAxOSIsInByZCI6IjM3MDljN2E0LWJhMTYtM2ViMC02NmMyLTRlMmExYTFhZmU1MyIsInNjbyI6Im9mZmxpbmUgc2VjdXJpd
+HkuY2hhbGxlbmdlIHNpZ25pbiBzZWFyY2guaWRlbnRpdHkgYmFzaWMuaWRlbnRpdHkgYmFzaWMucGVyc29uYSBiYXNpYy5lbnRpdGxlbWVudCIsInBpZCI6IjEwMDAwNjcxNzkxOTUiLCJwdHkiOiJQUzMiLCJ1aWQiOiIyNDU4MTc5MTk1IiwicHNpZCI6NDE3NDQ4Mjk2LCJwbHR5cCI6IldFQiIsInBuaWQiOi
+JFQSIsImRwaWQiOiJXRUIiLCJzdHBzIjoiT0ZGIiwidWRnIjpmYWxzZSwiY250eSI6IjEiLCJhdXNyYyI6IjMxNzIzOSIsImlwZ2VvIjp7ImlwIjoiMTQ2LjcwLiouKiIsImN0eSI6IlVTIiwicmVnIjoiTmV3IFlvcmsiLCJjaXQiOiJOZXcgWW9yayIsImlzcCI6Ik0yNDcgRXVyb3BlIFNSTCIsImxhdCI6IjQ
+wLjcxNTciLCJsZ3QiOiItNzQuMCIsInR6IjoiLTQifSwidWlmIjp7InVkZyI6ZmFsc2UsImN0eSI6IlVTIiwibGFuIjoiZW4iLCJzdGEiOiJBQ1RJVkUiLCJhbm8iOmZhbHNlLCJhZ2UiOjU4LCJhZ3AiOiJBRFVMVCJ9LCJwc2lmIjpbeyJpZCI6NDE3NDQ4Mjk2LCJucyI6InBzMyIsImRpcyI6InNuYWxsYXBh
+IiwibmljIjoic25hbGxhcGEifSx7ImlkIjo4NzIyODQ5NzksIm5zIjoiY2VtX2VhX2lkIiwiZGlzIjoic25hbGxhcGEiLCJuaWMiOiJzbmFsbGFwYSJ9XSwiZW5jIjoiMHJ6WGg1dE1GMjFROEUxQmdQdlZLT1hZTzVIZ1dMVk5uNVNUV0NWbWorMEhKeFlxbDY5dHc1U1dpVVFibXlWangyOWhhWnNZMmZXNTU5M
+2lINGVQUUpQVXNZK056V0ZqaVZtUTdpMTJEUlRPbGV4NTVxODQvR0xjY2lZNFpBeUdIcCtlQzZqSkVKd3R4aGExTjBSOUtmOUgxVEN5UDhxVlI1ZVhtR2ZQazVIN09NNE9UVnYzRStGcFBwTnYybkZQc1FWUTAzaUhOSzVDTVV2OExxcU1PQzBBaDhHNTRRbjdrNFJGZ2VjWHNuNWVZVU1oRi9zZjAyK05YVmNQdV
+BZcG5LR1FuZUc3NFJFWjRrODZTTitvbURaVCtocEtmcE1qZkMxbWMrVVBSRXhack1NZ2VsaEdWakYxMmZsQ3pOZFBUbm9vaC95UUJQRFE5SUlQVU5zclFZYTIvS2VZOGkvWWlURWx4TWxJd3dxM1ZOMFNLNTZRSHF0dTNPblR0R3E1ejBEUlhuNVhjL2ZLb2t3VW85dFFQc0RiL1BnS21COSt0TStkdXpJTk9VVk5
+6eDVOUHRKSi9iNmhIUDZCaEZ4UTFKRGlxYUs1UUJEcWUzUk5FemNjQ0FtSy94N081Si9SckljbDFLWk5TbGRrMStNL3NrRFJUMHVtL3QrWWl4U1FwNFUxalIxU0wyQnVnUjh4bWhHMU5WYzBxRU5IRFAxSHNHUjZlSUk3WEwyNjFNV2RrblZCNG40eUQveVZMQ09OazBuUWswSnRacXR0YjBKck8yY25tekZyNzFx
+Tjg2NmJxZVQ4Rk9CQWhVOD0ifX0.cmzyks04-DuxOKnD5lRwex5qzQuLpI3npnj0e7zwFGJOJ1ZB_ME1RtsnlfVdaOuSTHv2oxJA34UmtpLNRf-21H43n2qu-8icIlSPgrfcXHCJpRMovmJpMUpImCWaOYmtqszHNSH5rVb2a-red3CLSpOAeU1O6w0f5AtyrKgFGk3V3SEJhZE6R_d3oq2VsogyigMDwdTLLGEHA
+eaQvxpO1x2uMjMjRm8cQar_2ZerC4aHKVDiOfbE1Hes8XstZynohNUwL1LQbAWe1KnHz1i7iajIK9GmEKgElyTS0mmPKvavRnU2GthTEWQgii9_PgVgOuY8oMFM-3TO4mt76LowCw",
+    "productName": "madden-2024-ps5-mca"
+}
+
+Flow Details
+2023-09-24 01:28:13 POST https://159.153.64.202/wal/authentication/login                                                                                                                                                              
+                         ← 200 OK application/json 1.1k 112ms
+                                   Request                                                                       Response                                                                       Detail
+Date:               Sun, 24 Sep 2023 05:28:13 GMT                                                                                                                                                                                      
+X-Request-Id:       2835f730-5a9b-11ee-bd19-e7a9cca7f8e7                                                                                                                                                                               
+X-GS-Request-Id:    2835f730-5a9b-11ee-bd19-e7a9cca7f8e7                                                                                                                                                                               
+Content-Type:       application/json;charset=utf-8                                                                                                                                                                                     
+X-BLAZE-ERRORCODE:  0                                                                                                                                                                                                                  
+X-BLAZE-COMPONENT:  authentication                                                                                                                                                                                                     
+X-BLAZE-COMMAND:    login                                                                                                                                                                                                              
+X-BLAZE-SEQNO:      0                                                                                                                                                                                                                  
+Content-Length:     1127                                                                                                                                                                                                               
+JSON                                                                                                                                                                                                                             [m:auto]
+{
+    "isAnonymous": false,
+    "isOfLegalContactAge": true,
+    "isUnderage": false,
+    "userLoginInfo": {
+        "accountId": 2458179195,
+        "blazeId": 417448296,
+        "geoIpSucceeded": true,
+        "isFirstConsoleLogin": false,
+        "isFirstLogin": false,
+        "lastLoginDateTime": 1695532997,
+        "personaDetails": {
+            "displayName": "snallapa",
+            "extId": 0,
+            "lastAuthenticated": 0,
+            "personaId": 417448296,
+            "status": "UNKNOWN"
+        },
+        "platformInfo": {
+            "clientPlatform": "ps5",
+            "eaIds": {
+                "nucleusAccountId": 2458179195,
+                "originPersonaId": 872284979,
+                "originPersonaName": "snallapa"
+            },
+            "externalIds": {
+                "psnAccountId": 7573657078470043715,
+                "steamAccountId": 0,
+                "switchId": "",
+                "xblAccountId": 0
+            }
+        },
+        "previousAnonymousAccountId": 0,
+        "sessionKey": "000000e82bb0aa58_NKPqWidju7VEr13pTwVUnEQk$enLkr4YrE8kZSUZmkc="
+    }
+}
+
+
+----------------------------------------------------------------------------------------------------
+2023-09-24 01:28:14 POST https://159.153.64.202/wal/mca/Process/000000e82bb0aa58_NKPqWidju7VEr13pTwVUnEQk$enLkr4YrE8kZSUZmkc=                                                                                                         
+                         ← 200 OK application/json 5.4k 42ms
+                                   Request                                                                       Response                                                                       Detail
+Accept-Charset:     UTF-8                                                                                                                                                                                                              
+Accept:             application/json                                                                                                                                                                                                   
+X-BLAZE-ID:         madden-2024-ps5-gen5                                                                                                                                                                                               
+X-BLAZE-VOID-RESP:  XML                                                                                                                                                                                                                
+X-Application-Key:  MADDEN-MCA                                                                                                                                                                                                         
+Content-Type:       application/json                                                                                                                                                                                                   
+User-Agent:         Dalvik/2.1.0 (Linux; U; Android 13; sdk_gphone64_x86_64 Build/TE1A.220922.010)                                                                                                                                     
+Host:               wal2.tools.gos.bio-iad.ea.com                                                                                                                                                                                      
+Connection:         Keep-Alive                                                                                                                                                                                                         
+Accept-Encoding:    gzip                                                                                                                                                                                                               
+Content-Length:     488                                                                                                                                                                                                                
+JSON                                                                                                                                                                                                                             [m:auto]
+{
+    "apiVersion": 2,
+    "clientDevice": 3,
+    "requestInfo": "{\"messageExpirationTime\":1695533293,\"deviceId\":\"MCA4b35d75Vm-MCA\",\"commandName\":\"Mobile_GetMyLeagues\",\"componentId\":2060,\"commandId\":801,\"ipAddress\":\"127.0.0.1\",\"requestPayload\":\"{}\",\"compon
+entName\":\"careermode\",\"messageAuthData\":{\"authCode\":\"4kUgl8R9ZKGr7jlCuhakgw==\",\"authData\":\"DgfVT16lcP1a4eIqkd+QPrgoDrYQ4jXoDPDqLeCL3Gv7cBikCaVx7Erg7jqh94B9oCQApEfrYvNe3O9r74rVaK4mFLQcsX4=\",\"authType\":17039361}}"
+}
+
+
+
+2023-09-24 01:28:14 POST https://159.153.64.202/wal/mca/Process/000000e82bb0aa58_NKPqWidju7VEr13pTwVUnEQk$enLkr4YrE8kZSUZmkc=                                                                                                         
+                         ← 200 OK application/json 5.4k 42ms
+                                   Request                                                                       Response                                                                       Detail
+Date:               Sun, 24 Sep 2023 05:28:14 GMT                                                                                                                                                                                      
+X-Request-Id:       287411c6-5a9b-11ee-bd19-e7a9cca7f8e7                                                                                                                                                                               
+X-GS-Request-Id:    287411c6-5a9b-11ee-bd19-e7a9cca7f8e7                                                                                                                                                                               
+Content-Type:       application/json;charset=utf-8                                                                                                                                                                                     
+X-BLAZE-ERRORCODE:  0                                                                                                                                                                                                                  
+X-BLAZE-COMPONENT:  mca                                                                                                                                                                                                                
+X-BLAZE-COMMAND:    Process                                                                                                                                                                                                            
+X-BLAZE-SEQNO:      0                                                                                                                                                                                                                  
+Content-Length:     5505                                                                                                                                                                                                               
+JSON                                                                                                                                                                                                                             [m:auto]
+{
+    "responseInfo": {
+        "tdfclass": "Blaze::CareerMode::GetMyLeaguesResponse",
+        "tdfid": 2005767237,
+        "value": {
+            "leagues": [
+                {
+                    "calendarYear": 2024,
+                    "commish": {
+                        "persona": "snallapa",
+                        "userId": 417448296
+                    },
+                    "creationTime": 1692671055000000,
+                    "importedLeagueId": 0,
+                    "isImportable": false,
+                    "joinsEnabled": true,
+                    "lastAdvancedTimeSecs": 1695332983,
+                    "leagueId": 2388254,
+                    "leagueName": "snallapa_2",
+                    "numMembers": 2,
+                    "rosterId": 1,
+                    "seasonSort": 1539,
+                    "seasonText": "2024 OFF Stg 3",
+                    "secsSinceLastAdvancedTime": 200311,
+                    "settings": {
+                        "acceleratedClockEnabled": true,
+                        "isPublic": false,
+                        "leagueModeType": "LEAGUEMODETYPE_CLASSIC",
+                        "leagueType": "LEAGUETYPE_ALL",
+                        "legendsEnabled": true,
+                        "maxMembers": 32,
+                        "quarterLength": 6,
+                        "skillLevel": "SKILLLEVEL_ALL_MADDEN"
+                    },
+                    "teamLogos": "151,159",
+                    "teams": "103,130",
+                    "userFullName": "Matt LaFleur",
+                    "userPlayerClass": "",
+                    "userPosition": "POSITION_HC",
+                    "userTeamId": "TEAMID_GOLDENEAGLES",
+                    "userTeamLogoId": 159,
+                    "userTeamName": "Golden Eagles"
+                },
+                {
+                    "calendarYear": 2023,
+                    "commish": {
+                        "persona": "DJazzyJefff23",
+                        "userId": 238731176
+                    },
+                    "creationTime": 1694135752000000,
+                    "importedLeagueId": 0,
+                    "isImportable": false,
+                    "joinsEnabled": true,
+                    "lastAdvancedTimeSecs": 1695531238,
+                    "leagueId": 5306779,
+                    "leagueName": "NEFL",
+                    "numMembers": 32,
+                    "rosterId": 268435455,
+                    "seasonSort": 71,
+                    "seasonText": "2023 Wk 8",
+                    "secsSinceLastAdvancedTime": 2056,
+                    "settings": {
+                        "acceleratedClockEnabled": true,
+                        "isPublic": false,
+                        "leagueModeType": "LEAGUEMODETYPE_CLASSIC",
+                        "leagueType": "LEAGUETYPE_COACHESONLY",
+                        "legendsEnabled": true,
+                        "maxMembers": 32,
+                        "quarterLength": 8,
+                        "skillLevel": "SKILLLEVEL_ALL_MADDEN"
+                    },
+                    "teamLogos": "22,2,26,23,24,9,10,18,16,21,15,1,13,8,30,17,27,5,29,28,19,4,25,0,6,31,12,20,14,7,11,3",
+                    "teams": "23,3,27,24,25,10,11,19,17,22,16,2,14,9,31,18,28,6,30,29,20,5,26,1,7,32,13,21,15,8,12,4",
+                    "userFullName": "Peter Gaffney",
+                    "userPlayerClass": "",
+                    "userPosition": "POSITION_HC",
+                    "userTeamId": "TEAMID_PATRIOTS",
+                    "userTeamLogoId": 21,
+                    "userTeamName": "Patriots"
+                },
+                {
+                    "calendarYear": 2023,
+                    "commish": {
+                        "persona": "Stillsav_",
+                        "userId": 1785617209
+                    },
+                    "creationTime": 1694138513000000,
+                    "importedLeagueId": 0,
+                    "isImportable": false,
+                    "joinsEnabled": true,
+                    "lastAdvancedTimeSecs": 1695529165,
+                    "leagueId": 5314719,
+                    "leagueName": "Champions Lounge Pro",
+                    "numMembers": 32,
+                    "rosterId": 268435455,
+                    "seasonSort": 71,
+                    "seasonText": "2023 Wk 8",
+                    "secsSinceLastAdvancedTime": 4129,
+                    "settings": {
+                        "acceleratedClockEnabled": true,
+                        "isPublic": false,
+                        "leagueModeType": "LEAGUEMODETYPE_CLASSIC",
+                        "leagueType": "LEAGUETYPE_ALL",
+                        "legendsEnabled": true,
+                        "maxMembers": 32,
+                        "quarterLength": 8,
+                       "skillLevel": "SKILLLEVEL_ALL_MADDEN"
+                    },
+                    "teamLogos": "22,2,26,23,24,9,10,18,16,21,15,1,13,8,30,17,27,5,29,28,19,4,25,0,6,31,12,20,14,7,11,3",
+                    "teams": "23,3,27,24,25,10,11,19,17,22,16,2,14,9,31,18,28,6,30,29,20,5,26,1,7,32,13,21,15,8,12,4",
+                    "userFullName": "Peter Gaffney",
+                    "userPlayerClass": "",
+                    "userPosition": "POSITION_HC",
+                    "userTeamId": "TEAMID_PATRIOTS",
+                    "userTeamLogoId": 21,
+                    "userTeamName": "Patriots"
+                },
+                {
+                    "calendarYear": 2023,
+                    "commish": {
+                        "persona": "Stillsav_",
+                        "userId": 1785617209
+                    },
+                    "creationTime": 1694138513000000,
+                    "importedLeagueId": 0,
+                    "isImportable": false,
+                    "joinsEnabled": true,
+                    "lastAdvancedTimeSecs": 1695533038,
+                    "leagueId": 5314719,
+                    "leagueName": "Champions Lounge Pro",
+                    "numMembers": 32,
+                    "rosterId": 268435455,
+                    "seasonSort": 71,
+                    "seasonText": "2023 Wk 8",
+                    "secsSinceLastAdvancedTime": 9128,
+                    "settings": {
+                        "acceleratedClockEnabled": true,
+                        "isPublic": false,
+                        "leagueModeType": "LEAGUEMODETYPE_CLASSIC",
+                        "leagueType": "LEAGUETYPE_ALL",
+                        "legendsEnabled": true,
+                        "maxMembers": 32,
+                        "quarterLength": 8,
+                        "skillLevel": "SKILLLEVEL_ALL_MADDEN"
+                    },
+                    "teamLogos": "25,11,6,10,5,8,21,19,26,31,2,16,18,23,12,14,9,13,0,30,20,24,17,3,28,7,29,1,22,27,15,4",
+                    "teams": "26,12,7,11,6,9,22,20,27,32,3,17,19,24,13,15,10,14,1,31,21,25,18,4,29,8,30,2,23,28,16,5",
+                    "userFullName": "Mike McCarthy",
+                    "userPlayerClass": "",
+                    "userPosition": "POSITION_HC",
+                    "userTeamId": "TEAMID_COWBOYS",
+                    "userTeamLogoId": 10,
+                    "userTeamName": "Cowboys"
+                }
+            ],
+            "message": "",
+            "success": true
+        }
+    }
+}
+---------------------------------------------------------
+
+2023-10-06 01:44:56 POST https://159.153.191.240/connect/token                                                                                                                                                                                        
+                         ← 200 OK application/json 316b 40ms
+                                      Request                                                                            Response                                                                            Detail
+Accept-Charset:   UTF-8                                                                                                                                                                                                                                
+Content-Type:     application/x-www-form-urlencoded; charset=UTF-8                                                                                                                                                                                     
+User-Agent:       Dalvik/2.1.0 (Linux; U; Android 13; sdk_gphone_x86_64 Build/TE1A.220922.031)                                                                                                                                                         
+Host:             accounts.ea.com                                                                                                                                                                                                                      
+Connection:       Keep-Alive                                                                                                                                                                                                                           
+Accept-Encoding:  gzip                                                                                                                                                                                                                                 
+Content-Length:   294                                                                                                                                                                                                                                  
+URLEncoded form                                                                                                                                                                                                                                  [m:auto]
+authentication_source: 317239
+code:                  QUOwAFs1Md8EGY55-YDRGUvppFMkjMP60psnf5W5
+grant_type:            authorization_code
+release_type:          prod
+client_secret:         U02zL2khwlgFdODLWCyLPmccOc5EiPBBYcEwCqKDTWBrZj2Fwcx4b4Zd9rsA6lHLkIU4qlVvNh84olij
+redirect_uri:          http://127.0.0.1/success
+client_id:             MaddenCompanionApp19
+
+
+Flow Details
+2023-10-06 01:44:56 POST https://159.153.191.240/connect/token                                                                                                                                                                                        
+                         ← 200 OK application/json 316b 40ms
+                                      Request                                                                            Response                                                                            Detail
+x-nexus-sequence:               143.244.47.100:8083930330587221602                                                                                                                                                                                     
+x-nexus-hostname:               prdaccounts-145                                                                                                                                                                                                        
+p3p:                            CP="ALL DSP COR IVD IVA PSD PSA TEL TAI CUS ADM CUR CON SAM OUR IND"                                                                                                                                                   
+x-samesite:                     true                                                                                                                                                                                                                   
+pragma:                         no-cache                                                                                                                                                                                                               
+expires:                        Thu, 01 Jan 1970 00:00:00 GMT                                                                                                                                                                                          
+cache-control:                  no-cache,no-store                                                                                                                                                                                                      
+content-type:                   application/json;charset=UTF-8                                                                                                                                                                                         
+content-length:                 316                                                                                                                                                                                                                    
+date:                           Fri, 06 Oct 2023 05:44:55 GMT                                                                                                                                                                                          
+server:                         Powered by Electronic Arts                                                                                                                                                                                             
+x-envoy-upstream-service-time:  16                                                                                                                                                                                                                     
+x-envoy-hostname:               prdnonpcihost-4.iad2.infery.com                                                                                                                                                                                        
+Strict-Transport-Security:      max-age=15552000; includeSubDomains; preload                                                                                                                                                                           
+JSON                                                                                                                                                                                                                                             [m:auto]
+{
+    "access_token": "QVQwOjMuMDozLjA6MjQwOldsQTV5U2ZLTVZ5Vjg4eDRCMXR5MHB6aGp4Q21sNjFXZkd3Ojc5MTk1OnF1dGVv",
+    "expires_in": 14399,
+    "id_token": null,
+    "refresh_token": "UlQwOjMuMDozLjA6MjAxNjA6WEVrZ2JGQ2I5RTJMNDhBc3pVaUE1NzNNZW9YSGNLNXZNOjc5MTk1OnF1dGVv.jX6cdUPsrJ5AuY1415EPBoUWDd",
+    "token_type": "Bearer"
+}
+
+
+-----------------------------------------------------
+
+Flow Details
+2023-10-06 01:44:56 GET https://159.153.191.240/connect/tokeninfo?access_token=QVQwOjMuMDozLjA6MjQwOldsQTV5U2ZLTVZ5Vjg4eDRCMXR5MHB6aGp4Q21sNjFXZkd3Ojc5MTk1OnF1dGVv                                                                                   
+                        ← 200 OK application/json 318b 21ms
+                                      Request                                                                            Response                                                                            Detail
+Accept-Charset:      UTF-8                                                                                                                                                                                                                             
+X-Include-Deviceid:  true                                                                                                                                                                                                                              
+User-Agent:          Dalvik/2.1.0 (Linux; U; Android 13; sdk_gphone_x86_64 Build/TE1A.220922.031)                                                                                                                                                      
+Host:                accounts.ea.com                                                                                                                                                                                                                   
+Connection:          Keep-Alive                                                                                                                                                                                                                        
+Accept-Encoding:     gzip                                                                                                                                                                                                                              
+Query                                                                                                                                                                                                                                            [m:auto]
+access_token: QVQwOjMuMDozLjA6MjQwOldsQTV5U2ZLTVZ5Vjg4eDRCMXR5MHB6aGp4Q21sNjFXZkd3Ojc5MTk1OnF1dGVv
+
+
+2023-10-06 01:44:56 GET https://159.153.191.240/connect/tokeninfo?access_token=QVQwOjMuMDozLjA6MjQwOldsQTV5U2ZLTVZ5Vjg4eDRCMXR5MHB6aGp4Q21sNjFXZkd3Ojc5MTk1OnF1dGVv                                                                                   
+                        ← 200 OK application/json 318b 21ms
+                                      Request                                                                            Response                                                                            Detail
+x-nexus-sequence:               143.244.47.100:7416521972790872290                                                                                                                                                                                     
+x-nexus-hostname:               prdaccounts-116                                                                                                                                                                                                        
+p3p:                            CP="ALL DSP COR IVD IVA PSD PSA TEL TAI CUS ADM CUR CON SAM OUR IND"                                                                                                                                                   
+x-samesite:                     true                                                                                                                                                                                                                   
+pragma:                         no-cache                                                                                                                                                                                                               
+expires:                        Thu, 01 Jan 1970 00:00:00 GMT                                                                                                                                                                                          
+cache-control:                  no-cache,no-store                                                                                                                                                                                                      
+content-type:                   application/json;charset=UTF-8                                                                                                                                                                                         
+content-length:                 318                                                                                                                                                                                                                    
+date:                           Fri, 06 Oct 2023 05:44:56 GMT                                                                                                                                                                                          
+server:                         Powered by Electronic Arts                                                                                                                                                                                             
+x-envoy-upstream-service-time:  2                                                                                                                                                                                                                      
+x-envoy-hostname:               prdnonpcihoststandby-10.iad2.infery.com                                                                                                                                                                                
+Strict-Transport-Security:      max-age=15552000; includeSubDomains; preload                                                                                                                                                                           
+JSON                                                                                                                                                                                                                                             [m:auto]
+{
+    "client_id": "MaddenCompanionApp19",
+    "device_id": "MCA4b35d75Vm-MCA",
+    "expires_in": 14399,
+    "persona_id": null,
+    "pid_id": "2458179195",
+    "pid_type": "NUCLEUS",
+    "scope": "offline security.challenge signin search.identity basic.identity basic.persona basic.entitlement",
+    "user_id": "2458179195"
+}
+-----------------------------------------------------
+2023-10-06 01:44:56 GET https://159.153.191.238/proxy/identity/pids/2458179195/entitlements/?status=ACTIVE                                                                                                                                            
+                        ← 200 OK application/json 2.4k 31ms
+                                      Request                                                                            Response                                                                            Detail
+Accept-Charset:    UTF-8                                                                                                                                                                                                                               
+Authorization:     Bearer QVQwOjMuMDozLjA6MjQwOldsQTV5U2ZLTVZ5Vjg4eDRCMXR5MHB6aGp4Q21sNjFXZkd3Ojc5MTk1OnF1dGVv                                                                                                                                         
+X-Expand-Results:  true                                                                                                                                                                                                                                
+User-Agent:        Dalvik/2.1.0 (Linux; U; Android 13; sdk_gphone_x86_64 Build/TE1A.220922.031)                                                                                                                                                        
+Host:              gateway.ea.com                                                                                                                                                                                                                      
+Connection:        Keep-Alive                                                                                                                                                                                                                          
+Accept-Encoding:   gzip                                                                                                                                                                                                                                
+Query                                                                                                                                                                                                                                            [m:auto]
+status: ACTIVE
+
+2023-10-06 01:44:56 GET https://159.153.191.238/proxy/identity/pids/2458179195/entitlements/?status=ACTIVE                                                                                                                                            
+                        ← 200 OK application/json 2.4k 31ms
+                                      Request                                                                            Response                                                                            Detail
+x-nexus-sequence:               143.244.47.100:3924620986684558845                                                                                                                                                                                     
+x-nexus-hostname:               prdgateway-85                                                                                                                                                                                                          
+x-sequence:                     489079924                                                                                                                                                                                                              
+date:                           Fri, 06 Oct 2023 05:44:56 GMT                                                                                                                                                                                          
+server:                         Powered by Electronic Arts                                                                                                                                                                                             
+x-hostname:                     prdgateway-85.gateway.prd-gateway.svc.cluster.local                                                                                                                                                                    
+x-bundle:                       com.ea.nucleus.entitlement.impl                                                                                                                                                                                        
+x-version:                      2.0.0                                                                                                                                                                                                                  
+x-envoy-upstream-service-time:  11                                                                                                                                                                                                                     
+x-envoy-hostname:               prdnonpcihost-4.iad2.infery.com                                                                                                                                                                                        
+cache-control:                  no-store                                                                                                                                                                                                               
+content-type:                   application/json;charset=utf-8                                                                                                                                                                                         
+content-length:                 2478                                                                                                                                                                                                                   
+Strict-Transport-Security:      max-age=15552000; includeSubDomains; preload                                                                                                                                                                           
+JSON                                                                                                                                                                                                                                             [m:auto]
+{
+    "entitlements": {
+        "entitlement": [
+            {
+                "entitlementId": 1017465179195,
+                "entitlementSource": "319991",
+                "entitlementTag": "ONLINE_ACCESS",
+                "entitlementType": "ONLINE_ACCESS",
+                "grantDate": "2023-08-18T2:15Z",
+                "groupName": "MADDEN_24PS5",
+                "isConsumable": false,
+                "lastModifiedDate": "2023-08-18T2:15Z",
+                "originPermissions": 0,
+                "pidUri": "/pids/2458179195",
+                "productCatalog": "",
+                "productId": "",
+                "projectId": "319991",
+                "status": "ACTIVE",
+                "statusReasonCode": "",
+                "terminationDate": "",
+                "useCount": 0,
+                "version": 0
+            },
+            {
+                "entitlementId": 1014818979195,
+                "entitlementSource": "319038",
+                "entitlementTag": "ONLINE_ACCESS",
+                "entitlementType": "ONLINE_ACCESS",
+                "grantDate": "2022-08-19T14:42Z",
+                "groupName": "MADDEN_23PS5",
+                "isConsumable": false,
+                "lastModifiedDate": "2022-08-19T14:42Z",
+                "originPermissions": 0,
+                "pidUri": "/pids/2458179195",
+                "productCatalog": "",
+                "productId": "",
+                "projectId": "319038",
+                "status": "ACTIVE",
+               "statusReasonCode": "",
+                "terminationDate": "",
+                "useCount": 0,
+                "version": 0
+            },
+            {
+                "entitlementId": 1014525379195,
+                "entitlementSource": "319038",
+                "entitlementTag": "BETA_ONLINE_ACCESS",
+                "entitlementType": "ONLINE_ACCESS",
+                "grantDate": "2022-06-18T4:2Z",
+                "groupName": "MADDEN_23PS5",
+                "isConsumable": false,
+                "lastModifiedDate": "2022-06-18T4:2Z",
+                "originPermissions": 0,
+                "pidUri": "/pids/2458179195",
+                "productCatalog": "",
+                "productId": "",
+                "projectId": "319038",
+                "status": "ACTIVE",
+                "statusReasonCode": "",
+                "terminationDate": "",
+                "useCount": 0,
+                "version": 0
+            },
+            {
+                "entitlementId": 1013632479195,
+                "entitlementSource": "319132",
+                "entitlementTag": "ONLINE_ACCESS",
+                "entitlementType": "ONLINE_ACCESS",
+                "grantDate": "2021-08-27T23:38Z",
+                "groupName": "MADDEN_22PS5",
+                "isConsumable": false,
+                "lastModifiedDate": "2021-08-27T23:38Z",
+                "originPermissions": 0,
+                "pidUri": "/pids/2458179195",
+                "productCatalog": "",
+                "productId": "",
+                "projectId": "319132",
+                "status": "ACTIVE",
+                "statusReasonCode": "",
+                "terminationDate": "",
+                "useCount": 0,
+                "version": 0
+            }
+        ]
+    }
+}
+------------------------------------------------
+2023-10-06 01:44:56 GET https://159.153.191.238/proxy/identity/pids/2458179195/personas?status=ACTIVE&access_token=QVQwOjMuMDozLjA6MjQwOldsQTV5U2ZLTVZ5Vjg4eDRCMXR5MHB6aGp4Q21sNjFXZkd3Ojc5MTk1OnF1dGVv                                               
+                        ← 200 OK application/json 787b 31ms
+                                      Request                                                                            Response                                                                            Detail
+Accept-Charset:    UTF-8                                                                                                                                                                                                                               
+X-Expand-Results:  true                                                                                                                                                                                                                                
+User-Agent:        Dalvik/2.1.0 (Linux; U; Android 13; sdk_gphone_x86_64 Build/TE1A.220922.031)                                                                                                                                                        
+Host:              gateway.ea.com                                                                                                                                                                                                                      
+Connection:        Keep-Alive                                                                                                                                                                                                                          
+Accept-Encoding:   gzip                                                                                                                                                                                                                                
+Query                                                                                                                                                                                                                                            [m:auto]
+status:       ACTIVE
+access_token: QVQwOjMuMDozLjA6MjQwOldsQTV5U2ZLTVZ5Vjg4eDRCMXR5MHB6aGp4Q21sNjFXZkd3Ojc5MTk1OnF1dGVv
+
+2023-10-06 01:44:56 GET https://159.153.191.238/proxy/identity/pids/2458179195/personas?status=ACTIVE&access_token=QVQwOjMuMDozLjA6MjQwOldsQTV5U2ZLTVZ5Vjg4eDRCMXR5MHB6aGp4Q21sNjFXZkd3Ojc5MTk1OnF1dGVv                                               
+                        ← 200 OK application/json 787b 31ms
+                                      Request                                                                            Response                                                                            Detail
+x-nexus-sequence:               143.244.47.100:4937294250478357751                                                                                                                                                                                     
+x-nexus-hostname:               prdgateway-110                                                                                                                                                                                                         
+x-sequence:                     1215797629                                                                                                                                                                                                             
+date:                           Fri, 06 Oct 2023 05:44:56 GMT                                                                                                                                                                                          
+server:                         Powered by Electronic Arts                                                                                                                                                                                             
+x-hostname:                     prdgateway-110.gateway.prd-gateway.svc.cluster.local                                                                                                                                                                   
+x-bundle:                       com.ea.nucleus.eaid                                                                                                                                                                                                    
+x-version:                      2.0.0                                                                                                                                                                                                                  
+x-envoy-upstream-service-time:  10                                                                                                                                                                                                                     
+x-envoy-hostname:               prdnonpciworkernode-5.iad2.infery.com                                                                                                                                                                                  
+cache-control:                  no-store                                                                                                                                                                                                               
+content-type:                   application/json;charset=utf-8                                                                                                                                                                                         
+content-length:                 787                                                                                                                                                                                                                    
+Strict-Transport-Security:      max-age=15552000; includeSubDomains; preload                                                                                                                                                                           
+JSON                                                                                                                                                                                                                                             [m:auto]
+{
+    "personas": {
+        "persona": [
+            {
+                "dateCreated": "2013-04-27T16:28Z",
+                "displayName": "snallapa",
+                "isVisible": true,
+                "lastAuthenticated": "2023-07-14T3:46Z",
+                "name": "snallapa",
+                "namespaceName": "cem_ea_id",
+                "personaId": 872284979,
+                "pidId": 2458179195,
+                "showPersona": "NO_ONE",
+                "status": "ACTIVE",
+                "statusReasonCode": ""
+            },
+            {
+                "dateCreated": "2012-02-13T22:35Z",
+                "displayName": "snallapa",
+                "isVisible": true,
+                "lastAuthenticated": "2023-10-06T5:43Z",
+                "name": "snallapa",
+                "namespaceName": "ps3",
+                "personaId": 417448296,
+                "pidId": 2458179195,
+                "showPersona": "EVERYONE",
+                "status": "ACTIVE",
+                "statusReasonCode": "NONE"
+            }
+        ]
+    }
+}
+
+-----------------------------------------------------------------
+2023-10-06 01:45:01 GET https://159.153.191.240/connect/auth?hide_create=true&release_type=prod&response_type=code&redirect_uri=http://127.0.0.1/success&client_id=MaddenCompanionApp19&machineProfileKey=MCA4b35d75Vm-MCA&authentication_source=3172 
+                        39&access_token=QVQwOjMuMDozLjA6MjQwOldsQTV5U2ZLTVZ5Vjg4eDRCMXR5MHB6aGp4Q21sNjFXZkd3Ojc5MTk1OnF1dGVv&persona_id=417448296&persona_namespace=ps3                                                                               
+                        ← 302 Found [no content] 111ms
+                                      Request                                                                            Response                                                                            Detail
+Host:                       accounts.ea.com                                                                                                                                                                                                            
+Connection:                 keep-alive                                                                                                                                                                                                                 
+Upgrade-Insecure-Requests:  1                                                                                                                                                                                                                          
+User-Agent:                 Mozilla/5.0 (Linux; Android 13; sdk_gphone_x86_64 Build/TE1A.220922.031; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/103.0.5060.71 Mobile Safari/537.36                                                  
+Accept:                     text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9                                                                                    
+X-Requested-With:           com.ea.gp.madden19companionapp                                                                                                                                                                                             
+Sec-Fetch-Site:             none                                                                                                                                                                                                                       
+Sec-Fetch-Mode:             navigate                                                                                                                                                                                                                   
+Sec-Fetch-User:             ?1                                                                                                                                                                                                                         
+Sec-Fetch-Dest:             document                                                                                                                                                                                                                   
+Accept-Encoding:            gzip, deflate                                                                                                                                                                                                              
+Accept-Language:            en-US,en;q=0.9                                                                                                                                                                                                             
+Cookie:                     sid=U2U0Z1Jkb3c2QWRFZEk2MlZYQ092ZFRkdTlLZHhnWnhvQndIRDV3SUJpQ3JiMm1keHBWWFNpT3lYNDJnbg.ddpg9N7SSVYT8Zuy-9gn5nimsCD9Wp1rOB_3hMt29sM;                                                                                        
+                            remid=TUU6c0xDQWpLM0pRYmVCY3Z1a3hvTVE4Nkc5NGtoc285VFNjZUNJNWoweDoxMDA2NzkxOTU.atG4x8HOrg3OBEUx8unsjuPYj6wWnBpj4104YYlc; _ga=GA1.2.1331427011.1695625045; _nx_mpcid=MCA4b35d75Vm-MCA; _gid=GA1.2.1359819984.1696571090;     
+                            _gat=1                                                                                                                                                                                                                     
+Query                                                                                                                                                                                                                                            [m:auto]
+hide_create:           true
+release_type:          prod
+response_type:         code
+redirect_uri:          http://127.0.0.1/success
+client_id:             MaddenCompanionApp19
+machineProfileKey:     MCA4b35d75Vm-MCA
+authentication_source: 317239
+access_token:          QVQwOjMuMDozLjA6MjQwOldsQTV5U2ZLTVZ5Vjg4eDRCMXR5MHB6aGp4Q21sNjFXZkd3Ojc5MTk1OnF1dGVv
+persona_id:            417448296
+persona_namespace:     ps3
+
+023-10-06 01:45:01 GET https://159.153.191.240/connect/auth?hide_create=true&release_type=prod&response_type=code&redirect_uri=http://127.0.0.1/success&client_id=MaddenCompanionApp19&machineProfileKey=MCA4b35d75Vm-MCA&authentication_source=3172 
+                        39&access_token=QVQwOjMuMDozLjA6MjQwOldsQTV5U2ZLTVZ5Vjg4eDRCMXR5MHB6aGp4Q21sNjFXZkd3Ojc5MTk1OnF1dGVv&persona_id=417448296&persona_namespace=ps3                                                                               
+                        ← 302 Found [no content] 111ms
+                                      Request                                                                            Response                                                                            Detail
+x-nexus-sequence:               143.244.47.100:646970624208620478                                                                                                                                                                                      
+x-nexus-hostname:               prdaccounts-37                                                                                                                                                                                                         
+p3p:                            CP="ALL DSP COR IVD IVA PSD PSA TEL TAI CUS ADM CUR CON SAM OUR IND"                                                                                                                                                   
+x-samesite:                     true                                                                                                                                                                                                                   
+pragma:                         no-cache                                                                                                                                                                                                               
+expires:                        Thu, 01 Jan 1970 00:00:00 GMT                                                                                                                                                                                          
+cache-control:                  no-cache,no-store                                                                                                                                                                                                      
+location:                       http://127.0.0.1/success?code=QUOwAFs1F2cl_yzfbijvjqvosL_xZ7Bxt4tVjSdhAQ                                                                                                                                               
+content-length:                 0                                                                                                                                                                                                                      
+date:                           Fri, 06 Oct 2023 05:45:01 GMT                                                                                                                                                                                          
+server:                         Powered by Electronic Arts                                                                                                                                                                                             
+x-envoy-upstream-service-time:  91                                                                                                                                                                                                                     
+x-envoy-hostname:               prdaccountshost-2.iad2.infery.com                                                                                                                                                                                      
+x-test:                         test                                                                                                                                                                                                                   
+set-cookie:                     sid=U29RQnFRbDZtcG1uQkF5OExwQkI4UG13dmUwcUoxQ3FGd3FHeWRhV3l1Uk5BTUdqc1VNUjF3aE5QYWIzbw.PmUiVNo-CRNWtJ5b3U0BK-2MKXHxstMCFRAI9XV_Sb0; Path=/connect; Secure; HttpOnly; SameSite=None                                     
+Strict-Transport-Security:      max-age=15552000; includeSubDomains; preload                                                                                                                                                                           
+No content                                                                                                                                                                                                                                       [m:auto]
+
+--------------------------------------------------------------------------------------
+2023-10-06 01:45:02 POST https://159.153.191.240/connect/token                                                                                                                                                                                        
+                         ← 200 OK application/json 4.6k 67ms
+                                      Request                                                                            Response                                                                            Detail
+Accept-Charset:   UTF-8                                                                                                                                                                                                                                
+Content-Type:     application/x-www-form-urlencoded; charset=UTF-8                                                                                                                                                                                     
+User-Agent:       Dalvik/2.1.0 (Linux; U; Android 13; sdk_gphone_x86_64 Build/TE1A.220922.031)                                                                                                                                                         
+Host:             accounts.ea.com                                                                                                                                                                                                                      
+Connection:       Keep-Alive                                                                                                                                                                                                                           
+Accept-Encoding:  gzip                                                                                                                                                                                                                                 
+Content-Length:   313                                                                                                                                                                                                                                  
+URLEncoded form                                                                                                                                                                                                                                  [m:auto]
+authentication_source: 317239
+code:                  QUOwAFs1F2cl_yzfbijvjqvosL_xZ7Bxt4tVjSdhAQ
+grant_type:            authorization_code
+token_format:          JWS
+release_type:          prod
+client_secret:         U02zL2khwlgFdODLWCyLPmccOc5EiPBBYcEwCqKDTWBrZj2Fwcx4b4Zd9rsA6lHLkIU4qlVvNh84olij
+redirect_uri:          http://127.0.0.1/success
+client_id:             MaddenCompanionApp19
+
+
+2023-10-06 01:45:02 POST https://159.153.191.240/connect/token                                                                                                                                                                                        
+                         ← 200 OK application/json 4.6k 67ms
+                                      Request                                                                            Response                                                                            Detail
+x-nexus-sequence:               143.244.47.100:6278279678140631303                                                                                                                                                                                     
+x-nexus-hostname:               prdaccounts-19                                                                                                                                                                                                         
+p3p:                            CP="ALL DSP COR IVD IVA PSD PSA TEL TAI CUS ADM CUR CON SAM OUR IND"                                                                                                                                                   
+x-samesite:                     true                                                                                                                                                                                                                   
+pragma:                         no-cache                                                                                                                                                                                                               
+expires:                        Thu, 01 Jan 1970 00:00:00 GMT                                                                                                                                                                                          
+cache-control:                  no-cache,no-store                                                                                                                                                                                                      
+content-type:                   application/json;charset=UTF-8                                                                                                                                                                                         
+content-length:                 4673                                                                                                                                                                                                                   
+date:                           Fri, 06 Oct 2023 05:45:01 GMT                                                                                                                                                                                          
+server:                         Powered by Electronic Arts                                                                                                                                                                                             
+x-envoy-upstream-service-time:  47                                                                                                                                                                                                                     
+x-envoy-hostname:               prdnonpcihost-8.iad2.infery.com                                                                                                                                                                                        
+Strict-Transport-Security:      max-age=15552000; includeSubDomains; preload                                                                                                                                                                           
+JSON                                                                                                                                                                                                                                             [m:auto]
+{
+    "access_token": "eyJraWQiOiJkZTE4ZjdlOS1mZGE2LTQ1N2YtYmJhNy00YTQyMTBhYzUxZjciLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhY2NvdW50cy5lYS5jb20iLCJqdGkiOiJTa0V3T2pNdU1Eb3hMakE2TXpBM05qQXpPV010TVRFeVppMDBZamRpTFdKa1ltUXRPRFF3WXpKaU56ZGlPV1V4IiwiYXpwIjoiTWFkZGV
+uQ29tcGFuaW9uQXBwMTkiLCJpYXQiOjE2OTY1NzExMDIsImV4cCI6MTY5NjU4NTUwMiwidmVyIjoxLCJuZXh1cyI6eyJjbGkiOiJNYWRkZW5Db21wYW5pb25BcHAxOSIsInByZCI6IjM3MDljN2E0LWJhMTYtM2ViMC02NmMyLTRlMmExYTFhZmU1MyIsInNjbyI6Im9mZmxpbmUgc2VjdXJpdHkuY2hhbGxlbmdlIHNpZ25pbiBzZWFy
+Y2guaWRlbnRpdHkgYmFzaWMuaWRlbnRpdHkgYmFzaWMucGVyc29uYSBiYXNpYy5lbnRpdGxlbWVudCIsInBpZCI6IjEwMDAwNjcxNzkxOTUiLCJwdHkiOiJQUzMiLCJ1aWQiOiIyNDU4MTc5MTk1IiwicHNpZCI6NDE3NDQ4Mjk2LCJwbHR5cCI6IldFQiIsInBuaWQiOiJFQSIsImRwaWQiOiJXRUIiLCJzdHBzIjoiT0ZGIiwidWRnI
+jpmYWxzZSwiY250eSI6IjEiLCJhdXNyYyI6IjMxNzIzOSIsImlwZ2VvIjp7ImlwIjoiMTQzLjI0NC4qLioiLCJjdHkiOiJVUyIsInJlZyI6Ik5ldyBZb3JrIiwiY2l0IjoiTmV3IFlvcmsiLCJpc3AiOiJEYXRhY2FtcCBMaW1pdGVkIiwibGF0IjoiNDAuNzEyMyIsImxndCI6Ii03NC4wMDY4IiwidHoiOiItNCJ9LCJ1aWYiOnsidW
+RnIjpmYWxzZSwiY3R5IjoiVVMiLCJsYW4iOiJlbiIsInN0YSI6IkFDVElWRSIsImFubyI6ZmFsc2UsImFnZSI6NTgsImFncCI6IkFEVUxUIn0sInBzaWYiOlt7ImlkIjo0MTc0NDgyOTYsIm5zIjoicHMzIiwiZGlzIjoic25hbGxhcGEiLCJuaWMiOiJzbmFsbGFwYSJ9LHsiaWQiOjg3MjI4NDk3OSwibnMiOiJjZW1fZWFfaWQiLCJ
+kaXMiOiJzbmFsbGFwYSIsIm5pYyI6InNuYWxsYXBhIn1dLCJlbmMiOiIwcnpYaDV0TUYyMVE4RTFCZ1B2VktPWFlPNUhnV0xWTm41U1RXQ1ZtaiswSEp4WXFsNjl0dzVTV2lVUWJteVZqeDI5aGFac1kyZlc1NTkzaUg0ZVBRSlBVc1krTnpXRmppVm1RN2kxMkRSVE9sZXg1NXE4NC9HTGNjaVk0WkF5R0hwK2VDNmpKRUp3dHhoYTFO
+MFI5S2Y5SDFUQ3lQOHFWUjVlWG1HZlBrNUg3T000T1RWdjNFK0ZwUHBOdjJuRlBzUVZRMDNpSE5LNUNNVXY4THFxTU9DMEFoOEc1NFFuN2s0UkZnZWNYc241ZVlVTWhGL3NmMDIrTlhWY1B1UFlwbktHUW5lRzc0UkVaNGs4NlNOK29tRFpUK2hwS2ZwTWpmQzFtYytVUFJFeFpyTU1nZWxoR1ZqRjEyZmxDek5kUHdqazhXK2dHNjJaV
+WI5c09KRGlqZklhMi9LZVk4aS9ZaVRFbHhNbEl3d3BWWFRqdDZhZldsOXBnVkUzODNtNUxEMHFHUnN1M1ozQjBKcCtvRHBNM0IzSjFoR3pKVTBaLzU4NCt1S21SVXFsTnp4NU5QdEpKL2I2aEhQNkJoRnhRMUpEaXFhSzVRQkRxZTNSTkV6Y2NDQW1LL3g3TzVKL1JySWNsMUtaTlNsZGsxK00vc2tEUlQwdW0vdCtZaXhTUXA0VTFqUj
+FTTDJCdWdSOHhtaEcxTlZjMHFFTkhEUDFIc0dSNmVJSTdYTDNNa0dBUElndjBXRUg4SmRndjdURytrMG5RazBKdFpxdHRiMEpyTzJjbm16RnI3MXFOODY2YnFlVDhGT0JBaFU4PSJ9fQ.hrACDdqKki1KNdqSXrDtCLI2Hn69STuF7GSQvWPAbbicBcIjeHhPEEeKHLw3Tpt1p6fMGzLXmJ5llQOgdxVSwf8FtzUfaU5w17-7fkkWESYC
+riSmMbDz1S67Eve3uv8zSoGe0Rqjbfq5sRI_BziTm7XULwv3xW4Mfou-K0GIaBL0rspQG0QO0bEF1EMb6DodyvOmm7UAtL-q9alVG61IVicu0sjznlkKOKwrKbXG-KjXBxzYDnI9p9VZMc0yXCsUyRb5FS4-76TuJaKmr4O4d00L8uRnAfoFzGtr962ejbR07lSK4ce_xzLWjiGTe0-AfTJFgWwBf95DmStyEQefYA",
+    "expires_in": 14399,
+    "id_token": null,
+    "refresh_token": "eyJraWQiOiJmZGZlOWQyNC0wYjkyLTRiNzAtYjI2MC02MzRkMzY5MjIyMWIiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhY2NvdW50cy5lYS5jb20iLCJqdGkiOiJTbEl3T2pNdU1Eb3hMakE2TURka01ERXpPVEl0TXpKbE15MDBNR1poTFdFeVpqVXRaR0kyWkdFME1HVXdOMkU1IiwiYXpwIjoiTWFkZG
+VuQ29tcGFuaW9uQXBwMTkiLCJpYXQiOjE2OTY1NzExMDIsImV4cCI6MTY5Nzc4MDcwMiwidmVyIjoxLCJuZXh1cyI6eyJ1aWQiOiIyNDU4MTc5MTk1IiwiZW5jIjoiZnU4YksydEFEWFdxUW9CSWw2VTlNMjFyaC96SlpVdmIwUGg0NldCWktucklxeTdtNWF5cEh6TGFFcnFubVVXMUcvTGNVZnE2NlJzQnZEVk04L0pBaVQxWnUvczY
+vMisxWE1MRjh0LzVaT3hTVFc1Y1JrcTFtak9mRFpzZU1FRllDTjF5aFovaXlaS3RhanlPRXh3eXRNZ1ZNNUhGSUhBQm9kVWtnTVdMbHEvb0hxRFlOUXJXVml6RnF6T016N2d2a0hKQ21NYk40b2lhTWlwalpRK0FLNlkwQ1Z0aXNUOEhlQWNVTTVYeWVTSjRQNzM0RnJBSnVOdWNGY0x6cXJLYzY2Y0g1MzN1a3N3SkdNYVo0UWY0Y2dT
+b00wRTU5dkpneWhlbU9KYk1CcUwrVWExaG1lbmNFQ2xFT2pXVTR0T3BLRDZwd2k0ZzJENmhRV1BhelR2b2dtbkQrS2RwcWJEL2ljVkh0d3lOSmJlOWNrK1UxOG5oYVpUMlNBRVZJdWN0SUUvWnpQRVUzUVpxRDBkRjZyQTBId2doTzZ0Si9HbmFRaG1VaGxjM1kzQ0EyRWZueW1ISjFDeS9hTkI4dUZaMk40SDJlQTcxNzdKMmlyNUo2a
+kJkWXowam8wMEY4a1hlOU5COS9CQkFaaHVFWnR0d1ZuRTBHaXBTRSsyR2IvWjI2dkJBOWY1UXZtUGtBNkxvVmNFd1EzWGVNTi9XVUxHNmNXUlRxVXpObWQ4T0NrQ3hYVEw1SmgwREtKVzJmRTJwWE9Fa3h4VzR5bEIzYWkyNjZRaHZCRFcrUXpEUnE2Tncra09FeUhJdVJzWllsVVZ6cVBEOFJhVzBsUE5meFpzazZ1NFIvdk5Yc1NKWH
+VodjhHc3RONG9XR2FTK2ZFM2JScUJuMUlYbzZnM1ZsK0NiT1NRWWc4bGtFQnhQcGJXY3JqbGpqczBOdkdNS1g2cU85K0IycFhIVTlGUnY5WmdTTnBuakNmSllSVVBuZ2x6YnBNems5ZXNxKzUySVhuS0pnQ3A2NFNFeDd4UGNzdEE2V09XbXZEK3o2cFR2WU5QUjBHNU9JZG12eTdKaFcvQXF6cUdId1ZDV0pBeG5JdWxwSk5aakNKMC9
+LeUlqL1prQldJYUNob3Z1MytIWHNUcjk5YnBPQkZQQ0NDQ2U2SXYvN3hPWGhOSDU2Tnd0VkFkVytqOHdKNm1xWkhnU1VqWVhPaFo0bk5DQUxoR1pCZFdXYVRwZ1IvMmRxL2YxRjRLeHc5U2ZNZ04yZ1NmenhRZDhTY2UzSUwwZ1ZrZmVyV0NKbTdBWmU0ZG0wdzI3Z1Vyakpab3FRd2tsM2xZUG4wWEQ5Sy8wcktKVlF0cWlVd3R5d21Z
+ZmwvRWFOOFcvbHgvSmlXVEFGb2c9PSJ9fQ.MrxnSGMyPHE5xFS6tBOoWoX_mZFu2xInUz6bQmEOhhpJviVjOmg-z2cT6DjroePuHj7t4bS1t2d0OiNqIRujlfq-PzvXgWpF6W2-o22kAv1HeuoW5TX0X6ExO4T0Y1eTdI64AEUGkzcIQWBYTusf34Qw4w5kbQdrNSAbYu40VxQlXRzV8EQCUQBPQfFU-Smbo1wBRYUE0Waqagw15U2a2l
+GJEpj5Dl0b2t8hHAk0IbqeFQDCEjy0oHbYjNaHzfiOQVgDYKObBjaublEaDnTx7CR1osBk951b0n0JgTUV3LvH9tqAsMRhNneRHfhbrAblrGiH-zFGV1s253D_teVjdg",
+    "token_type": "Bearer"
+}
+
+-------------------------------------------------------------------
+
+curl -X POST https://accounts.ea.com/connect/token -H "Accept-Charset: UTF-8" -H "Content-Type: application/x-www-form-urlencoded" 
+-H "User-Agent: Dalvik/2.1.0 (Linux; U; Android 13; sdk_gphone_x86_64 Build/TE1A.220922.031)" 
+-d "grant_type=refresh_token&client_id=MaddenCompanionApp19
+&client_secret=U02zL2khwlgFdODLWCyLPmccOc5EiPBBYcEwCqKDTWBrZj2Fwcx4b4Zd9rsA6lHLkIU4qlVvNh84olij&release_type=prod
+&refresh_token=eyJraWQiOiJmZGZlOWQyNC0wYjkyLTRiNzAtYjI2MC02MzRkMzY5MjIyMWIiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhY2NvdW50cy5lYS5jb20iLCJqdGkiOiJTbEl4T2pNdU1Eb3hMakE2T0RCbE1HVTBZelV0TlRkaVlpMDBZVFEzTFRsak1qVXRNR1l6TmpKaU1XVTJPVE16IiwiYXpwIjoiTWFkZGVuQ29tcGFuaW9uQXBwMTkiLCJpYXQiOjE2OTY2ODY1MzksImV4cCI6MTY5Nzg5NjEzOSwidmVyIjoxLCJuZXh1cyI6eyJ1aWQiOiIyNDU4MTc5MTk1IiwiZW5jIjoiZnU4YksydEFEWFdxUW9CSWw2VTlNMjFyaC96SlpVdmIwUGg0NldCWktucklxeTdtNWF5cEh6TGFFcnFubVVXMUcvTGNVZnE2NlJzQnZEVk04L0pBaVQxWnUvczYvMisxWE1MRjh0LzVaT3hTVFc1Y1JrcTFtak9mRFpzZU1FRllDTjF5aFovaXlaS3RhanlPRXh3eXRNZ1ZNNUhGSUhBQm9kVWtnTVdMbHEvb0hxRFlOUXJXVml6RnF6T016N2d2a0hKQ21NYk40b2lhTWlwalpRK0FLNlkwQ1Z0aXNUOEhlQWNVTTVYeWVTSjRQNzM0RnJBSnVOdWNGY0x6cXJLYzY2Y0g1MzN1a3N3SkdNYVo0UWY0Y2tjYzhQdytpckI3SU5NZHJBZ0VWRW93SExaTUFLSVdEWXFqSitJb0crMjYyNTNadmVyclF3bnJvUWVpaVhLSStmMmtOKzVQSm92QVZLaWFONGdFc1grYTd3Q1dvU0JMdHhwMW9KWkp5VUFJTnh3bjRMbGxjOWhTOW9tTG1RWUdLZmlpbWsxRXppaVZnc2Q3RGdSQlFReFM4cHVMNCtXQkxsY1REbFZ6aWVsdldvVlRZc2pzTVlaSGs1ZGpUZWxwdVdiREhZbk13NHh6cW9wY3ZGQm5TbjY4ZTlVNnQwSUFrQlZySWZ3OERoM012NDJEcEkySlFBK2wyT1gzazdCMXk1UWlES29VeGo5TFFDd21nSkptdHJvQ0VjdzF2WjcyM0lxR1YxVmdqeWc3YmlCSzFJWHhDdkxUTWxUM0pEMVdLS1dEenB6YXVkbVpkeHcvS2VHaDJwSTZBRkVTam9BSG10WlZSeVVyTktYa1BuUUZNZ05jRVh1VlF5TkpiWEhrN1lvM0RHdUprbXNoYnhlTzQ5SUFGUWRTYlV6cjFMRmt0c0pCWlV1enpJdkN2b2xnRm80YXJSTkRGN0dwdUhaVnovK29qN2xUNExaKzhiYll6ajNIRThMa2h2QU1CTWRlUUZXbUt4NUZQcCtSKzhwTXZ4dFE3dHcwWFV2cm9wOVdpczdrbEZzVzNTZmlwMVovZHVtMnhRRHd3NVlRejV0Z0U0R0U4L3IzMHd0RG1iakltVUticmk1MElZeGR2aG5xMVdXZDV4aEFBYzR5dDB4UktVUTZ6VGhtRVNLN21rSG00VDBRVGh6bE9Ta2ZXeVZLOFgxbGhGNlNhckozZlg0Ym5IQ1BxNWdHM0Y4ckpNNjVSQ1hESEh5VEFWR0xoRE96djVERTVEUVAxelExZ1B5OW9Ld2ZZL1N6Y2Zhb3RnQjlaWnhaMTZuMFZZcWpLYzVKWlZJbW5LaGZENXpTTFhKUmlTeHl5R1QwZXBzYy9LbEhzNFJkSTl5ZU0rNU1xSnpaUnc9PSJ9fQ.MQW8YEHT5W7SXK6bLIQhiV4e78yecy8B2UwKYF9TUC6m7YLAhuKZ0VS0F3IslpVFWzFCidEyCa8Fz48peSiV0ciyqVddBQ-XYeAZC7edsLMEcjFhdudPjnjAED67FdppyPva0y_PgjS7L2tob_LqilL8P9fGUrYMIeIZCvzQlWOpM4Wac5M6GClhYhm6rjMCqujqdf63RLvr_ouIE8HPurJIpUOXIXa5Bns_MBStRk0jkbeSIoPgVnpKJPQOP9DGqd5tBXBfe67rSsustl-6ZtEasXFz84ryumW4RBrrhoJWdQTz7qRiQiVmwvsuT647bj40tU-xXgM6MBd7pSGA4w
+&authentication_source=317239&token_format=JWS"
+
+
+-------------------------------------------------------------------
+2023-10-06 01:45:02 POST https://159.153.64.202/wal/authentication/login                                                                                                                                                                              
+                         ← 200 OK application/json 1.1k 111ms
+                                      Request                                                                            Response                                                                            Detail
+Accept-Charset:     UTF-8                                                                                                                                                                                                                              
+Accept:             application/json                                                                                                                                                                                                                   
+X-BLAZE-ID:         madden-2024-ps5-gen5                                                                                                                                                                                                               
+X-BLAZE-VOID-RESP:  XML                                                                                                                                                                                                                                
+X-Application-Key:  MADDEN-MCA                                                                                                                                                                                                                         
+Content-Type:       application/json                                                                                                                                                                                                                   
+User-Agent:         Dalvik/2.1.0 (Linux; U; Android 13; sdk_gphone_x86_64 Build/TE1A.220922.031)                                                                                                                                                       
+Host:               wal2.tools.gos.bio-iad.ea.com                                                                                                                                                                                                      
+Connection:         Keep-Alive                                                                                                                                                                                                                         
+Accept-Encoding:    gzip                                                                                                                                                                                                                               
+Content-Length:     2508                                                                                                                                                                                                                               
+JSON                                                                                                                                                                                                                                             [m:auto]
+{
+    "accessToken": "eyJraWQiOiJkZTE4ZjdlOS1mZGE2LTQ1N2YtYmJhNy00YTQyMTBhYzUxZjciLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhY2NvdW50cy5lYS5jb20iLCJqdGkiOiJTa0V3T2pNdU1Eb3hMakE2TXpBM05qQXpPV010TVRFeVppMDBZamRpTFdKa1ltUXRPRFF3WXpKaU56ZGlPV1V4IiwiYXpwIjoiTWFkZGVu
+Q29tcGFuaW9uQXBwMTkiLCJpYXQiOjE2OTY1NzExMDIsImV4cCI6MTY5NjU4NTUwMiwidmVyIjoxLCJuZXh1cyI6eyJjbGkiOiJNYWRkZW5Db21wYW5pb25BcHAxOSIsInByZCI6IjM3MDljN2E0LWJhMTYtM2ViMC02NmMyLTRlMmExYTFhZmU1MyIsInNjbyI6Im9mZmxpbmUgc2VjdXJpdHkuY2hhbGxlbmdlIHNpZ25pbiBzZWFyY
+2guaWRlbnRpdHkgYmFzaWMuaWRlbnRpdHkgYmFzaWMucGVyc29uYSBiYXNpYy5lbnRpdGxlbWVudCIsInBpZCI6IjEwMDAwNjcxNzkxOTUiLCJwdHkiOiJQUzMiLCJ1aWQiOiIyNDU4MTc5MTk1IiwicHNpZCI6NDE3NDQ4Mjk2LCJwbHR5cCI6IldFQiIsInBuaWQiOiJFQSIsImRwaWQiOiJXRUIiLCJzdHBzIjoiT0ZGIiwidWRnIj
+pmYWxzZSwiY250eSI6IjEiLCJhdXNyYyI6IjMxNzIzOSIsImlwZ2VvIjp7ImlwIjoiMTQzLjI0NC4qLioiLCJjdHkiOiJVUyIsInJlZyI6Ik5ldyBZb3JrIiwiY2l0IjoiTmV3IFlvcmsiLCJpc3AiOiJEYXRhY2FtcCBMaW1pdGVkIiwibGF0IjoiNDAuNzEyMyIsImxndCI6Ii03NC4wMDY4IiwidHoiOiItNCJ9LCJ1aWYiOnsidWR
+nIjpmYWxzZSwiY3R5IjoiVVMiLCJsYW4iOiJlbiIsInN0YSI6IkFDVElWRSIsImFubyI6ZmFsc2UsImFnZSI6NTgsImFncCI6IkFEVUxUIn0sInBzaWYiOlt7ImlkIjo0MTc0NDgyOTYsIm5zIjoicHMzIiwiZGlzIjoic25hbGxhcGEiLCJuaWMiOiJzbmFsbGFwYSJ9LHsiaWQiOjg3MjI4NDk3OSwibnMiOiJjZW1fZWFfaWQiLCJk
+aXMiOiJzbmFsbGFwYSIsIm5pYyI6InNuYWxsYXBhIn1dLCJlbmMiOiIwcnpYaDV0TUYyMVE4RTFCZ1B2VktPWFlPNUhnV0xWTm41U1RXQ1ZtaiswSEp4WXFsNjl0dzVTV2lVUWJteVZqeDI5aGFac1kyZlc1NTkzaUg0ZVBRSlBVc1krTnpXRmppVm1RN2kxMkRSVE9sZXg1NXE4NC9HTGNjaVk0WkF5R0hwK2VDNmpKRUp3dHhoYTFOM
+FI5S2Y5SDFUQ3lQOHFWUjVlWG1HZlBrNUg3T000T1RWdjNFK0ZwUHBOdjJuRlBzUVZRMDNpSE5LNUNNVXY4THFxTU9DMEFoOEc1NFFuN2s0UkZnZWNYc241ZVlVTWhGL3NmMDIrTlhWY1B1UFlwbktHUW5lRzc0UkVaNGs4NlNOK29tRFpUK2hwS2ZwTWpmQzFtYytVUFJFeFpyTU1nZWxoR1ZqRjEyZmxDek5kUHdqazhXK2dHNjJaVW
+I5c09KRGlqZklhMi9LZVk4aS9ZaVRFbHhNbEl3d3BWWFRqdDZhZldsOXBnVkUzODNtNUxEMHFHUnN1M1ozQjBKcCtvRHBNM0IzSjFoR3pKVTBaLzU4NCt1S21SVXFsTnp4NU5QdEpKL2I2aEhQNkJoRnhRMUpEaXFhSzVRQkRxZTNSTkV6Y2NDQW1LL3g3TzVKL1JySWNsMUtaTlNsZGsxK00vc2tEUlQwdW0vdCtZaXhTUXA0VTFqUjF
+TTDJCdWdSOHhtaEcxTlZjMHFFTkhEUDFIc0dSNmVJSTdYTDNNa0dBUElndjBXRUg4SmRndjdURytrMG5RazBKdFpxdHRiMEpyTzJjbm16RnI3MXFOODY2YnFlVDhGT0JBaFU4PSJ9fQ.hrACDdqKki1KNdqSXrDtCLI2Hn69STuF7GSQvWPAbbicBcIjeHhPEEeKHLw3Tpt1p6fMGzLXmJ5llQOgdxVSwf8FtzUfaU5w17-7fkkWESYCr
+iSmMbDz1S67Eve3uv8zSoGe0Rqjbfq5sRI_BziTm7XULwv3xW4Mfou-K0GIaBL0rspQG0QO0bEF1EMb6DodyvOmm7UAtL-q9alVG61IVicu0sjznlkKOKwrKbXG-KjXBxzYDnI9p9VZMc0yXCsUyRb5FS4-76TuJaKmr4O4d00L8uRnAfoFzGtr962ejbR07lSK4ce_xzLWjiGTe0-AfTJFgWwBf95DmStyEQefYA",
+    "productName": "madden-2024-ps5-mca"
+}
+
+
+2023-10-06 01:45:02 POST https://159.153.64.202/wal/authentication/login                                                                                                                                                                              
+                         ← 200 OK application/json 1.1k 111ms
+                                      Request                                                                            Response                                                                            Detail
+Date:               Fri, 06 Oct 2023 05:45:02 GMT                                                                                                                                                                                                      
+X-Request-Id:       7e8cab7d-640b-11ee-a60a-8d252f95f5f0                                                                                                                                                                                               
+X-GS-Request-Id:    7e8cab7d-640b-11ee-a60a-8d252f95f5f0                                                                                                                                                                                               
+Content-Type:       application/json;charset=utf-8                                                                                                                                                                                                     
+X-BLAZE-ERRORCODE:  0                                                                                                                                                                                                                                  
+X-BLAZE-COMPONENT:  authentication                                                                                                                                                                                                                     
+X-BLAZE-COMMAND:    login                                                                                                                                                                                                                              
+X-BLAZE-SEQNO:      0                                                                                                                                                                                                                                  
+Content-Length:     1127                                                                                                                                                                                                                               
+JSON                                                                                                                                                                                                                                             [m:auto]
+{
+    "isAnonymous": false,
+    "isOfLegalContactAge": true,
+    "isUnderage": false,
+    "userLoginInfo": {
+        "accountId": 2458179195,
+        "blazeId": 417448296,
+        "geoIpSucceeded": true,
+        "isFirstConsoleLogin": false,
+        "isFirstLogin": false,
+        "lastLoginDateTime": 1696571034,
+        "personaDetails": {
+            "displayName": "snallapa",
+            "extId": 0,
+            "lastAuthenticated": 0,
+            "personaId": 417448296,
+            "status": "UNKNOWN"
+        },
+        "platformInfo": {
+            "clientPlatform": "ps5",
+            "eaIds": {
+                "nucleusAccountId": 2458179195,
+                "originPersonaId": 872284979,
+                "originPersonaName": "snallapa"
+            },
+            "externalIds": {
+                "psnAccountId": 7573657078470043715,
+                "steamAccountId": 0,
+                "switchId": "",
+                "xblAccountId": 0
+            }
+        },
+        "previousAnonymousAccountId": 0,
+        "sessionKey": "0000011e45e917fd_qRbAGSEfoToiFyGpz5oBv4G6V6QXJekYN3N5Y6TnaIA="
+    }
+}
+
+------------------------------------------------------------
+2023-10-06 01:45:02 POST https://159.153.64.202/wal/mca/Process/0000011e45e917fd_qRbAGSEfoToiFyGpz5oBv4G6V6QXJekYN3N5Y6TnaIA=                                                                                                                         
+                         ← 200 OK application/json 5.4k 61ms
+                                      Request                                                                            Response                                                                            Detail
+Accept-Charset:     UTF-8                                                                                                                                                                                                                              
+Accept:             application/json                                                                                                                                                                                                                   
+X-BLAZE-ID:         madden-2024-ps5-gen5                                                                                                                                                                                                               
+X-BLAZE-VOID-RESP:  XML                                                                                                                                                                                                                                
+X-Application-Key:  MADDEN-MCA                                                                                                                                                                                                                         
+Content-Type:       application/json                                                                                                                                                                                                                   
+User-Agent:         Dalvik/2.1.0 (Linux; U; Android 13; sdk_gphone_x86_64 Build/TE1A.220922.031)                                                                                                                                                       
+Host:               wal2.tools.gos.bio-iad.ea.com                                                                                                                                                                                                      
+Connection:         Keep-Alive                                                                                                                                                                                                                         
+Accept-Encoding:    gzip                                                                                                                                                                                                                               
+Content-Length:     490                                                                                                                                                                                                                                
+JSON                                                                                                                                                                                                                                             [m:auto]
+{
+    "apiVersion": 2,
+    "clientDevice": 3,
+    "requestInfo": "{\"messageExpirationTime\":1696571102,\"deviceId\":\"MCA4b35d75Vm-MCA\",\"commandName\":\"Mobile_GetMyLeagues\",\"componentId\":2060,\"commandId\":801,\"ipAddress\":\"127.0.0.1\",\"requestPayload\":\"{}\",\"componentName\":\"care
+ermode\",\"messageAuthData\":{\"authCode\":\"KhPuwizZwZ+bioH6WMFMew==\",\"authData\":\"euw9PIvXzRKruAijCFVWDoScr+fFkIgH/akApHkBGlvHxLn13NfMA7u5BLM4fUZNnJe++9KX0gewqSikbg4WXpGSue/CzIgb\",\"authType\":17039361}}"
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+blaz
+
+FRIDA
+-------------------
+
+           0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F  0123456789ABCDEF
+00000000  63 42 03 36 20 17 bf 72 f7 0b a9 00 c0 aa 4e 6b  cB.6 ..r......Nk
+
+
+           0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F  0123456789ABCDEF
+00000000  b4 c5 eb 5c 3c 78 00 00 7c 00 00 00 00 00 00 00  ...\<x..|.......
+
+
+authdata = md5hash(4 random bytes + 63 42 03 36 20 17 bf 72 f7 0b a9 00 c0 aa 4e 6b) xor on  {"staticData":"05e6a7ead5584ab4","requestId":3,"blazeId":417448296}
+
+authCode = md5hash(":SA5!FL;e12e0p[p :)" + authdata)
+
+base64 encode each of those
+
+3a 53 41 35 21 46 4c 3b 65 31 32 65 30 70 5b 70 20 3a 29 00
