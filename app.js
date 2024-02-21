@@ -1336,7 +1336,7 @@ app.post("/:discord/export", async (req, res, next) => {
           discord,
         );
         await Promise.all(
-          exportUrls.map((exportUrl) =>
+          onlyStats.map((exportUrl) =>
             exportData(
               exportUrl,
               data,
@@ -1362,7 +1362,7 @@ app.post("/:discord/export", async (req, res, next) => {
           discord,
         );
         await Promise.all(
-          exportUrls.map((exportUrl) =>
+          onlyStats.map((exportUrl) =>
             exportData(
               exportUrl,
               data,
@@ -1382,7 +1382,7 @@ app.post("/:discord/export", async (req, res, next) => {
         discord,
       );
       await Promise.all(
-        exportUrls.map((exportUrl) =>
+        onlyRosters.map((exportUrl) =>
           exportData(exportUrl, data, maddenConsole, maddenLeagueId, "reg", 1),
         ),
       );
