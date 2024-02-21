@@ -516,7 +516,8 @@ async function refreshToken(guild_id) {
       expires_in: expiresIn,
     } = res1Json;
     if (!accessToken) {
-      console.log(res1Json);
+      console.error(res1Json);
+      console.log(tokenInfo);
     }
     const expiry = new Date(new Date().getTime() + expiresIn * 1000);
     await firestore.setDoc(
@@ -1308,16 +1309,18 @@ app.post("/:discord/export", async (req, res, next) => {
         maddenLeague,
         discord,
       );
-      for (const exportUrl of exportUrls) {
-        await exportData(
-          exportUrl,
-          data,
-          maddenConsole,
-          maddenLeagueId,
-          stage === 0 ? "pre" : "reg",
-          week,
-        );
-      }
+      await Promise.all(
+        exportUrls.map((exportUrl) =>
+          exportData(
+            exportUrl,
+            data,
+            maddenConsole,
+            maddenLeagueId,
+            stage === 0 ? "pre" : "reg",
+            week,
+          ),
+        ),
+      );
     } else if (week === 100) {
       const onlyStats = exportUrls.map((e) => ({ ...e, rosters: false }));
       const onlyRosters = exportUrls
@@ -1332,16 +1335,18 @@ app.post("/:discord/export", async (req, res, next) => {
           maddenLeague,
           discord,
         );
-        for (const exportUrl of onlyStats) {
-          await exportData(
-            exportUrl,
-            data,
-            maddenConsole,
-            maddenLeagueId,
-            "pre",
-            weekIndex + 1,
-          );
-        }
+        await Promise.all(
+          onlyStats.map((exportUrl) =>
+            exportData(
+              exportUrl,
+              data,
+              maddenConsole,
+              maddenLeagueId,
+              "pre",
+              weekIndex + 1,
+            ),
+          ),
+        );
       }
       //regular season
       for (let weekIndex = 0; weekIndex < 23; weekIndex++) {
@@ -1356,16 +1361,18 @@ app.post("/:discord/export", async (req, res, next) => {
           maddenLeague,
           discord,
         );
-        for (const exportUrl of onlyStats) {
-          await exportData(
-            exportUrl,
-            data,
-            maddenConsole,
-            maddenLeagueId,
-            "reg",
-            weekIndex + 1,
-          );
-        }
+        await Promise.all(
+          onlyStats.map((exportUrl) =>
+            exportData(
+              exportUrl,
+              data,
+              maddenConsole,
+              maddenLeagueId,
+              "reg",
+              weekIndex + 1,
+            ),
+          ),
+        );
       }
       const data = await getExportData(
         onlyRosters,
@@ -1374,16 +1381,11 @@ app.post("/:discord/export", async (req, res, next) => {
         maddenLeague,
         discord,
       );
-      for (const exportUrl of onlyRosters) {
-        await exportData(
-          exportUrl,
-          data,
-          maddenConsole,
-          maddenLeagueId,
-          "reg",
-          1,
-        );
-      }
+      await Promise.all(
+        onlyRosters.map((exportUrl) =>
+          exportData(exportUrl, data, maddenConsole, maddenLeagueId, "reg", 1),
+        ),
+      );
     } else if (week === 101) {
       const autoUrls = auto
         ? exportUrls.filter((e) => e.autoUpdate)
@@ -1398,16 +1400,18 @@ app.post("/:discord/export", async (req, res, next) => {
         maddenLeague,
         discord,
       );
-      for (const exportUrl of autoUrls) {
-        await exportData(
-          exportUrl,
-          data,
-          maddenConsole,
-          maddenLeagueId,
-          stage === 0 ? "pre" : "reg",
-          weekIndex + 1,
-        );
-      }
+      await Promise.all(
+        autoUrls.map((exportUrl) =>
+          exportData(
+            exportUrl,
+            data,
+            maddenConsole,
+            maddenLeagueId,
+            stage === 0 ? "pre" : "reg",
+            weekIndex + 1,
+          ),
+        ),
+      );
     } else if (week === 102) {
       const autoUrls = auto
         ? exportUrls.filter((e) => e.autoUpdate)
@@ -1434,16 +1438,18 @@ app.post("/:discord/export", async (req, res, next) => {
           maddenLeague,
           discord,
         );
-        for (const exportUrl of autoUrls) {
-          await exportData(
-            exportUrl,
-            data,
-            maddenConsole,
-            maddenLeagueId,
-            stage === 0 ? "pre" : "reg",
-            weekIndex + 1,
-          );
-        }
+        await Promise.all(
+          autoUrls.map((exportUrl) =>
+            exportData(
+              exportUrl,
+              data,
+              maddenConsole,
+              maddenLeagueId,
+              stage === 0 ? "pre" : "reg",
+              weekIndex + 1,
+            ),
+          ),
+        );
       }
     }
     res.status(200).json({});
