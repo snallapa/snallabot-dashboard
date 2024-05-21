@@ -143,7 +143,7 @@ app.post(
       }
     }
     fetch(
-      `https://snallabot.me/${platform}/${leagueId}/standings/week/${weekType}/${weekNum}/${dataType}`,
+      `https://snallabot.me/${platform}/${leagueId}/week/${weekType}/${weekNum}/${dataType}`,
       {
         method: "POST",
         body: JSON.stringify(req.body),
