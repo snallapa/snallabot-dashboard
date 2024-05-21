@@ -43,7 +43,7 @@ app.post("/:discord/:platform/:leagueId/leagueteams", (req, res) => {
   }
   let teams = {};
   const {
-    params: { discord },
+    params: { discord, leagueId, platform },
   } = req;
   teamsData.forEach(
     (t) =>
@@ -60,6 +60,7 @@ app.post("/:discord/:platform/:leagueId/leagueteams", (req, res) => {
       firestore.doc(db, "leagues", discord),
       {
         guild_id: discord,
+        league_id: leagueId,
         teams: teams,
       },
       { merge: true },
@@ -72,9 +73,26 @@ app.post("/:discord/:platform/:leagueId/leagueteams", (req, res) => {
       console.log(e);
       res.sendStatus(500);
     });
+  fetch(`https://snallabot.me/${platform}/${leagueId}/leagueteams`, {
+    method: "POST",
+    body: JSON.stringify(req.body),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 });
 
 app.post("/:discord/:platform/:leagueId/standings", (req, res) => {
+  const {
+    params: { discord, leagueId, platform },
+  } = req;
+  fetch(`https://snallabot.me/${platform}/${leagueId}/standings`, {
+    method: "POST",
+    body: JSON.stringify(req.body),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
   res.sendStatus(200);
 });
 
@@ -82,7 +100,7 @@ app.post(
   "/:discord/:platform/:leagueId/week/:weekType/:weekNum/:dataType",
   (req, res) => {
     const {
-      params: { discord, weekType, weekNum, dataType },
+      params: { discord, weekType, weekNum, dataType, platform, leagueId },
     } = req;
     switch (dataType) {
       case "schedules": {
@@ -124,15 +142,45 @@ app.post(
         break;
       }
     }
+    fetch(
+      `https://snallabot.me/${platform}/${leagueId}/standings/week/${weekType}/${weekNum}/${dataType}`,
+      {
+        method: "POST",
+        body: JSON.stringify(req.body),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
   },
 );
 
 // ROSTERS
 app.post("/:username/:platform/:leagueId/freeagents/roster", (req, res) => {
+  const {
+    params: { leagueId, platform },
+  } = req;
+  fetch(`https://snallabot.me/${platform}/${leagueId}/freeagents/roster`, {
+    method: "POST",
+    body: JSON.stringify(req.body),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
   res.sendStatus(200);
 });
 
 app.post("/:username/:platform/:leagueId/team/:teamId/roster", (req, res) => {
+  const {
+    params: { leagueId, platform, teamId },
+  } = req;
+  fetch(`https://snallabot.me/${platform}/${leagueId}/team/${teamId}/roster`, {
+    method: "POST",
+    body: JSON.stringify(req.body),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
   res.sendStatus(200);
 });
 
