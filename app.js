@@ -1127,7 +1127,7 @@ app.post("/:discord/selectLeague", async (req, res, next) => {
               url: `https://snallabot.herokuapp.com/${discord}`,
               leagueInfo: true,
               weeklyStats: true,
-              rosters: false,
+              rosters: true,
               autoUpdate: true,
             },
           ],
