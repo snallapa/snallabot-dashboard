@@ -1181,12 +1181,18 @@ async function exportData(
       fetch(`${url}/${maddenConsole}/${league}/leagueteams`, {
         method: "POST",
         body: JSON.stringify(data.leagueTeams),
+        headers: {
+          "Content-Type": "application/json",
+        },
       }),
     );
     exports.push(
       fetch(`${url}/${maddenConsole}/${league}/standings`, {
         method: "POST",
         body: JSON.stringify(data.standings),
+        headers: {
+          "Content-Type": "application/json",
+        },
       }),
     );
     const responses = await Promise.all(exports);
@@ -1219,6 +1225,9 @@ async function exportData(
           {
             method: "POST",
             body: JSON.stringify(weekly[weeklyExport]),
+            headers: {
+              "Content-Type": "application/json",
+            },
           },
         ),
       );
@@ -1242,6 +1251,9 @@ async function exportData(
           fetch(`${url}/${maddenConsole}/${league}/${teamId}/roster`, {
             method: "POST",
             body: JSON.stringify(data.teams[teamId]),
+            headers: {
+              "Content-Type": "application/json",
+            },
           }),
         );
       } else {
@@ -1249,6 +1261,9 @@ async function exportData(
           fetch(`${url}/${maddenConsole}/${league}/team/${teamId}/roster`, {
             method: "POST",
             body: JSON.stringify(data.teams[teamId]),
+            headers: {
+              "Content-Type": "application/json",
+            },
           }),
         );
       }
