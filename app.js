@@ -484,7 +484,7 @@ app.post(
 );
 
 const TWO_DIGIT_YEAR = "24";
-const YEAR = "2024";
+const YEAR = "2025";
 
 const VALID_ENTITLEMENTS = (a) => ({
   xone: `MADDEN_${a}XONE`,
