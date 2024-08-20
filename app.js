@@ -160,7 +160,6 @@ app.post("/:username/:platform/:leagueId/freeagents/roster", (req, res) => {
   const {
     params: { leagueId, platform },
   } = req;
-  console.log(req.body);
   fetch(`https://snallabot.me/${platform}/${leagueId}/freeagents/roster`, {
     method: "POST",
     body: JSON.stringify(req.body),
