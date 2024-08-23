@@ -1058,6 +1058,9 @@ app.post("/:discord/linkea", async (req, res, next) => {
       refresh_token: refreshToken,
       expires_in: expiresIn,
     } = res1Json;
+    if (!accessToken) {
+      console.log(res1Json);
+    }
     const expiry = new Date(new Date().getTime() + expiresIn * 1000);
     const blazeService = BLAZE_SERVICE(YEAR)[consoleAbbr];
     const blazeProductName = BLAZE_PRODUCT_NAME(YEAR)[consoleAbbr];
