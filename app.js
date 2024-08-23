@@ -483,7 +483,7 @@ app.post(
   },
 );
 
-const TWO_DIGIT_YEAR = "24";
+const TWO_DIGIT_YEAR = "25";
 const YEAR = "2025";
 
 const VALID_ENTITLEMENTS = (a) => ({
