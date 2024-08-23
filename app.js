@@ -554,7 +554,7 @@ async function refreshToken(guild_id) {
         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
         "Accept-Encoding": "gzip",
       },
-      body: `grant_type=refresh_token&client_id=MaddenCompanionApp19&client_secret=U02zL2khwlgFdODLWCyLPmccOc5EiPBBYcEwCqKDTWBrZj2Fwcx4b4Zd9rsA6lHLkIU4qlVvNh84olij&release_type=prod&refresh_token=${tokenInfo.refreshToken}&authentication_source=317239&token_format=JWS`,
+      body: `grant_type=refresh_token&client_id=MCA_25_COMP_APP&client_secret=wfGAWnrxLroZOwwELYA2ZrAuaycuF2WDb00zOLv48Sb79viJDGlyD6OyK8pM5eIiv_20240731135155&release_type=prod&refresh_token=${tokenInfo.refreshToken}&authentication_source=317239&token_format=JWS`,
     });
     const res1Json = await res1.json();
 
@@ -1013,7 +1013,7 @@ app.post("/:discord/linkea", async (req, res, next) => {
   const consoleAbbr = ENTITLEMENT_TO_SYSTEM(TWO_DIGIT_YEAR)[gameConsole];
   try {
     const locationUrl = await fetch(
-      `https://accounts.ea.com/connect/auth?hide_create=true&release_type=prod&response_type=code&redirect_uri=http://127.0.0.1/success&client_id=MaddenCompanionApp19&machineProfileKey=MCA4b35d75Vm-MCA&authentication_source=317239&access_token=${token}&persona_id=${persona.personaId}&persona_namespace=${persona.namespaceName}`,
+      `https://accounts.ea.com/connect/auth?hide_create=true&release_type=prod&response_type=code&redirect_uri=http://127.0.0.1/success&client_id=MCA_25_COMP_APP&machineProfileKey=444d362e8e067fe2&authentication_source=317239&access_token=${token}&persona_id=${persona.personaId}&persona_namespace=${persona.namespaceName}`,
       {
         redirect: "manual",
         headers: {
@@ -1050,7 +1050,7 @@ app.post("/:discord/linkea", async (req, res, next) => {
         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
         "Accept-Encoding": "gzip",
       },
-      body: `authentication_source=317239&code=${code}&grant_type=authorization_code&token_format=JWS&release_type=prod&client_secret=U02zL2khwlgFdODLWCyLPmccOc5EiPBBYcEwCqKDTWBrZj2Fwcx4b4Zd9rsA6lHLkIU4qlVvNh84olij&redirect_uri=http://127.0.0.1/success&client_id=MaddenCompanionApp19`,
+      body: `authentication_source=317239&code=${code}&grant_type=authorization_code&token_format=JWS&release_type=prod&client_secret=wfGAWnrxLroZOwwELYA2ZrAuaycuF2WDb00zOLv48Sb79viJDGlyD6OyK8pM5eIiv_20240731135155&redirect_uri=http://127.0.0.1/success&client_id=MCA_25_COMP_APP`,
     });
     const res1Json = await res1.json();
     const {
