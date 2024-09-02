@@ -565,7 +565,7 @@ async function refreshToken(guild_id) {
     } = res1Json;
     if (!accessToken) {
       console.error(res1Json);
-      console.log(tokenInfo);
+      console.log(tokenInfo.refreshtoken);
     }
     const expiry = new Date(new Date().getTime() + expiresIn * 1000);
     await firestore.setDoc(
