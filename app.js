@@ -1160,6 +1160,20 @@ app.post("/:discord/getLeagueInfo", async (req, res, next) => {
     const league = docSnap.data();
     await refreshToken(discord);
     await getBlazeSession(discord);
+    const allLeaguesResponse = await makeBlazeRequest(discord, {
+      commandName: "Mobile_GetMyLeagues",
+      componentId: 2060,
+      commandId: 801,
+      requestPayload: {},
+      componentName: "careermode",
+    });
+    const {
+      responseInfo: {
+        value: { leagues: maddenLeagues },
+      },
+    } = allLeaguesResponse;
+    const leagueId = league.madden_server.leagueId;
+    const leagueName = maddenLeagues.filter(m => m.leagueId).map(m => m.leagueName)[0];
     const leagueResponse = await makeBlazeRequest(discord, {
       commandName: "Mobile_Career_GetLeagueHub",
       componentId: 2060,
@@ -1184,6 +1198,7 @@ app.post("/:discord/getLeagueInfo", async (req, res, next) => {
       teamIdInfoList,
       seasonInfo,
       exports: league.commands.exports,
+      leagueName: leagueName
     });
   } catch (e) {
     next(e);
