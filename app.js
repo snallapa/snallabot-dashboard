@@ -1173,7 +1173,7 @@ app.post("/:discord/getLeagueInfo", async (req, res, next) => {
       },
     } = allLeaguesResponse;
     const leagueId = league.madden_server.leagueId;
-    const leagueName = maddenLeagues.filter(m => m.leagueId).map(m => m.leagueName)[0];
+    const leagueName = maddenLeagues.filter(m => m.leagueId === leagueId).map(m => m.leagueName)[0];
     const leagueResponse = await makeBlazeRequest(discord, {
       commandName: "Mobile_Career_GetLeagueHub",
       componentId: 2060,
