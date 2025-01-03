@@ -53,7 +53,7 @@ app.post("/:discord/:platform/:leagueId/leagueteams", (req, res) => {
         username: t.userName,
         division: t.divName,
         cityName: t.cityName,
-      }),
+      })
   );
   firestore
     .setDoc(
@@ -63,7 +63,7 @@ app.post("/:discord/:platform/:leagueId/leagueteams", (req, res) => {
         league_id: leagueId,
         teams: teams,
       },
-      { merge: true },
+      { merge: true }
     )
     .then((_) => {
       console.log(`teams written with id`);
@@ -125,7 +125,7 @@ app.post(
               guild_id: discord,
               schedules: schedules,
             },
-            { merge: true },
+            { merge: true }
           )
           .then((_) => {
             console.log(`schedule written with id`);
@@ -150,9 +150,9 @@ app.post(
         headers: {
           "Content-Type": "application/json",
         },
-      },
+      }
     );
-  },
+  }
 );
 
 // ROSTERS
@@ -204,7 +204,7 @@ app.post("/media/:discord/:platform/:leagueId/leagueteams", (req, res) => {
         username: t.userName,
         division: t.divName,
         cityName: t.cityName,
-      }),
+      })
   );
   firestore
     .setDoc(
@@ -213,7 +213,7 @@ app.post("/media/:discord/:platform/:leagueId/leagueteams", (req, res) => {
         guild_id: discord,
         teams: teams,
       },
-      { merge: true },
+      { merge: true }
     )
     .then((_) => {
       console.log(`teams written with id`);
@@ -263,7 +263,7 @@ app.post(
               guild_id: discord,
               schedules: schedules,
             },
-            { merge: true },
+            { merge: true }
           )
           .then((_) => {
             console.log(`schedule written with id`);
@@ -310,7 +310,7 @@ app.post(
             {
               ...stats,
             },
-            { merge: true },
+            { merge: true }
           )
           .then((_) => {
             console.log(`stats written with id`);
@@ -350,7 +350,7 @@ app.post(
             {
               ...stats,
             },
-            { merge: true },
+            { merge: true }
           )
           .then((_) => {
             console.log(`stats written with id`);
@@ -403,7 +403,7 @@ app.post(
             ...kickerStats,
           };
           Object.keys(allStats).forEach(
-            (key) => allStats[key] === undefined && delete allStats[key],
+            (key) => allStats[key] === undefined && delete allStats[key]
           );
           s[stat.rosterId] = {
             teamId: stat.teamId,
@@ -417,7 +417,7 @@ app.post(
             {
               ...stats,
             },
-            { merge: true },
+            { merge: true }
           )
           .then((_) => {
             console.log(`stats written with id`);
@@ -431,7 +431,7 @@ app.post(
         break;
       }
     }
-  },
+  }
 );
 
 // ROSTERS
@@ -439,7 +439,7 @@ app.post(
   "/media/:username/:platform/:leagueId/freeagents/roster",
   (req, res) => {
     res.sendStatus(200);
-  },
+  }
 );
 
 app.post(
@@ -470,7 +470,7 @@ app.post(
         {
           teams: teams,
         },
-        { merge: true },
+        { merge: true }
       )
       .then((_) => {
         console.log(`roster written with id`);
@@ -480,7 +480,7 @@ app.post(
         console.log(e);
         res.sendStatus(500);
       });
-  },
+  }
 );
 
 const TWO_DIGIT_YEAR = "25";
@@ -533,7 +533,7 @@ const BLAZE_PRODUCT_NAME = (a) => ({
 
 async function refreshToken(guild_id) {
   const docSnap = await firestore.getDoc(
-    firestore.doc(db, "leagues", guild_id),
+    firestore.doc(db, "leagues", guild_id)
   );
   if (!docSnap.exists()) {
     throw new Error(`No league found for ${guild_id}, export in MCA first`);
@@ -579,7 +579,7 @@ async function refreshToken(guild_id) {
           blazeSessionExpiry: firestore.deleteField(),
         },
       },
-      { merge: true },
+      { merge: true }
     );
   }
 }
@@ -588,7 +588,7 @@ const BLAZE_SESSION_EXPIRY = 540;
 
 async function getBlazeSession(guild_id) {
   const docSnap = await firestore.getDoc(
-    firestore.doc(db, "leagues", guild_id),
+    firestore.doc(db, "leagues", guild_id)
   );
   if (!docSnap.exists()) {
     throw new Error(`No league found for ${guild_id}, export in MCA first`);
@@ -628,7 +628,7 @@ async function getBlazeSession(guild_id) {
           accessToken: tokenInfo.accessToken,
           productName: tokenInfo.blazeProductName,
         }),
-      },
+      }
     );
     const res1Json = await res1.json();
     if (!res1Json.userLoginInfo?.sessionKey) {
@@ -643,7 +643,7 @@ async function getBlazeSession(guild_id) {
 
     tokenInfo.sessionKey = sessionKey;
     const blazeExpiry = new Date(
-      new Date().getTime() + BLAZE_SESSION_EXPIRY * 1000,
+      new Date().getTime() + BLAZE_SESSION_EXPIRY * 1000
     );
     tokenInfo.blazeSessionExpiry = blazeExpiry;
     tokenInfo.blazeId = blazeId;
@@ -652,7 +652,7 @@ async function getBlazeSession(guild_id) {
       {
         madden_server: tokenInfo,
       },
-      { merge: true },
+      { merge: true }
     );
   } else if (tokenInfo.sessionKey) {
     const leagueResponse = await makeBlazeRequest(guild_id, {
@@ -692,7 +692,7 @@ async function getBlazeSession(guild_id) {
             accessToken: tokenInfo.accessToken,
             productName: tokenInfo.blazeProductName,
           }),
-        },
+        }
       );
       const res1Json = await res1.json();
       if (!res1Json.userLoginInfo?.sessionKey) {
@@ -707,7 +707,7 @@ async function getBlazeSession(guild_id) {
       } = res1Json;
       tokenInfo.sessionKey = sessionKey;
       const blazeExpiry = new Date(
-        new Date().getTime() + BLAZE_SESSION_EXPIRY * 1000,
+        new Date().getTime() + BLAZE_SESSION_EXPIRY * 1000
       );
       tokenInfo.blazeSessionExpiry = blazeExpiry;
       tokenInfo.blazeId = blazeId;
@@ -716,7 +716,7 @@ async function getBlazeSession(guild_id) {
         {
           madden_server: tokenInfo,
         },
-        { merge: true },
+        { merge: true }
       );
     }
   }
@@ -731,7 +731,7 @@ function calculateMessageAuthData(blazeId, requestId) {
   });
   const staticBytes = buffer.Buffer.from(
     "634203362017bf72f70ba900c0aa4e6b",
-    "hex",
+    "hex"
   );
 
   const xorHash = crypto
@@ -744,7 +744,7 @@ function calculateMessageAuthData(blazeId, requestId) {
   const authDataBytes = buffer.Buffer.concat([rand4bytes, scrambledBytes]);
   const staticAuthCode = buffer.Buffer.from(
     "3a53413521464c3b6531326530705b70203a2900",
-    "hex",
+    "hex"
   );
 
   const authCode = crypto
@@ -759,7 +759,7 @@ function calculateMessageAuthData(blazeId, requestId) {
 
 async function makeBlazeRequest(guild_id, blazeRequest) {
   const docSnap = await firestore.getDoc(
-    firestore.doc(db, "leagues", guild_id),
+    firestore.doc(db, "leagues", guild_id)
   );
   if (!docSnap.exists()) {
     throw new Error(`No league found for ${guild_id}, export in MCA first`);
@@ -805,7 +805,7 @@ async function makeBlazeRequest(guild_id, blazeRequest) {
           "Dalvik/2.1.0 (Linux; U; Android 13; sdk_gphone_x86_64 Build/TE1A.220922.031)",
       },
       body: body,
-    },
+    }
   );
   tokenInfo.blazeRequestId = requestId + 1;
   await firestore.setDoc(
@@ -813,7 +813,7 @@ async function makeBlazeRequest(guild_id, blazeRequest) {
     {
       madden_server: tokenInfo,
     },
-    { merge: true },
+    { merge: true }
   );
   const txtResponse = await res1.text();
   try {
@@ -826,7 +826,7 @@ async function makeBlazeRequest(guild_id, blazeRequest) {
 
 async function getExportData(exportUrls, week, stage, currentLeague, guild_id) {
   const docSnap = await firestore.getDoc(
-    firestore.doc(db, "leagues", guild_id),
+    firestore.doc(db, "leagues", guild_id)
   );
   if (!docSnap.exists()) {
     throw new Error(`No league found for ${guild_id}, export in MCA first`);
@@ -862,7 +862,7 @@ async function getExportData(exportUrls, week, stage, currentLeague, guild_id) {
             "Dalvik/2.1.0 (Linux; U; Android 13; sdk_gphone_x86_64 Build/TE1A.220922.031)",
         },
         body: JSON.stringify({ leagueId: tokenInfo.leagueId }),
-      },
+      }
     );
     data.leagueTeams = await res1.json();
     const res2 = await fetch(
@@ -887,7 +887,7 @@ async function getExportData(exportUrls, week, stage, currentLeague, guild_id) {
             "Dalvik/2.1.0 (Linux; U; Android 13; sdk_gphone_x86_64 Build/TE1A.220922.031)",
         },
         body: JSON.stringify({ leagueId: tokenInfo.leagueId }),
-      },
+      }
     );
     data.standings = await res2.json();
   }
@@ -929,7 +929,7 @@ async function getExportData(exportUrls, week, stage, currentLeague, guild_id) {
             stageIndex: stage,
             weekIndex: week,
           }),
-        },
+        }
       );
       data[statType] = await res1.json();
     }
@@ -967,7 +967,7 @@ async function getExportData(exportUrls, week, stage, currentLeague, guild_id) {
             returnFreeAgents: false,
             teamId: teamId,
           }),
-        },
+        }
       );
       data.teams[teamId] = await res1.json();
     }
@@ -998,7 +998,7 @@ async function getExportData(exportUrls, week, stage, currentLeague, guild_id) {
           returnFreeAgents: true,
           teamId: 0,
         }),
-      },
+      }
     );
     data.teams.freeagents = await res1.json();
   }
@@ -1031,7 +1031,7 @@ app.post("/:discord/linkea", async (req, res, next) => {
           "Accept-Encoding": "gzip, deflate",
           "Accept-Language": "en-US,en;q=0,9",
         },
-      },
+      }
     )
       .then((res5) => {
         return res5.headers.get("Location");
@@ -1039,7 +1039,7 @@ app.post("/:discord/linkea", async (req, res, next) => {
       .catch(console.warn);
 
     const code = new URLSearchParams(
-      locationUrl.replace("http://127.0.0.1/success", ""),
+      locationUrl.replace("http://127.0.0.1/success", "")
     ).get("code");
     const res1 = await fetch(`https://accounts.ea.com/connect/token`, {
       method: "POST",
@@ -1076,7 +1076,7 @@ app.post("/:discord/linkea", async (req, res, next) => {
           blazeProductName,
         },
       },
-      { merge: true },
+      { merge: true }
     );
     res.status(200).json({});
   } catch (e) {
@@ -1139,7 +1139,7 @@ app.post("/:discord/selectLeague", async (req, res, next) => {
           leagueId: selectedLeague.leagueId,
         },
       },
-      { merge: true },
+      { merge: true }
     );
     res.status(200).json({});
   } catch (e) {
@@ -1160,45 +1160,74 @@ app.post("/:discord/getLeagueInfo", async (req, res, next) => {
     const league = docSnap.data();
     await refreshToken(discord);
     await getBlazeSession(discord);
-    const allLeaguesResponse = await makeBlazeRequest(discord, {
-      commandName: "Mobile_GetMyLeagues",
-      componentId: 2060,
-      commandId: 801,
-      requestPayload: {},
-      componentName: "careermode",
-    });
-    const {
-      responseInfo: {
-        value: { leagues: maddenLeagues },
-      },
-    } = allLeaguesResponse;
-    const leagueId = league.madden_server.leagueId;
-    const leagueName = maddenLeagues.filter(m => m.leagueId === leagueId).map(m => m.leagueName)[0];
-    const leagueResponse = await makeBlazeRequest(discord, {
-      commandName: "Mobile_Career_GetLeagueHub",
-      componentId: 2060,
-      commandId: 811,
-      requestPayload: { leagueId: league.madden_server.leagueId },
-      componentName: "careermode",
-    });
-    if (!leagueResponse.responseInfo?.value) {
-      console.log(leagueResponse);
-    }
-    const {
-      responseInfo: {
-        value: {
-          gameScheduleHubInfo,
-          teamIdInfoList,
-          careerHubInfo: { seasonInfo },
+
+    async function fetchLeagueName() {
+      const allLeaguesResponse = await makeBlazeRequest(discord, {
+        commandName: "Mobile_GetMyLeagues",
+        componentId: 2060,
+        commandId: 801,
+        requestPayload: {},
+        componentName: "careermode",
+      });
+      const {
+        responseInfo: {
+          value: { leagues: maddenLeagues },
         },
-      },
-    } = leagueResponse;
+      } = allLeaguesResponse;
+      const leagueId = league.madden_server.leagueId;
+      return maddenLeagues
+        .filter((m) => m.leagueId === leagueId)
+        .map((m) => m.leagueName)[0];
+    }
+
+    async function fetchLeagueInfo() {
+      const leagueResponse = await makeBlazeRequest(discord, {
+        commandName: "Mobile_Career_GetLeagueHub",
+        componentId: 2060,
+        commandId: 811,
+        requestPayload: { leagueId: league.madden_server.leagueId },
+        componentName: "careermode",
+      });
+      if (!leagueResponse.responseInfo?.value) {
+        console.log(leagueResponse);
+      }
+      const {
+        responseInfo: {
+          value: {
+            gameScheduleHubInfo,
+            teamIdInfoList,
+            careerHubInfo: { seasonInfo },
+          },
+        },
+      } = leagueResponse;
+      const weekIndex = seasonInfo.seasonWeek;
+      const stage = seasonInfo.seasonWeekType == 0 ? 0 : 1;
+      const data = await getExportData(
+        [{ leagueInfo: true, rosters: true, weeklyStats: true }],
+        weekIndex,
+        stage,
+        leagueResponse.responseInfo.value,
+        discord
+      );
+      return {
+        gameScheduleHubInfo,
+        teamIdInfoList,
+        seasonInfo,
+        exportData: data,
+      };
+    }
+    const [
+      leagueName,
+      { gameScheduleHubInfo, teamIdInfoList, seasonInfo, exportData },
+    ] = await Promise.all([fetchLeagueName(), fetchLeagueInfo()]);
+
     res.status(200).json({
       gameScheduleHubInfo,
       teamIdInfoList,
       seasonInfo,
       exports: league.commands.exports,
-      leagueName: leagueName
+      leagueName: leagueName,
+      exportData,
     });
   } catch (e) {
     next(e);
@@ -1220,7 +1249,7 @@ app.post("/:discord/unlink", async (req, res, next) => {
       {
         madden_server: firestore.deleteField(),
       },
-      { merge: true },
+      { merge: true }
     );
     res.status(200).json({});
   } catch (e) {
@@ -1234,7 +1263,7 @@ async function exportData(
   maddenConsole,
   league,
   weekType,
-  weekNumber,
+  weekNumber
 ) {
   const { leagueInfo, weeklyStats, rosters } = exportUrl;
   const url = exportUrl.url.endsWith("/")
@@ -1250,7 +1279,7 @@ async function exportData(
         headers: {
           "Content-Type": "application/json",
         },
-      }),
+      })
     );
     exports.push(
       fetch(`${url}/${maddenConsole}/${league}/standings`, {
@@ -1259,7 +1288,7 @@ async function exportData(
         headers: {
           "Content-Type": "application/json",
         },
-      }),
+      })
     );
     const responses = await Promise.all(exports);
     const isSuccess = responses.every((r) => r.ok);
@@ -1294,8 +1323,8 @@ async function exportData(
             headers: {
               "Content-Type": "application/json",
             },
-          },
-        ),
+          }
+        )
       );
     }
     const responses = await Promise.all(exports);
@@ -1320,7 +1349,7 @@ async function exportData(
             headers: {
               "Content-Type": "application/json",
             },
-          }),
+          })
         );
       } else {
         exports.push(
@@ -1330,7 +1359,7 @@ async function exportData(
             headers: {
               "Content-Type": "application/json",
             },
-          }),
+          })
         );
       }
     }
@@ -1388,7 +1417,7 @@ app.post("/:discord/export", async (req, res, next) => {
         weekIndex,
         stage,
         maddenLeague,
-        discord,
+        discord
       );
       await Promise.all(
         exportUrls.map((exportUrl) =>
@@ -1398,9 +1427,9 @@ app.post("/:discord/export", async (req, res, next) => {
             maddenConsole,
             maddenLeagueId,
             stage === 0 ? "pre" : "reg",
-            week,
-          ),
-        ),
+            week
+          )
+        )
       );
     } else if (week === 100) {
       const onlyStats = exportUrls.map((e) => ({ ...e, rosters: false }));
@@ -1414,7 +1443,7 @@ app.post("/:discord/export", async (req, res, next) => {
           weekIndex,
           0,
           maddenLeague,
-          discord,
+          discord
         );
         await Promise.all(
           onlyStats.map((exportUrl) =>
@@ -1424,9 +1453,9 @@ app.post("/:discord/export", async (req, res, next) => {
               maddenConsole,
               maddenLeagueId,
               "pre",
-              weekIndex + 1,
-            ),
-          ),
+              weekIndex + 1
+            )
+          )
         );
       }
       //regular season
@@ -1440,7 +1469,7 @@ app.post("/:discord/export", async (req, res, next) => {
           weekIndex,
           1,
           maddenLeague,
-          discord,
+          discord
         );
         await Promise.all(
           onlyStats.map((exportUrl) =>
@@ -1450,9 +1479,9 @@ app.post("/:discord/export", async (req, res, next) => {
               maddenConsole,
               maddenLeagueId,
               "reg",
-              weekIndex + 1,
-            ),
-          ),
+              weekIndex + 1
+            )
+          )
         );
       }
       const data = await getExportData(
@@ -1460,12 +1489,12 @@ app.post("/:discord/export", async (req, res, next) => {
         0,
         1,
         maddenLeague,
-        discord,
+        discord
       );
       await Promise.all(
         onlyRosters.map((exportUrl) =>
-          exportData(exportUrl, data, maddenConsole, maddenLeagueId, "reg", 1),
-        ),
+          exportData(exportUrl, data, maddenConsole, maddenLeagueId, "reg", 1)
+        )
       );
     } else if (week === 101) {
       const autoUrls = auto
@@ -1479,7 +1508,7 @@ app.post("/:discord/export", async (req, res, next) => {
         weekIndex,
         stage,
         maddenLeague,
-        discord,
+        discord
       );
       await Promise.all(
         autoUrls.map((exportUrl) =>
@@ -1489,9 +1518,9 @@ app.post("/:discord/export", async (req, res, next) => {
             maddenConsole,
             maddenLeagueId,
             stage === 0 ? "pre" : "reg",
-            weekIndex + 1,
-          ),
-        ),
+            weekIndex + 1
+          )
+        )
       );
     } else if (week === 102) {
       const autoUrls = auto
@@ -1517,7 +1546,7 @@ app.post("/:discord/export", async (req, res, next) => {
           weekIndex,
           stage,
           maddenLeague,
-          discord,
+          discord
         );
         await Promise.all(
           autoUrls.map((exportUrl) =>
@@ -1527,9 +1556,9 @@ app.post("/:discord/export", async (req, res, next) => {
               maddenConsole,
               maddenLeagueId,
               stage === 0 ? "pre" : "reg",
-              weekIndex + 1,
-            ),
-          ),
+              weekIndex + 1
+            )
+          )
         );
       }
     }
@@ -1557,7 +1586,7 @@ app.post("/:discord/updateExports", async (req, res, next) => {
           exports: newExports,
         },
       },
-      { merge: true },
+      { merge: true }
     );
     res.status(200).json(newExports);
   } catch (e) {
@@ -1566,5 +1595,5 @@ app.post("/:discord/updateExports", async (req, res, next) => {
 });
 
 app.listen(app.get("port"), () =>
-  console.log("Madden Data is running on port", app.get("port")),
+  console.log("Madden Data is running on port", app.get("port"))
 );
