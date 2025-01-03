@@ -1160,47 +1160,74 @@ app.post("/:discord/getLeagueInfo", async (req, res, next) => {
     const league = docSnap.data();
     await refreshToken(discord);
     await getBlazeSession(discord);
-    const allLeaguesResponse = await makeBlazeRequest(discord, {
-      commandName: "Mobile_GetMyLeagues",
-      componentId: 2060,
-      commandId: 801,
-      requestPayload: {},
-      componentName: "careermode",
-    });
-    const {
-      responseInfo: {
-        value: { leagues: maddenLeagues },
-      },
-    } = allLeaguesResponse;
-    const leagueId = league.madden_server.leagueId;
-    const leagueName = maddenLeagues
-      .filter((m) => m.leagueId === leagueId)
-      .map((m) => m.leagueName)[0];
-    const leagueResponse = await makeBlazeRequest(discord, {
-      commandName: "Mobile_Career_GetLeagueHub",
-      componentId: 2060,
-      commandId: 811,
-      requestPayload: { leagueId: league.madden_server.leagueId },
-      componentName: "careermode",
-    });
-    if (!leagueResponse.responseInfo?.value) {
-      console.log(leagueResponse);
-    }
-    const {
-      responseInfo: {
-        value: {
-          gameScheduleHubInfo,
-          teamIdInfoList,
-          careerHubInfo: { seasonInfo },
+
+    async function fetchLeagueName() {
+      const allLeaguesResponse = await makeBlazeRequest(discord, {
+        commandName: "Mobile_GetMyLeagues",
+        componentId: 2060,
+        commandId: 801,
+        requestPayload: {},
+        componentName: "careermode",
+      });
+      const {
+        responseInfo: {
+          value: { leagues: maddenLeagues },
         },
-      },
-    } = leagueResponse;
+      } = allLeaguesResponse;
+      const leagueId = league.madden_server.leagueId;
+      return maddenLeagues
+        .filter((m) => m.leagueId === leagueId)
+        .map((m) => m.leagueName)[0];
+    }
+
+    async function fetchLeagueInfo() {
+      const leagueResponse = await makeBlazeRequest(discord, {
+        commandName: "Mobile_Career_GetLeagueHub",
+        componentId: 2060,
+        commandId: 811,
+        requestPayload: { leagueId: league.madden_server.leagueId },
+        componentName: "careermode",
+      });
+      if (!leagueResponse.responseInfo?.value) {
+        console.log(leagueResponse);
+      }
+      const {
+        responseInfo: {
+          value: {
+            gameScheduleHubInfo,
+            teamIdInfoList,
+            careerHubInfo: { seasonInfo },
+          },
+        },
+      } = leagueResponse;
+      const weekIndex = seasonInfo.seasonWeek;
+      const stage = seasonInfo.seasonWeekType == 0 ? 0 : 1;
+      const data = await getExportData(
+        [{ leagueInfo: true, rosters: true, weeklyStats: true }],
+        weekIndex,
+        stage,
+        leagueResponse.responseInfo.value,
+        discord
+      );
+      return {
+        gameScheduleHubInfo,
+        teamIdInfoList,
+        seasonInfo,
+        exportData: data,
+      };
+    }
+    const [
+      leagueName,
+      { gameScheduleHubInfo, teamIdInfoList, seasonInfo, exportData },
+    ] = await Promise.all([fetchLeagueName(), fetchLeagueInfo()]);
+
     res.status(200).json({
       gameScheduleHubInfo,
       teamIdInfoList,
       seasonInfo,
       exports: league.commands.exports,
       leagueName: leagueName,
+      exportData,
     });
   } catch (e) {
     next(e);
